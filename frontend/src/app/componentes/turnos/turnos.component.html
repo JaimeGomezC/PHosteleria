@@ -1,0 +1,27 @@
+<div class="container">
+    <h3>Turnos</h3>
+    <table class="table table-hover">
+        <thead>
+          <tr class="table-primary">
+            <th>Fecha</th>
+            <th>Plazas</th>
+            <th>Turno</th>
+            <th>observaciones</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of arrayTurnos" class="table-active">
+            <td>{{item.fecha}}</td>
+            <td>{{item.n_plazas}}</td>
+            <td>{{item.tipo}}</td>
+            <td>{{item.observaciones}}</td>
+            <td>
+              <button type="button" class="btn btn-success btn-sm">Editar</button>
+              <button type="button" (click)="borrar(item.id)" class="btn btn-danger btn-sm">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      
+</div>
