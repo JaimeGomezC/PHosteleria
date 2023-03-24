@@ -21,7 +21,7 @@ class AuthModel
 	 */
 	public function login($username, $password)
 	{
-		$query = "SELECT id, nombre, username FROM usuarios WHERE username = '$username' AND password = '$password'";
+		$query = "SELECT id, nombre, username FROM administrador WHERE username = '$username' AND password = '$password'";
 
 		$results = $this->connection->query($query);
 
@@ -42,7 +42,7 @@ class AuthModel
 	 */
 	public function update($id, $token)
 	{
-		$query = "UPDATE usuarios SET token = '$token' WHERE id = $id";
+		$query = "UPDATE administrador SET token = '$token' WHERE id = $id";
 
 		$this->connection->query($query);
 		
@@ -58,7 +58,7 @@ class AuthModel
 	 */
 	public function getById($id)
 	{
-		$query = "SELECT token FROM usuarios WHERE id = $id";
+		$query = "SELECT token FROM administrador WHERE id = $id";
 
 		$results = $this->connection->query($query);
 

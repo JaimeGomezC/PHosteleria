@@ -13,7 +13,6 @@ const routes: Routes = [
 {path:'reservas',component:ReservasComponent},
 {path:'turnos',component:TurnosComponent},
 {path:'**',redirectTo:'',pathMatch:'full'}
-
 ];
 
 @NgModule({
@@ -21,3 +20,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+export const routingComponents=[ReservasComponent,InicioComponent,TurnosComponent]

@@ -5,6 +5,7 @@
  */
 require_once 'src/classes/auth.class.php';
 require_once 'src/response.php';
+require_once 'coor.php';
 
 $auth = new Authentication();
 
