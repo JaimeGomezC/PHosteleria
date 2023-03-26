@@ -1,4 +1,6 @@
 export interface Response{
     status:string,
-    result:string,
+    result:any,
+    token:any,
+    details:any
 }

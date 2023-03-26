@@ -6,6 +6,7 @@
 require_once 'src/response.php';
 require_once 'src/classes/turnos.class.php';
 require_once 'src/classes/auth.class.php';
+require_once 'coor.php';
 
 // $auth = new Authentication();
 // $auth->verify();
@@ -26,7 +27,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
 		$response = array(
 			'result' => 'ok',
-			'Turnos de comida' => $turnos
+			'Turnos' => $turnos
 		);
 
 		Response::result(200, $response);

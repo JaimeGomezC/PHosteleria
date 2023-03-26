@@ -3,6 +3,10 @@ import { Turnos } from '../../interfaces/turnos';
 import { FormControl,FormGroup,Validators,FormControlName} from '@angular/forms';
 import { ApiService } from 'src/app/servicios/api.service';
 import { Login } from 'src/app/interfaces/login';
+import { Response } from 'src/app/interfaces/response';
+import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-reservas',
@@ -14,20 +18,25 @@ export class ReservasComponent implements OnInit {
     username:new FormControl('',Validators.required),
     password:new FormControl('',Validators.required)
   })
-  constructor(private api:ApiService) { 
+  constructor(private api:ApiService, private router:Router) {   }
 
-  }
-  
-  arrayReservas:Turnos[]=[{id:1,fecha:'28/03/2023',n_plazas:50,observaciones:'Las mesas se distribuyen...',tipo:'Mañana'}
-        ,{id:2,fecha:'01/04/2023',n_plazas:20,observaciones:'Las sillas se distribuyen...',tipo:'Mañana'},
-        {id:3,fecha:'03/04/2023',n_plazas:30,observaciones:'ssssdistribuyen...',tipo:'Noche'}]
+  errorStatus:boolean=false;
+  errorMsj:any='';
 
   ngOnInit(): void {
   }
 
   onLogin(form:Login){
     this.api.loginByEmail(form).subscribe(data=>{
-      console.log(data)
+      console.log(data);
+      let dataResponse:Response=data;
+      if(dataResponse.result =='ok'){
+        sessionStorage.setItem("token",dataResponse.token);
+        this.router.navigate(['turnos']);
+      }else{
+        this.errorStatus=true;
+        this.errorMsj=dataResponse.details
+      }
     })
   }
 
