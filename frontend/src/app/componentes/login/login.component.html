@@ -1,0 +1,21 @@
+
+<div class="container">
+    <div class="wrapper fadeInDown" [formGroup]="loginForm" (ngSubmit)="onLogin(loginForm.value)">
+        <div id="formContent" >
+            <div class="fadeIn first">
+                <img src="../../../assets/imagenes/logo.jpg" id="icon" alt="Icono" />
+            </div>
+
+            <form [formGroup]="loginForm" (ngSubmit)="onLogin(loginForm.value)">
+                <input type="text" id="login" class="fadeIn second" name="login" placeholder="login" formControlName="username">
+                <input type="password" id="password" class="fadeIn third" name="login" placeholder="password" formControlName="password">
+                <input type="submit" class="fadeIn fourth" value="Log In">
+            </form>
+
+            <div class="alert alert-danger" *ngIf="errorStatus">
+                <p>{{errorMsj}}</p>
+            </div>
+
+        </div>
+    </div>
+</div>

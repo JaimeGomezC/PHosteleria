@@ -7,6 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 //componentes
 import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { FooterComponent } from './componentes/footer/footer.component';
+import { NuevoComponent } from './componentes/nuevo/nuevo.component';
+import { LoginComponent } from './componentes/login/login.component';
 
 
 
@@ -16,7 +18,9 @@ import { FooterComponent } from './componentes/footer/footer.component';
     AppComponent,
     NavbarComponent,
     FooterComponent,
-    routingComponents
+    routingComponents,
+    NuevoComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

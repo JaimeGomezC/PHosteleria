@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Turnos } from '../interfaces/turnos';
+import { Turnos } from '../interfaces/turnosResponse';
 
 @Injectable({
   providedIn: 'root'

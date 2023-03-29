@@ -3,13 +3,13 @@ import { Login } from "../interfaces/login";
 import { Response } from "../interfaces/response";
 import { HttpClient,HttpHeaders } from "@angular/common/http";
 import { Observable } from 'rxjs';
-import { Turnos } from '../interfaces/turnos';
+import { TurnosResponse } from '../interfaces/turnosResponse';
 
 @Injectable({
     providedIn:'root'
 })
 export class ApiService{
-    url:string="http://localhost/proyectohosteleria/backend/"
+    url:string="http://localhost:8084/proyectohosteleria/backend/"
     constructor(private http:HttpClient){
     }
 
@@ -18,8 +18,8 @@ export class ApiService{
         return this.http.post<Response>(direccion,form)
     }
 
-    getTurnos():Observable<Turnos[]>{
+    getTurnos():Observable<TurnosResponse>{
         let direccion=this.url+"turnos.php";
-        return this.http.get<Turnos[]>(direccion)
+        return this.http.get<TurnosResponse>(direccion)
       }
 }

@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ReservasComponent } from './componentes/reservas/reservas.component';
 import { InicioComponent } from './componentes/inicio/inicio.component';
 import { TurnosComponent } from './componentes/turnos/turnos.component';
+import { LoginComponent } from './componentes/login/login.component';
 
 
 
@@ -12,6 +13,7 @@ const routes: Routes = [
 {path:'',component:InicioComponent},
 {path:'reservas',component:ReservasComponent},
 {path:'turnos',component:TurnosComponent},
+{path:'login',component:LoginComponent},
 {path:'**',redirectTo:'',pathMatch:'full'}
 ];
 
@@ -20,4 +22,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-export const routingComponents=[ReservasComponent,InicioComponent,TurnosComponent]
+export const routingComponents=[ReservasComponent,InicioComponent,TurnosComponent,LoginComponent]

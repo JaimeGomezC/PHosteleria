@@ -4,25 +4,25 @@ import { ApiService } from 'src/app/servicios/api.service';
 import { Login } from 'src/app/interfaces/login';
 import { Response } from 'src/app/interfaces/response';
 import { Router } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
-
 
 @Component({
-  selector: 'app-reservas',
-  templateUrl: './reservas.component.html',
-  styleUrls: ['./reservas.component.css']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
-export class ReservasComponent implements OnInit {
+export class LoginComponent implements OnInit {
   loginForm= new FormGroup({
     username:new FormControl('',Validators.required),
     password:new FormControl('',Validators.required)
   })
+  
   constructor(private api:ApiService, private router:Router) {   }
 
   errorStatus:boolean=false;
   errorMsj:any='';
-
+  
   ngOnInit(): void {
+    
   }
 
   onLogin(form:Login){
@@ -38,5 +38,4 @@ export class ReservasComponent implements OnInit {
       }
     })
   }
-
 }

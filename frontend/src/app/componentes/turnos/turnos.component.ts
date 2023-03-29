@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Turnos } from 'src/app/interfaces/turnos';
+import { TurnosResponse } from 'src/app/interfaces/turnosResponse';
 import { ApiService } from 'src/app/servicios/api.service';
 import { Router } from '@angular/router';
 
@@ -11,18 +11,25 @@ import { Router } from '@angular/router';
 export class TurnosComponent implements OnInit {
   
   constructor(private api:ApiService,private router:Router) { }
-  arrayTurnos=[{id:1,fecha:'28/03/2023',n_plazas:50,observaciones:'Las mesas se distribuyen...',tipo:'Mañana'}
-  ,{id:2,fecha:'01/04/2023',n_plazas:20,observaciones:'Las sillas se distribuyen...',tipo:'Mañana'},
-  {id:3,fecha:'03/04/2023',n_plazas:30,observaciones:'ssssdistribuyen...',tipo:'Noche'}]
+  arrayTurnos:any=[]
   
   ngOnInit(): void {
-    this.api.getTurnos().subscribe(data=>{
-           console.log(data);
-
+    this.api.getTurnos().subscribe(data =>{
+           let dataResponse:TurnosResponse=data;
+           this.arrayTurnos=dataResponse.Turnos;
     })
     
   }
   
+  editarTurno(id:any):void {
+    console.log('editar'+id)
+  }
+
+  nuevoTurno():void {
+    console.log('Nuevo turno')
+  }
+
+
   borrar(id:any):void {
     console.log('eliminar'+id)
   }

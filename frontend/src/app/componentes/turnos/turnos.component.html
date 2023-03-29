@@ -1,5 +1,6 @@
 <div class="container">
     <h3>Turnos</h3>
+    <button type="button" class="btn btn-primary" (click)="nuevoTurno()">Nuevo turno</button>
     <table class="table table-hover">
         <thead>
           <tr class="table-primary">
@@ -11,10 +12,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of arrayTurnos" class="table-active">
-            <td>{{item.fecha}}</td>
+          <tr *ngFor="let item of arrayTurnos" (click)="editarTurno(item.id)" class="table-active">
+            <td>{{item.fecha | date: 'dd/MM/yyyy'}}</td>
             <td>{{item.n_plazas}}</td>
-            <td>{{item.tipo}}</td>
+            <td>{{item.tipoTurno}}</td>
             <td>{{item.observaciones}}</td>
             <td>
               <button type="button" class="btn btn-success btn-sm">Editar</button>
