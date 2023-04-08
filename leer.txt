@@ -1,0 +1,23 @@
+Angular primera vez:
+https://angular.io/
+npm i -g @angular/cli		instalar CLI
+instalar ultima versión nodejs lts
+
+Crear un nuevo proyecto
+ng new frontend				Crear proyecto
+ng serve --o				Iniciar Servidor
+ng g c nombreComponente		Crear componente
+ng g s servicios/alumno
+
+
+backend-api
+La primera vez:
+Instalar composer: https://getcomposer.org/download/ buscar Windows Installer(al principio) download and run
+Confirmar la variables de entorno:
+C:\Users\...\AppData\Roaming\Composer\vendor\bin
+C:\wamp64\bin\php\php7.4.9 o C:\xampp\php...
+
+levantar el servidor: php artisan serve
+Crear migration: php artisan make:migration create_turnos_table
+Ejecutar migration: php artisan migrate
+Crear modelo y controlador: php artisan make:model Turnos -mcr

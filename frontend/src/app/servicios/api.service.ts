@@ -11,6 +11,8 @@ import {HttpParams} from "@angular/common/http";
 })
 export class ApiService{
     url:string="http://localhost:80/proyectohosteleria/backend/"
+    //url:string="http://localhost:8000/proyectohosteleria/backend-api/"
+
     constructor(private http:HttpClient){
     }
 
