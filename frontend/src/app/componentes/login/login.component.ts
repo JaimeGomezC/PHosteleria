@@ -5,6 +5,8 @@ import { Login } from 'src/app/interfaces/login';
 import { Response } from 'src/app/interfaces/response';
 import { Router } from '@angular/router';
 
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -26,7 +28,7 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(form:Login){
-    this.api.loginByEmail(form).subscribe(data=>{
+    this.api.autentificar(form).subscribe(data=>{
       console.log(data);
       let dataResponse:Response=data;
       if(dataResponse.result =='ok'){

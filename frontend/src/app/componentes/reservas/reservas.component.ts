@@ -26,7 +26,7 @@ export class ReservasComponent implements OnInit {
   }
 
   onLogin(form:Login){
-    this.api.loginByEmail(form).subscribe(data=>{
+    this.api.autentificar(form).subscribe(data=>{
       console.log(data);
       let dataResponse:Response=data;
       if(dataResponse.result =='ok'){

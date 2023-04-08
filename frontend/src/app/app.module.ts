@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { FooterComponent } from './componentes/footer/footer.component';
 import { NuevoComponent } from './componentes/nuevo/nuevo.component';
-import { LoginComponent } from './componentes/login/login.component';
+import { MenuComponent } from './componentes/menu/menu.component';
 
 
 
@@ -20,7 +20,7 @@ import { LoginComponent } from './componentes/login/login.component';
     FooterComponent,
     routingComponents,
     NuevoComponent,
-    LoginComponent
+    MenuComponent  
   ],
   imports: [
     BrowserModule,
