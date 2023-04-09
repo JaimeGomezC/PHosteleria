@@ -30,7 +30,7 @@ export class ReservasComponent implements OnInit {
       console.log(data);
       let dataResponse:Response=data;
       if(dataResponse.result =='ok'){
-        sessionStorage.setItem("token",dataResponse.token);
+        sessionStorage.setItem("token",dataResponse.accessToken);
         this.router.navigate(['turnos']);
       }else{
         this.errorStatus=true;

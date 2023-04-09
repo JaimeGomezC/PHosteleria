@@ -16,8 +16,10 @@ export class TurnosComponent implements OnInit {
   
   ngOnInit(): void {
     this.api.getTurnos().subscribe(data =>{
+      console.log('data');
+      console.log(data);
            let dataResponse:TurnosResponse=data;
-           this.arrayTurnos=dataResponse.Turnos;
+           this.arrayTurnos=dataResponse;
     })
     
   }

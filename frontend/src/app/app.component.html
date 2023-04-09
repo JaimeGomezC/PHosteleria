@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 
-<div *ngIf="true">
+<div  *ngIf="api.isLoggedIn">
     <div class="row">
         <div class="col-md-2">
             <app-menu></app-menu>
@@ -9,6 +9,9 @@
             <router-outlet></router-outlet>
         </div>
     </div>
+</div>
+<div  *ngIf="!api.isLoggedIn">
+    <router-outlet></router-outlet>
 </div>
 
 

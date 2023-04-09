@@ -14,10 +14,10 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loginForm= new FormGroup({
-    username:new FormControl('',Validators.required),
+    email:new FormControl('',Validators.required),
     password:new FormControl('',Validators.required)
   })
-  
+
   constructor(private api:ApiService, private router:Router) {   }
 
   errorStatus:boolean=false;
@@ -32,12 +32,17 @@ export class LoginComponent implements OnInit {
       console.log(data);
       let dataResponse:Response=data;
       if(dataResponse.result =='ok'){
-        sessionStorage.setItem("token",dataResponse.token);
+        this.api.login();
+        sessionStorage.setItem("token",dataResponse.accessToken,
+        );
         this.router.navigate(['turnos']);
       }else{
         this.errorStatus=true;
-        this.errorMsj=dataResponse.details
+        this.errorMsj=dataResponse.message
       }
     })
   }
+
+  
+ 
 }

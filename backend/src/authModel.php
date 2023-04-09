@@ -8,7 +8,7 @@ class AuthModel
 	private $connection;
 	
 	public function __construct(){
-		$this->connection = new mysqli('127.0.0.1', 'root', '', 'hosteleria', '3306');
+		$this->connection = new mysqli('127.0.0.1', 'root', '', 'hosteleria2', '3306');
 
 		if($this->connection->connect_errno){
 			echo 'Error de conexión a la base de datos';
@@ -19,9 +19,9 @@ class AuthModel
 	/**
 	 * Método para autentificarse en la API
 	 */
-	public function login($username, $password)
+	public function login($email, $password)
 	{
-		$query = "SELECT id, nombre, username FROM administrador WHERE username = '$username' AND password = '$password'";
+		$query = "SELECT id, nombre, email FROM users WHERE email = '$email' AND password = '$password'";
 
 		$results = $this->connection->query($query);
 

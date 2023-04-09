@@ -45,6 +45,7 @@ class TurnosController extends Controller
         $turnos->visible=$request->visible;
         $turnos->save();
         $data=[
+            'result'=>'ok',
             'message'=>'Turno Creado',
             'turno'=>$turnos
         ];
