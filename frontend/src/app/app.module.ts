@@ -9,7 +9,9 @@ import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { FooterComponent } from './componentes/footer/footer.component';
 import { NuevoComponent } from './componentes/nuevo/nuevo.component';
 import { MenuComponent } from './componentes/menu/menu.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule} from '@angular/material/button';
+import { MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 
@@ -17,17 +19,21 @@ import { MenuComponent } from './componentes/menu/menu.component';
   declarations: [
     AppComponent,
     NavbarComponent,
+    MenuComponent, 
     FooterComponent,
     routingComponents,
     NuevoComponent,
-    MenuComponent  
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

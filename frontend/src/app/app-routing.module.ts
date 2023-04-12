@@ -5,6 +5,7 @@ import { ReservasComponent } from './componentes/reservas/reservas.component';
 import { InicioComponent } from './componentes/inicio/inicio.component';
 import { TurnosComponent } from './componentes/turnos/turnos.component';
 import { LoginComponent } from './componentes/login/login.component';
+import { MenuComponent } from './componentes/menu/menu.component';
 
 
 
@@ -14,6 +15,8 @@ const routes: Routes = [
 {path:'reservas',component:ReservasComponent},
 {path:'turnos',component:TurnosComponent},
 {path:'login',component:LoginComponent},
+{path:'menu',component:MenuComponent},
+
 {path:'**',redirectTo:'',pathMatch:'full'}
 ];
 
@@ -22,4 +25,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-export const routingComponents=[ReservasComponent,InicioComponent,TurnosComponent,LoginComponent]
+export const routingComponents=[ReservasComponent,InicioComponent,TurnosComponent,LoginComponent,MenuComponent]

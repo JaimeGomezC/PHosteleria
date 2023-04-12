@@ -1,48 +1,74 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl,FormGroup,Validators,FormControlName} from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+  FormControlName,
+} from '@angular/forms';
 import { ApiService } from 'src/app/servicios/api.service';
 import { Login } from 'src/app/interfaces/login';
 import { Response } from 'src/app/interfaces/response';
 import { Router } from '@angular/router';
-
-
+import Swal from 'sweetalert2';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { LoginService } from 'src/app/servicios/login.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  loginForm= new FormGroup({
-    email:new FormControl('',Validators.required),
-    password:new FormControl('',Validators.required)
-  })
+  loginForm = new FormGroup({
+    email: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required),
+  });
 
-  constructor(private api:ApiService, private router:Router) {   }
+  constructor(
+    private api: ApiService,
+    private loginService: LoginService,
+    private router: Router,
+    private snack: MatSnackBar
+  ) {}
 
-  errorStatus:boolean=false;
-  errorMsj:any='';
-  
-  ngOnInit(): void {
-    
-  }
+  errorStatus: boolean = false;
+  errorMsj: any = '';
 
-  onLogin(form:Login){
-    this.api.autentificar(form).subscribe(data=>{
-      console.log(data);
-      let dataResponse:Response=data;
-      if(dataResponse.result =='ok'){
-        this.api.login();
-        sessionStorage.setItem("token",dataResponse.accessToken,
-        );
-        this.router.navigate(['turnos']);
-      }else{
-        this.errorStatus=true;
-        this.errorMsj=dataResponse.message
+  ngOnInit(): void {}
+
+  formSubmit(form: Login) {
+    if (form.email.trim() == '' || form.email == null) {
+      // Swal.fire('Introduzca el email','Email','success');
+      this.snack.open('El email es requerido !!', 'Aceptar', {
+        duration: 1000,
+        verticalPosition: 'top',
+        horizontalPosition: 'center',
+      });
+      return;
+    }
+    if (form.password.trim() == '' || form.password == null) {
+      this.snack.open('El password es requerido !!', 'Aceptar', {
+        duration: 1000,
+        verticalPosition: 'top',
+        horizontalPosition: 'center',
+      });
+      return;
+    }
+
+    this.loginService.generarToken(form).subscribe(
+      (data) => {
+        console.log(data);
+        let dataResponse: Response = data;
+        if (dataResponse.result == 'ok') {
+          sessionStorage.setItem('token', dataResponse.accessToken);
+          this.router.navigate(['turnos']);
+          this.api.login();
+        }
+      },
+      (error) => {
+        this.errorStatus = true;
+        this.errorMsj = error.error.message;
       }
-    })
+    );
   }
-
-  
- 
 }

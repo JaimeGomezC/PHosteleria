@@ -23,15 +23,20 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 
-Route::group(['middleware' => 'cors'], function(){
-    Route::post('register',[AuthController::class,'register']);
-    Route::post('login',[AuthController::class,'login']);
-});
+
 Route::middleware(['auth:sanctum'])->group(function(){
-    Route::post('logout',[AuthController::class,'logout']);
+    Route::group(['middleware' => 'cors'], function(){
+        Route::post('register',[AuthController::class,'register']);
+        Route::post('login',[AuthController::class,'login']);
+        Route::post('logout',[AuthController::class,'logout']);
+    });
+    
     Route::get('turnos',[TurnosController::class,'index']);
     Route::post('turnos',[TurnosController::class,'store']);
     Route::get('turnos/{turno}',[TurnosController::class,'show']);
     Route::put('turnos/{turno}',[TurnosController::class,'update']);
     Route::delete('turnos/{turno}',[TurnosController::class,'destroy']);
+
+
+    
 });

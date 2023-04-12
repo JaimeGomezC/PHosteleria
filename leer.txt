@@ -10,6 +10,10 @@ ng g c nombreComponente		Crear componente
 ng g s servicios/alumno
 
 
+auditar vulnerabilidades
+npm audit fix --force
+
+
 backend-api
 La primera vez:
 Instalar composer: https://getcomposer.org/download/ buscar Windows Installer(al principio) download and run

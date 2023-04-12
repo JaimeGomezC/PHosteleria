@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiService } from './servicios/api.service';
-
+import { LoginService } from './servicios/login.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,5 +9,5 @@ import { ApiService } from './servicios/api.service';
 export class AppComponent {
   title = 'frontend';
 
-  constructor(public api:ApiService) {   }
+  constructor(public login:LoginService) {   }
 }

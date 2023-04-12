@@ -37,7 +37,7 @@ class AuthController extends Controller
 
     public function login(Request $request){
         if(!Auth::attempt($request->only('email','password'))){
-            return response()->json(['message'=>'No autorizado'],401);
+            return response()->json(['message'=>'Email o password incorrectos'],401);
         }
         $user=User::where('email',$request['email'])->firstOrFail();
         $token=$user->createToken('auth_token')->plainTextToken;
@@ -52,10 +52,18 @@ class AuthController extends Controller
     }
 
     public function logout(Request $request)
-    {
+    {   
+       
         $accessToken = $request->bearerToken();
-        $token = PersonalAccessToken::findToken($accessToken);
-        $token->delete();
-        return['message'=>'logged out correcto, token eliminado'];
+        $saluda='hola';
+        echo ($accessToken);
+         $token = PersonalAccessToken::findToken($accessToken);
+        if($token){
+            $token->delete();
+            return response()->json(['result'=>'ok','message'=>'logged out correcto, token eliminado']);
+        }else{
+            return response()->json(['result'=>'false','message'=>'No existe el token2 ','token'=>$request]);
+        }
+        
     }
 }
