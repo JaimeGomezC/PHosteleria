@@ -20,7 +20,7 @@ export class MenuComponent implements OnInit {
           console.log(data);
           if (data.result=='ok') {
             sessionStorage.removeItem('token');
-            this.router.navigate(['turnos']);
+            this.router.navigate(['']);
             Swal.fire('Sesión', data.message, 'success');
           }else{
             Swal.fire('Sesión', data.message, 'warning');

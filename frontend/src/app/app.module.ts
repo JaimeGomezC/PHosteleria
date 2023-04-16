@@ -9,9 +9,11 @@ import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { FooterComponent } from './componentes/footer/footer.component';
 import { NuevoComponent } from './componentes/nuevo/nuevo.component';
 import { MenuComponent } from './componentes/menu/menu.component';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule} from '@angular/material/button';
-import { MatSnackBarModule} from '@angular/material/snack-bar';
+
+//Angular Material
+import { SharedModule } from './shared/shared.module';
 
 
 
@@ -22,7 +24,7 @@ import { MatSnackBarModule} from '@angular/material/snack-bar';
     MenuComponent, 
     FooterComponent,
     routingComponents,
-    NuevoComponent,
+    NuevoComponent
     
   ],
   imports: [
@@ -32,8 +34,8 @@ import { MatSnackBarModule} from '@angular/material/snack-bar';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatButtonModule,
-    MatSnackBarModule
+    SharedModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

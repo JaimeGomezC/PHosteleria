@@ -1,0 +1,56 @@
+<h2 mat-dialog-title>Nuevo Turno</h2>
+<form *ngIf="!loading" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-dialog-content>
+    
+        <div class="row">
+            <div class="col-5 mb-5">
+                <label class="form-label">Turno {{f.value.turno}}</label>
+                <select formControlName="turno" class="form-control"  [ngClass]="{ 'is-invalid': submitted && f.value.turno==''}">
+                    <option value="">Selecciona un turno</option>
+                    <option value="Comida">Comida</option>
+                    <option value="Cena">Cena</option>
+                </select>
+                <div *ngIf="submitted" class="invalid-feedback">
+                    <div>Turno requerido</div>
+                </div>
+            </div>
+            
+            <div class="col-3 mb-3">
+                <label class="form-label">Plazas</label>
+                <input type="number" formControlName="n_plazas" class="form-control" min="0" [ngClass]="{ 'is-invalid': submitted && f.value.n_plazas==''}"/>
+                <div *ngIf="submitted" class="invalid-feedback">
+                    <div>Plazas requerido</div>
+                </div>
+            </div>
+            <div class="col-4 mb-4">
+                <label class="form-label">Fecha</label>
+                <input type="date" formControlName="fecha" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.value.fecha==''}"/>
+            </div>
+
+            <div class="col-5 mb-5">
+                <label class="form-label">Publicar </label>
+                <select formControlName="visible" class="form-control"  [ngClass]="{ 'is-invalid': submitted && f.value.visible==''}">
+                    <option value="1" ng-init="1" [defaultSelected]="true">SI</option>
+                    <option value="0">NO</option>
+                </select>
+                <div *ngIf="submitted" class="invalid-feedback">
+                    <div>Elemento requerido</div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col-12 mb-12">
+                <label class="form-label">Observaciones</label>
+                <textarea formControlName="observaciones" class="form-control" cols="30" rows="5"></textarea>
+            </div>
+           
+        </div>
+        <div class="text-center">
+            <button class="btn btn-primary me-2">Añadir</button>
+            <button class="btn btn-secondary" type="reset" (click)="cancelar()">Cancelar</button>
+        </div>
+    
+    </mat-dialog-content>
+</form>
+

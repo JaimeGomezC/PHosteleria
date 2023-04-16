@@ -3,5 +3,6 @@ export interface Response{
     message:string,
     result:any,
     accessToken:any,
-    details:any
+    details:any,
+    user:any
 }

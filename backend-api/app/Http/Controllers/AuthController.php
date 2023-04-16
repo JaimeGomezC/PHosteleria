@@ -47,16 +47,13 @@ class AuthController extends Controller
             'message'=>'Hola'.$user->name,
             'accessToken'=>$token,
             'token_type'=>'Bearer',
-            'user'=>$user,
+            'user'=>$user->id,
         ]);
     }
 
     public function logout(Request $request)
     {   
-       
         $accessToken = $request->bearerToken();
-        $saluda='hola';
-        echo ($accessToken);
          $token = PersonalAccessToken::findToken($accessToken);
         if($token){
             $token->delete();

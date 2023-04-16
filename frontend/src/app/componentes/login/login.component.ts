@@ -57,12 +57,12 @@ export class LoginComponent implements OnInit {
 
     this.loginService.generarToken(form).subscribe(
       (data) => {
-        console.log(data);
         let dataResponse: Response = data;
         if (dataResponse.result == 'ok') {
           sessionStorage.setItem('token', dataResponse.accessToken);
+          sessionStorage.setItem('usuario', dataResponse.user);
           this.router.navigate(['turnos']);
-          this.api.login();
+          this.loginService.login();
         }
       },
       (error) => {

@@ -21,15 +21,15 @@ export class LoginService {
   public cerrarSesion(): any {
     let direccion=this.url+"logout";
     let token: any = sessionStorage.getItem('token');
-    console.log(token);
-    const headers = new HttpHeaders({
-      'Content-Accept': 'application/json',
-      'Authorization': `Bearer ${token}`
-    });
-
-    const requestOptions = { headers: headers };
-    return this.http.post(`${this.url}logout`,requestOptions);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': `Bearer ${token}`
+      })
+    };    
+    return this.http.post(`${this.url}logout`,{}, httpOptions);
   }
+
   public login() {
     // Lógica para iniciar sesión
     this.logged = true;
