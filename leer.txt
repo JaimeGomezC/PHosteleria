@@ -21,6 +21,12 @@ Confirmar la variables de entorno:
 C:\Users\...\AppData\Roaming\Composer\vendor\bin
 C:\wamp64\bin\php\php7.4.9 o C:\xampp\php...
 
+Si te descargas el proyecto desde github:
+composer install ('Te debe crear una carpeta vendor')
+duplicar el archivo .env.example y dejar como .env
+Para obtener APP_KEY ejecutar: php artisan key:generate
+Ejecutar migration: php artisan migrate
+
 levantar el servidor: php artisan serve
 Crear migration: php artisan make:migration create_turnos_table
 Ejecutar migration: php artisan migrate
