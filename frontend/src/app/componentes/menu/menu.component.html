@@ -35,9 +35,12 @@
                     <i class="fs-5 bi-grid"></i><span class="ms-1 d-none d-sm-inline">Productos</span></a>
             </li>
             <li>
-                <a href="#" class="nav-link text-truncate">
-                    <i class="fs-5 bi-people"></i><span class="ms-1 d-none d-sm-inline">Logout</span> </a>
-                    <button type="button" (click)="cerrarSesion()" class="btn btn-danger btn-sm">Logout</button>
+                <a href="#" class="nav-link text-truncate" >
+                    <span class="ms-1 d-none d-sm-inline" (click)="cerrarSesion()"><i class="fs-5 bi-people"></i>
+                    Logout</span>
+                </a>
+                    
             </li>
         </ul>
     </div>
+    

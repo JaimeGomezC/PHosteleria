@@ -4,6 +4,7 @@ import { AppRoutingModule,routingComponents } from './app-routing.module';//Se h
 import { AppComponent } from './app.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { FullCalendarModule } from '@fullcalendar/angular';
 //componentes
 import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { FooterComponent } from './componentes/footer/footer.component';
@@ -24,7 +25,7 @@ import { SharedModule } from './shared/shared.module';
     MenuComponent, 
     FooterComponent,
     routingComponents,
-    NuevoComponent
+    NuevoComponent,
     
   ],
   imports: [
@@ -34,7 +35,8 @@ import { SharedModule } from './shared/shared.module';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    SharedModule
+    SharedModule,
+    FullCalendarModule
 
   ],
   providers: [],
