@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Turnos;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TurnosController extends Controller
 {
@@ -14,23 +15,13 @@ class TurnosController extends Controller
      */
     public function index()
     {
-        return Turnos::all();
+        $turno = Turnos::all();
+        return response()->json($turno);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-      //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -104,11 +95,22 @@ class TurnosController extends Controller
      */
     public function destroy(Turnos $turno)
     {
+       // Definir las reglas de validación
+    $reglas = [
+        'id' => 'required|exists:usuarios,id'
+    ];
+
+    // Crear una instancia del validador
+    $validator = Validator::make(['id' => $turno], $reglas);
+    
+        if ($validator->fails()) {
+            return response()->json(['mensaje' => 'Datos de solicitud inválidos'], 400);
+        }
+        try {
         $turno->delete();
-        $data=[
-            'message'=>'Turno Eliminado',
-            'turno'=>$turno
-        ];
-        return response()->json($data);
+        return response()->json(['result'=>true,'message'=>'Turno Eliminado','turno'=>$turno]);
+        } catch (\Exception $e) {
+            return response()->json(['result'=>false,'mensaje' => 'Error al borrar el usuario'], 500);
+        }
     }
 }

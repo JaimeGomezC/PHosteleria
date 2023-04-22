@@ -45,3 +45,8 @@
     color:hsl(143, 74%, 56%);
     margin-right: 5%;
   }
+
+  .spinner-border{
+    width: 6rem;
+    height: 6rem;
+  }

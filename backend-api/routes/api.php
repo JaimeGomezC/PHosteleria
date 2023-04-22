@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TurnosController;
+use App\Http\Controllers\ClienteController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -30,13 +31,24 @@ Route::group(['middleware' => 'cors'], function(){
 
 Route::middleware(['auth:sanctum'])->group(function(){
     
-    
     Route::get('turnos',[TurnosController::class,'index']);
     Route::post('turnos',[TurnosController::class,'store']);
     Route::get('turnos/{turno}',[TurnosController::class,'show']);
     Route::put('turnos/{turno}',[TurnosController::class,'update']);
     Route::delete('turnos/{turno}',[TurnosController::class,'destroy']);
 
+    Route::get('clientes', [ClienteController::class, 'index']);
+    Route::get('clientes/{cliente}', [ClienteController::class, 'show']);
+    Route::put('clientes/{cliente}', [ClienteController::class, 'update']);
+    Route::delete('clientes/{cliente}', [ClienteController::class, 'destroy']);
 
-    
+    Route::get('reservas', [ReservaController::class, 'index']);
+    Route::post('reservas', [ReservaController::class, 'store']);
+    Route::get('reservas/{reserva}', [ReservaController::class, 'show']);
+    Route::put('reservas/{reserva}', [ReservaController::class, 'update']);
+    Route::delete('reservas/{reserva}', [ReservaController::class, 'destroy']);
+    Route::get('reservas/turno/{id_turno}', 'ReservaController@getByTurno');
+
 });
+
+Route::post('clientes', [ClienteController::class, 'store']);
