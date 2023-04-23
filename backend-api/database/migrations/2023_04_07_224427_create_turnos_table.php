@@ -20,8 +20,9 @@ class CreateTurnosTable extends Migration
             $table->integer("n_plazas");
             $table->string("observaciones");
             $table->string("turno");
-            $table->boolean("visible");
+            $table->boolean('visible')->default(false);
             $table->timestamps();
+            $table->date('fecha'); // Nuevo atributo fecha
         });
     }
 

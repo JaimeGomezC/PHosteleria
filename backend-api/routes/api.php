@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TurnosController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\ReservaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -47,8 +48,7 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::get('reservas/{reserva}', [ReservaController::class, 'show']);
     Route::put('reservas/{reserva}', [ReservaController::class, 'update']);
     Route::delete('reservas/{reserva}', [ReservaController::class, 'destroy']);
-    Route::get('reservas/turno/{id_turno}', 'ReservaController@getByTurno');
+    Route::get('reservas/turno/{id_turno}',[ReservaController::class, 'getByTurno']);
 
 });
-
 Route::post('clientes', [ClienteController::class, 'store']);

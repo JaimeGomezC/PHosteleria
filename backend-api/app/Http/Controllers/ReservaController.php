@@ -77,7 +77,7 @@ class ReservaController extends Controller
         // Actualizar los datos de la reserva
         
     } 
-    // Filtrar por el turno
+    // // Filtrar por el turno
     public function getByTurno($id_turno)
     {
         $reservas = Reserva::where('id_turno', $id_turno)->get();

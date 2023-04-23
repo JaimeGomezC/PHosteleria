@@ -4,6 +4,7 @@ export interface TurnosResponse{
     id_menu?:number;
     n_plazas:number;
     observaciones:string;
+    fecha:Date;
     turno:string;
     visible:number;
     updated_at?:string;
