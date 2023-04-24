@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
@@ -19,12 +20,12 @@ export class TurnosComponent implements OnInit,AfterViewInit {
  
   loading = true;
   dataSource:MatTableDataSource<TurnosResponse>;
-  displayedColumns: string[] = [ 'created_at','turno', 'n_plazas', 'observaciones','acciones'];
+  displayedColumns: string[] = [ 'fecha','turno','visible','n_plazas', 'observaciones','acciones'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
 
-  constructor(private turno:TurnosService,private router:Router,private dialog:MatDialog) {
+  constructor(private turno:TurnosService,private router:Router,private dialog:MatDialog,private datePipe: DatePipe) {
     this.dataSource=new MatTableDataSource()
     
    }
@@ -54,18 +55,6 @@ export class TurnosComponent implements OnInit,AfterViewInit {
     })
   }  
 
-  edit_add_Turno(id:any):void {
-    const dialogRef = this.dialog.open(TurnosModalAddComponent,{
-      width:'40%'
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    },
-    (error) => {
-      console.log(error)
-    });
-  }
-
   borrar(id:any):void {
     this.turno.borrar(id).subscribe(data =>{
       this.cargarDatos();
@@ -76,10 +65,16 @@ export class TurnosComponent implements OnInit,AfterViewInit {
     })
   }
   verReserva(id:any):void {
-    this.router.navigate(['reservas']);
+    this.router.navigate(['ReservasLista']);
   }
-
+ 
   openModal(turno: TurnosResponse) {
+    // let fechaFormateada = this.datePipe.transform(turno.fecha, 'dd/MM/yyyy');
+    // console.log(turno)
+    // console.log(fechaFormateada)
+    // let nuevo=new Date(fechaFormateada);
+    // turno.fecha=new Date(fechaFormateada);
+
     const dialogRef = this.dialog.open(TurnosModalAddComponent, {
       data: turno
     });
@@ -88,4 +83,17 @@ export class TurnosComponent implements OnInit,AfterViewInit {
       this.cargarDatos();
     });
   };
+  
+  edit_add_Turno(id:any):void {
+    const dialogRef = this.dialog.open(TurnosModalAddComponent,{
+      width:'40%'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+      this.cargarDatos();
+    },
+    (error) => {
+      console.log(error)
+    });
+  }
 }

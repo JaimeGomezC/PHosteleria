@@ -8,7 +8,7 @@ import { HttpClient,HttpHeaders,HttpParams } from "@angular/common/http";
   providedIn: 'root'
 })
 export class TurnosService {
-  private apiURL='http://localhost/proyectohosteleria/backend/turnos.php';
+  // private apiURL='http://localhost/proyectohosteleria/backend/turnos.php';
 
   url:string="http://localhost:8000/api/"
   constructor(private http: HttpClient) {   }

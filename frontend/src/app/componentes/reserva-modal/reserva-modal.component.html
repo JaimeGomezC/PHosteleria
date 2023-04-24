@@ -1,0 +1,54 @@
+
+  <!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+    {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+  </button>  -->
+  <h3>Pasos para hacer tu reserva del {{fecha.fechaReserva |date: 'dd/MM/yyyy' }}</h3>
+  <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Rellena tus datos</ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>Nombre</mat-label>
+          <input matInput placeholder="Tu nombre" formControlName="firstnombre" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Apellidos</mat-label>
+            <input matInput placeholder="apellidos" formControlName="firstapellidos" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Enter your email</mat-label>
+            <input matInput placeholder="pat@example.com" formControlName="firstemail" required>
+            <mat-error *ngIf="firstFormGroup.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Observaciones</mat-label>
+            <textarea matInput placeholder="Observaciones" formControlName="firstobservaciones"></textarea>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext [disabled]="first">Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Realiza el pago de la reserva</ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>Address</mat-label>
+          <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
+                 required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Guarda tu código de reserva</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-stepper>

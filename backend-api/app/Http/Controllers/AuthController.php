@@ -54,10 +54,15 @@ class AuthController extends Controller
     public function logout(Request $request)
     {   
         $accessToken = $request->bearerToken();
-         $token = PersonalAccessToken::findToken($accessToken);
+        $token = PersonalAccessToken::findToken($accessToken);//$token->getAttribute('tokenable_id')
+        $personalAccessToken = PersonalAccessToken::where('tokenable_id', $token->getAttribute('tokenable_id'))->get();
         if($token){
-            $token->delete();
-            return response()->json(['result'=>'ok','message'=>'logged out correcto, token eliminado']);
+            foreach ($personalAccessToken as $token) {
+                $user = $token->user;
+                $token->delete();
+                // Delete files associated with the $user model
+            }
+            return response()->json(['result'=>'ok','message'=>'logged out correcto, token eliminado'.$personalAccessToken]);
         }else{
             return response()->json(['result'=>'false','message'=>'No existe el token2 ','token'=>$request]);
         }

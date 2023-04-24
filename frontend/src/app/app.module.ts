@@ -5,10 +5,10 @@ import { AppComponent } from './app.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { DatePipe } from '@angular/common';
 //componentes
 import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { FooterComponent } from './componentes/footer/footer.component';
-import { NuevoComponent } from './componentes/nuevo/nuevo.component';
 import { MenuComponent } from './componentes/menu/menu.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -25,7 +25,6 @@ import { SharedModule } from './shared/shared.module';
     MenuComponent, 
     FooterComponent,
     routingComponents,
-    NuevoComponent,
     
   ],
   imports: [
@@ -39,7 +38,7 @@ import { SharedModule } from './shared/shared.module';
     FullCalendarModule
 
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

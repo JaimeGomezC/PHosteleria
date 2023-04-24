@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Turnos;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TurnosController extends Controller
 {
@@ -14,7 +15,8 @@ class TurnosController extends Controller
      */
     public function index()
     {
-        return Turnos::all();
+        $turno = Turnos::all();
+        return response()->json($turno);
     }
 
     /**
@@ -22,31 +24,21 @@ class TurnosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-      //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        $turnos= new Turnos();
-        $turnos->id_admin=$request->id_admin;
-        $turnos->id_menu=$request->id_menu;
-        $turnos->n_plazas=$request->n_plazas;
-        $turnos->observaciones=$request->observaciones;
-        $turnos->turno=$request->turno;
-        $turnos->visible=$request->visible;
+        $turnos = new Turnos();
+        $turnos->id_admin = $request->id_admin;
+        $turnos->id_menu = $request->id_menu;
+        $turnos->n_plazas = $request->n_plazas;
+        $turnos->observaciones = $request->observaciones;
+        $turnos->turno = $request->turno;
+        $turnos->visible = $request->visible;
+        $turnos->fecha = $request->fecha;
         $turnos->save();
-        $data=[
-            'result'=>'ok',
-            'message'=>'Turno Creado',
-            'turno'=>$turnos
+        $data = [
+            'result' => 'ok',
+            'message' => 'Turno Creado',
+            'turno' => $turnos
         ];
         return response()->json($data);
     }
@@ -82,16 +74,17 @@ class TurnosController extends Controller
      */
     public function update(Request $request, Turnos $turno)
     {
-        $turno->id_admin=$request->id_admin;
-        $turno->id_menu=$request->id_menu;
-        $turno->n_plazas=$request->n_plazas;
-        $turno->observaciones=$request->observaciones;
-        $turno->turno=$request->turno;
-        $turno->visible=$request->visible;
+        $turno->id_admin = $request->id_admin;
+        $turno->id_menu = $request->id_menu;
+        $turno->n_plazas = $request->n_plazas;
+        $turno->observaciones = $request->observaciones;
+        $turno->turno = $request->turno;
+        $turno->visible = $request->visible;
+        $turno->fecha = $request->fecha;
         $turno->save();
-        $data=[
-            'message'=>'Turno Actualizado',
-            'turno'=>$turno
+        $data = [
+            'message' => 'Turno Actualizado',
+            'turno' => $turno
         ];
         return response()->json($data);
     }
@@ -102,13 +95,25 @@ class TurnosController extends Controller
      * @param  \App\Models\Turnos  $turnos
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Turnos $turno)
+    public function destroy(Request $request,Turnos $turno)
     {
-        $turno->delete();
-        $data=[
-            'message'=>'Turno Eliminado',
-            'turno'=>$turno
-        ];
-        return response()->json($data);
+        try {
+            // Validar que el turno existe en la base de datos
+            $id_turno = Turnos::find($turno);
+            $cliente = Turnos::findOrFail($turno);
+
+            if ($id_turno) {
+                return response()->json(['error' => 'El turno no existe'.$cliente], 404);
+            }
+
+
+            // Eliminar el turno
+            // $turno->delete();
+
+            return response()->json(['result' => true, 'message' => 'Turno Eliminado', 'turno' => $turno]);
+        } catch (\Exception $e) {
+            // Captura la excepción y maneja el error
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 }

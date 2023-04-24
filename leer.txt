@@ -12,6 +12,8 @@ ng g s servicios/alumno
 
 auditar vulnerabilidades
 npm audit fix --force
+npm install sweetalert2
+ng add @angular/material
 
 
 backend-api
