@@ -40,7 +40,16 @@ export class ReservaService {
   }
 
   // Eliminar una reserva por su ID
-  eliminarReserva(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  eliminar(id: number): Observable<ReservaResponse> {
+    let token:any = sessionStorage.getItem('token')
+      
+    const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      });
+
+     const requestOptions = { headers: headers};
+    return this.http.delete<ReservaResponse>(`${this.apiUrl}/${id}`,requestOptions);
   }
+
 }

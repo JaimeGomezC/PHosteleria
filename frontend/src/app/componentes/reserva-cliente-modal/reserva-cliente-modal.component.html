@@ -1,0 +1,131 @@
+<mat-toolbar color="primary">
+  <span class="fill-remaining-space">{{titulo}}</span>
+</mat-toolbar>
+<mat-card>
+  <mat-card-content>
+    <form *ngIf="!loading" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <mat-dialog-content>
+
+        <div class="row">
+          <div class="col-2 mb-2">
+            <label class="form-label">nombre</label>
+            <input formControlName="nombre" class="form-control" min="0"
+              [ngClass]="{ 'is-invalid': submitted && f.value.nombre==''}" />
+            <div *ngIf="submitted" class="invalid-feedback">
+              <div>Nombre requerido</div>
+            </div>
+          </div>
+            <div class="col-2 mb-2">
+              <label class="form-label">1ª apellido </label>
+              <input formControlName="apellido1" class="form-control" min="0"
+                [ngClass]="{ 'is-invalid': submitted && f.value.apellido1==''}" />
+              <div *ngIf="submitted" class="invalid-feedback">
+                <div>1ª apellido requerido</div>
+              </div>
+            </div>
+            <div class="col-2 mb-2">
+              <label class="form-label">2ª apellido</label>
+              <input formControlName="apellido2" class="form-control" min="0"
+                [ngClass]="{ 'is-invalid': submitted && f.value.apellido2==''}" />
+              <div *ngIf="submitted" class="invalid-feedback">
+                <div>2ª apellido requerido</div>
+              </div>
+            </div>
+            <div class="col-2 mb-2">
+              <label class="form-label">Correo</label>
+              <input formControlName="email" class="form-control" min="0"
+                [ngClass]="{ 'is-invalid': submitted && f.value.email==''}" />
+              <div *ngIf="submitted" class="invalid-feedback">
+                <div>Correo requerido</div>
+              </div>
+            </div>
+            <div class="col-2 mb-2">
+              <label class="form-label">Teléfono</label>
+              <input formControlName="telefono" class="form-control" min="0"
+                [ngClass]="{ 'is-invalid': submitted && f.value.telefono==''}" />
+              <div *ngIf="submitted" class="invalid-feedback">
+                <div>Teléfono requerido</div>
+              </div>
+            </div>
+        </div>
+        <div class="row">
+           <div class="col-2 mb-2">
+              <label class="form-label">Fecha</label>
+              <input formControlName="fecha" class="form-control" min="0"
+                [ngClass]="{ 'is-invalid': submitted && f.value.fecha==''}" />
+              <div *ngIf="submitted" class="invalid-feedback">
+                <div>Fecha requerida</div>
+              </div>
+            </div>
+            <div class="col-2 mb-2">
+              <label class="form-label">Nº comensales</label>
+              <input formControlName="num_comensales" class="form-control" min="0"
+                [ngClass]="{ 'is-invalid': submitted && f.value.num_comensales==''}" />
+              <div *ngIf="submitted" class="invalid-feedback">
+                <div>Nº comensales requerido</div>
+              </div>
+            </div>
+            <div class="col-2 mb-2">
+              <label class="form-label">forma_pago</label>
+              <input formControlName="telefono" class="form-control" min="0"
+                [ngClass]="{ 'is-invalid': submitted && f.value.forma_pago==''}" />
+              <div *ngIf="submitted" class="invalid-feedback">
+                <div>forma_pago requerido</div>
+              </div>
+            </div>
+            <div class="col-2 mb-2">
+              <label class="form-label">precio_total</label>
+              <input formControlName="precio_total" class="form-control" min="0"
+                [ngClass]="{ 'is-invalid': submitted && f.value.precio_total==''}" />
+              <div *ngIf="submitted" class="invalid-feedback">
+                <div>precio_total requerido</div>
+              </div>
+            </div>
+            <div class="col-2 mb-2">
+              <label class="form-label">pagado_base</label>
+              <input formControlName="pagado_base" class="form-control" min="0"
+                [ngClass]="{ 'is-invalid': submitted && f.value.pagado_base==''}" />
+              <div *ngIf="submitted" class="invalid-feedback">
+                <div>pagado_base requerido</div>
+              </div>
+            </div>
+            <div class="col-2 mb-2">
+              <label class="form-label">pagado_total</label>
+              <input formControlName="pagado_total" class="form-control" min="0"
+                [ngClass]="{ 'is-invalid': submitted && f.value.pagado_total==''}" />
+              <div *ngIf="submitted" class="invalid-feedback">
+                <div>pagado_total requerido</div>
+              </div>
+            </div>
+            <div class="col-2 mb-2">
+              <label class="form-label">codigo_verificacion</label>
+              <input formControlName="codigo_verificacion" class="form-control" min="0"
+                [ngClass]="{ 'is-invalid': submitted && f.value.codigo_verificacion==''}" />
+              <div *ngIf="submitted" class="invalid-feedback">
+                <div>codigo_verificacion requerido</div>
+              </div>
+            </div>
+            <div class="col-2 mb-2">
+              <label class="form-label">producto_extra</label>
+              <input formControlName="producto_extra" class="form-control" min="0"
+                [ngClass]="{ 'is-invalid': submitted && f.value.producto_extra==''}" />
+              <div *ngIf="submitted" class="invalid-feedback">
+                <div>producto_extra requerido</div>
+              </div>
+            </div>
+
+        </div>
+        <div class="row">
+          <div class="col-12 mb-12">
+            <label class="form-label">Observaciones</label>
+            <textarea formControlName="observaciones" class="form-control" cols="30" rows="5"></textarea>
+          </div>
+
+        </div>
+        <div class="text-center">
+          <button class="btn btn-primary me-2">Aceptar</button>
+          <button class="btn btn-secondary" type="reset" (click)="cancelar()">Cancelar</button>
+        </div>
+
+      </mat-dialog-content>
+    </form>

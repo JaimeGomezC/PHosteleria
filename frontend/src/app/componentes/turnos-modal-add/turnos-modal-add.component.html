@@ -1,10 +1,13 @@
-<h2 mat-dialog-title>Nuevo Turno</h2>
+<!-- <h2 mat-dialog-title>{{titulo}}</h2> -->
+<mat-toolbar color="primary">
+    <span class="fill-remaining-space">{{titulo}}</span>
+  </mat-toolbar>
 <form *ngIf="!loading" [formGroup]="form" (ngSubmit)="onSubmit()">
     <mat-dialog-content>
     
         <div class="row">
             <div class="col-5 mb-5">
-                <label class="form-label">Turno {{f.value.turno}}</label>
+                <label class="form-label">Turno </label>
                 <select formControlName="turno" class="form-control"  [ngClass]="{ 'is-invalid': submitted && f.value.turno==''}">
                     <option value="">Selecciona un turno</option>
                     <option value="Comida">Comida</option>
@@ -47,7 +50,7 @@
            
         </div>
         <div class="text-center">
-            <button class="btn btn-primary me-2">Añadir</button>
+            <button class="btn btn-primary me-2">Aceptar</button>
             <button class="btn btn-secondary" type="reset" (click)="cancelar()">Cancelar</button>
         </div>
     

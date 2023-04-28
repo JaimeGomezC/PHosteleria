@@ -56,16 +56,29 @@ export class TurnosComponent implements OnInit,AfterViewInit {
   }  
 
   borrar(id:any):void {
-    this.turno.borrar(id).subscribe(data =>{
-      this.cargarDatos();
-      Swal.fire('Turno', 'Borrado', 'success');
-    },
-    (error) => {
-      console.log(error)
+    Swal.fire({
+      title: 'Esta seguro que desea eliminar el registro?',
+      text: "Va a eliminar una turno!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.turno.borrar(id).subscribe(data =>{
+          this.cargarDatos();
+          Swal.fire('Registro borrado!','Ha eliminado el turno.','success')
+        },
+        (error) => {
+          console.log(error)
+        })
+      }
     })
   }
   verReserva(id:any):void {
-    this.router.navigate(['ReservasLista']);
+    this.router.navigate(['ReservaCliente']);
   }
  
   openModal(turno: TurnosResponse) {

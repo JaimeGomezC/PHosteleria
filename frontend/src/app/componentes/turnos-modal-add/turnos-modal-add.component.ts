@@ -1,14 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
 import { TurnosService } from 'src/app/servicios/turnos.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-
-// import { UserService, AlertService } from '../_services';
-// import { MustMatch } from '../_helpers';
-import { TurnosComponent } from '../turnos/turnos.component';
-import { getTestBed } from '@angular/core/testing';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -21,6 +15,7 @@ export class TurnosModalAddComponent implements OnInit {
   id?: string;
   loading = false;
   submitted = false;
+  titulo?:string;
 
   constructor(
     public formBuilder: FormBuilder,
@@ -31,12 +26,13 @@ export class TurnosModalAddComponent implements OnInit {
     private router: Router
   ) {
     console.log(data);
+    if(data){this.titulo='EDITAR TURNO'}else{this.titulo='NUEVO TURNO'}
     this.form = this.formBuilder.group({
-      turno: [data ? data.turno : '', Validators.required],
+      turno: [data?.turno, Validators.required],
       id_admin: sessionStorage.getItem('usuario'),
-      n_plazas: [data ? data.n_plazas : '', Validators.required],
-      fecha: [data ? data.created_at : '', Validators.required],
-      observaciones: [data ? data.observaciones : ''],
+      n_plazas: [data?.n_plazas, Validators.required],
+      fecha: [data?.fecha, Validators.required],
+      observaciones: [data?.observaciones],
 
       visible: ['1', Validators.required],
     });

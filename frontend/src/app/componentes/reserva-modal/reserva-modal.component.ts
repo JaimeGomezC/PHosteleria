@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ClienteService } from 'src/app/servicios/cliente.service';
 
 
 @Component({
@@ -12,7 +13,7 @@ export class ReservaModalComponent implements OnInit {
   first=false;
   fecha?:any;
  
-  constructor(private _formBuilder: FormBuilder,private router:ActivatedRoute) {}
+  constructor(private _formBuilder: FormBuilder,private router:ActivatedRoute,private cliente:ClienteService ) {}
   ngOnInit(): void {
     this.router.params.subscribe(params => {
       const datos = params; // Datos recibidos
@@ -27,7 +28,8 @@ export class ReservaModalComponent implements OnInit {
     firstnombre: ['', Validators.required],
     firstapellidos: ['', Validators.required],
     firstemail: ['', Validators.required],
-    firstobservaciones: ['', Validators.required]
+    first_tlf: ['', Validators.required],
+    firstobservaciones: ['']
   });
   secondFormGroup = this._formBuilder.group({
     secondCtrl: ['', Validators.required],
@@ -36,17 +38,16 @@ export class ReservaModalComponent implements OnInit {
   isLinear = true;
   
   getErrorMessage() {
-    const form = this.firstFormGroup;
-    console.log('dddd')
-    console.log(form.root.status)
-    
-    if (form.root.status=='VALID') {
-      this.first=false;
-      console.log('El formulario tiene errores:');
-    } else {
-      // El formulario no tiene errores, proceder con el envío de datos
-      console.log('El formulario se ha completado correctamente');
-    }
+    return "Correo incorrecto"
   }
+
+  // grabar() {
+  //   this.cliente.(this.form.value).subscribe(
+  //     (data) => {
+  //       console.log('data');
+        
+  //       });
+  //   }
+ 
   
 }

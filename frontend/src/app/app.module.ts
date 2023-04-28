@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule,routingComponents } from './app-routing.module';//Se hace export en el routing de todos las rutas, es una buena practica 
 import { AppComponent } from './app.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
@@ -11,10 +12,12 @@ import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { FooterComponent } from './componentes/footer/footer.component';
 import { MenuComponent } from './componentes/menu/menu.component';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 //Angular Material
 import { SharedModule } from './shared/shared.module';
+import { ReservaClienteComponent } from './componentes/reserva-cliente/reserva-cliente.component';
+import { ReservaClienteModalComponent } from './componentes/reserva-cliente-modal/reserva-cliente-modal.component';
 
 
 
@@ -25,6 +28,8 @@ import { SharedModule } from './shared/shared.module';
     MenuComponent, 
     FooterComponent,
     routingComponents,
+    ReservaClienteComponent,
+    ReservaClienteModalComponent,
     
   ],
   imports: [
