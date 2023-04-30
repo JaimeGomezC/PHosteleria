@@ -36,6 +36,7 @@ Route::group(['middleware' => 'cors'], function(){
 Route::middleware(['auth:sanctum'])->group(function(){
     
     Route::get('turnos',[TurnosController::class,'index']);
+    Route::get('turnos/publicados',[TurnosController::class,'turnosPublicados']);
     Route::post('turnos',[TurnosController::class,'store']);
     Route::get('turnos/{turno}',[TurnosController::class,'show']);
     Route::put('turnos/{turno}',[TurnosController::class,'update']);

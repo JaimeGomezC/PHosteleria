@@ -5,7 +5,6 @@ import { CalendarOptions,Calendar, EventClickArg, DateSelectArg,EventApi } from 
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin, { DateClickArg, EventDragStopArg } from '@fullcalendar/interaction';
 import { FullCalendarComponent } from '@fullcalendar/angular';
-import { TurnosResponse } from 'src/app/interfaces/turnosResponse';
 import { TurnosService } from 'src/app/servicios/turnos.service';
 
 @Component({
@@ -31,9 +30,9 @@ export class ReservasComponent implements OnInit {
     
   }
   cargarDatos(){
-    this.turno.getTurnos().subscribe(data =>{
-          console.log(data)
-          let turno=data.map((e: any) => ({ id:e.id,title:e.turno, start: e.fecha, allDay: true }));
+    this.turno.getTurnosPublicados().subscribe(data =>{
+          console.log(data.result)
+          let turno=data.data.map((e: any) => ({ id:e.id,title:e.turno, start: e.fecha, allDay: true }));
           console.log(turno)
           forwardRef(() => Calendar);
           this.calendarOptions = {

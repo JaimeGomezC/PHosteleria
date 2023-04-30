@@ -18,6 +18,15 @@ class TurnosController extends Controller
         $turno = Turnos::all();
         return response()->json($turno);
     }
+    public function turnosPublicados()
+    {
+        $turnos = Turnos::where('visible', 1)->get();
+
+        return response()->json([
+            'result' => 'ok',
+            'data' => $turnos
+        ], 200);
+    }
 
     /**
      * Show the form for creating a new resource.
