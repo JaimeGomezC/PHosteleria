@@ -1,0 +1,58 @@
+<!-- <h2 mat-dialog-title>{{titulo}}</h2> -->
+<mat-toolbar color="primary">
+    <span class="fill-remaining-space">{{titulo}}</span>
+</mat-toolbar>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
+    
+        <div class="row">
+            <div class="col-4 mb-2">
+                <label class="form-label">nombre</label>
+                <input formControlName="nombre_menu" class="form-control" 
+                    [ngClass]="{ 'is-invalid': submitted && f.value.nombre_menu==''}" />
+                <div *ngIf="f2['fecha'].errors?.['required']" class="invalid-feedback">
+                    <div>Nombre requerido</div>
+                </div>
+            </div>
+            <div class="col-4 mb-2">
+                <label class="form-label">imagen menu </label>
+                
+                <input  formControlName="imagen_menu" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.value.imagen_menu==''}" />
+                <div *ngIf="submitted" class="invalid-feedback">
+                    <div>imagen_menu requerido</div>
+                </div>
+            </div>
+            <div class="col-4 mb-2">
+                <label class="form-label">fecha</label>
+                <input type="date" formControlName="fecha" class="form-control" 
+                [ngClass]="{ 'is-invalid': submitted && f.value.fecha.errors }">
+                <div  class="invalid-feedback">
+                    <div>fecha requerido</div>
+                </div>
+            </div>
+            <div class="col-4 mb-2">
+                <label class="form-label">precio</label>
+                <input type="number" step="any" formControlName="precio_pax" class="form-control" min="0"
+                    [ngClass]="{ 'is-invalid': submitted && f.value.precio_pax==''}" />
+                <div *ngIf="submitted" class="invalid-feedback">
+                    <div>precio requerido</div>
+                </div>
+            </div>
+            <!-- <div class="col-4 mb-2">
+                <label class="form-label">precio</label>
+                <input type="file" name="imagen" (change)="onFileSelected($event)">
+            </div> -->
+            
+            <div class="row">
+                <div class="col-12 mb-12">
+                    <label class="form-label">Observaciones</label>
+                    <textarea formControlName="observaciones" class="form-control" cols="30" rows="5"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            <button class="btn btn-primary me-2">Aceptar</button>
+            <button class="btn btn-secondary" type="reset" (click)="cancelar()">Cancelar</button>
+          </div>
+
+</form>

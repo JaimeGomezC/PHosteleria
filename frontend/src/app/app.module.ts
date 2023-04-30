@@ -16,8 +16,7 @@ import { MenuComponent } from './componentes/menu/menu.component';
 
 //Angular Material
 import { SharedModule } from './shared/shared.module';
-import { ReservaClienteComponent } from './componentes/reserva-cliente/reserva-cliente.component';
-import { ReservaClienteModalComponent } from './componentes/reserva-cliente-modal/reserva-cliente-modal.component';
+import { MenuTurnoModalComponent } from './componentes/menu-turno-modal/menu-turno-modal.component';
 
 
 
@@ -28,8 +27,8 @@ import { ReservaClienteModalComponent } from './componentes/reserva-cliente-moda
     MenuComponent, 
     FooterComponent,
     routingComponents,
-    ReservaClienteComponent,
-    ReservaClienteModalComponent,
+    MenuTurnoModalComponent,
+
     
   ],
   imports: [

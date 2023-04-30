@@ -30,11 +30,20 @@
                 <input type="date" formControlName="fecha" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.value.fecha==''}"/>
             </div>
 
-            <div class="col-5 mb-5">
+            <div class="col-6 mb-6">
                 <label class="form-label">Publicar </label>
                 <select formControlName="visible" class="form-control"  [ngClass]="{ 'is-invalid': submitted && f.value.visible==''}">
                     <option value="1" ng-init="1" [defaultSelected]="true">SI</option>
                     <option value="0">NO</option>
+                </select>
+                <div *ngIf="submitted" class="invalid-feedback">
+                    <div>Elemento requerido</div>
+                </div>
+            </div>
+            <div class="col-6 mb-6">
+                <label class="form-label">Menu </label>
+                <select formControlName="id_menu" class="form-control" >
+                    <option value="{{opt.id}}" *ngFor="let opt of data.listaMenu">{{opt.nombre_menu}}</option>
                 </select>
                 <div *ngIf="submitted" class="invalid-feedback">
                     <div>Elemento requerido</div>

@@ -1,53 +1,55 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TurnosService } from 'src/app/servicios/turnos.service';
+import { MenuService } from 'src/app/servicios/menu.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-turnos-modal-add',
-  templateUrl: './turnos-modal-add.component.html',
-  styleUrls: ['./turnos-modal-add.component.css'],
+  selector: 'app-menu-turno-modal',
+  templateUrl: './menu-turno-modal.component.html',
+  styleUrls: ['./menu-turno-modal.component.css']
 })
-export class TurnosModalAddComponent implements OnInit {
-  public form!: FormGroup;
+export class MenuTurnoModalComponent implements OnInit {
+
+  form!: FormGroup;
   id?: string;
   loading = false;
   submitted = false;
   titulo?:string;
+  imagen?:File;
 
   constructor(
     public formBuilder: FormBuilder,
-    private turno: TurnosService,
-    private dialogRef: MatDialogRef<TurnosModalAddComponent>,
+    private menu: MenuService,
+    private dialogRef: MatDialogRef<MenuTurnoModalComponent>,
     private snack: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private router: Router
   ) {
-    console.log("data");
     console.log(data);
-    if(data){this.titulo='EDITAR TURNO'}else{this.titulo='NUEVO TURNO'}
+    if(data){this.titulo='EDITAR MENU'}else{this.titulo='NUEVO MENU'}
     this.form = this.formBuilder.group({
-      turno: [data?.turno, Validators.required],
+      nombre_menu: [this.data?.nombre_menu, Validators.required],
       id_admin: sessionStorage.getItem('usuario'),
-      n_plazas: [data?.n_plazas, Validators.required],
-      fecha: [data?.fecha, Validators.required],
-      observaciones: [data?.observaciones],
-      id_menu: [data?.id_menu],
-      listaMenu: [data?.listaMenu],
-      visible: ['1', Validators.required],
+      imagen_menu: [this.data?.n_plazas, Validators.required],
+      fecha: [this.data?.fecha, Validators.required],
+      precio_pax: [this.data?.precio, Validators.required],
+      observaciones: [this.data?.observaciones]
     });
   }
 
   ngOnInit(): void {
-    if (this.data) {
-    }
-  }
 
+  }
+ 
   public get f() {
+    console.dir(this.form.controls["fecha"].errors?.["required"])
+    console.dir(this.form.controls["fecha"])
+    console.dir(this.form)
     return this.form;
   }
+  get f2() { return this.form.controls; }
 
   onSubmit() {
     this.submitted = true;
@@ -62,7 +64,7 @@ export class TurnosModalAddComponent implements OnInit {
   }
 
   addTurno() {
-    this.turno.addTurnos(this.form.value).subscribe(
+    this.menu.crearMenu(this.form.value).subscribe(
       (data) => {
         console.log('data');
         console.log(this.form.value);
@@ -86,7 +88,7 @@ export class TurnosModalAddComponent implements OnInit {
   }
 
   addEditar(item: any): void {
-    this.turno.modificar(item.id,this.form.value).subscribe(
+    this.menu.actualizarMenu(item.id,this.form.value).subscribe(
       (data) => {
         this.snack.open('Turno modificado !!', 'Aceptar', {
           duration: 2000,
@@ -100,9 +102,9 @@ export class TurnosModalAddComponent implements OnInit {
       }
     );
   }
-
-  // onReset() {
-  //   this.submitted = false;
-  //   this.form.reset();
-  // }
+  onFileSelected(event:any) {
+    this.form.value.imagen_menu=event.target.files[0].name;
+    this.imagen= event.target.files[0];
+  }
+  
 }

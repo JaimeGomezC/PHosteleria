@@ -9,6 +9,8 @@ import { MenuComponent } from './componentes/menu/menu.component';
 import { TurnosModalAddComponent } from './componentes/turnos-modal-add/turnos-modal-add.component';
 import { ReservaModalComponent } from './componentes/reserva-modal/reserva-modal.component';
 import { ReservaClienteComponent } from './componentes/reserva-cliente/reserva-cliente.component';
+import { ReservaClienteModalComponent } from './componentes/reserva-cliente-modal/reserva-cliente-modal.component';
+import { MenuTurnoComponent } from './componentes/menu-turno/menu-turno.component';
 
 
 
@@ -21,7 +23,11 @@ const routes: Routes = [
 {path:'menu',component:MenuComponent},
 {path:'turnosModal',component:TurnosModalAddComponent},
 {path:'ReservasModal',component:ReservaModalComponent},
+{path:'menucomida',component:MenuTurnoComponent},
 {path:'ReservaCliente',component:ReservaClienteComponent},
+
+
+{path:'reservaClienteModal',component:ReservaClienteModalComponent},
 
 {path:'**',redirectTo:'',pathMatch:'full'}
 ];
@@ -34,5 +40,6 @@ export class AppRoutingModule { }
 export const routingComponents=[ReservasComponent,InicioComponent,
   TurnosComponent,LoginComponent,
   MenuComponent,TurnosModalAddComponent,
-  ReservaModalComponent,ReservaClienteComponent
+  ReservaModalComponent,ReservaClienteComponent,
+  ReservaClienteModalComponent,MenuTurnoComponent,
 ]

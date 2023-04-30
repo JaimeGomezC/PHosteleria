@@ -5,8 +5,10 @@ use App\Http\Controllers\TurnosController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\MenuController;
+use App\Models\Menu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,5 +58,14 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::get('menus/{menu}', [MenuController::class, 'show']);
     Route::put('menus/{menu}', [MenuController::class, 'update']);
     Route::delete('menus/{menu}', [MenuController::class, 'destroy']);
+    Route::get('/menus/{id}/imagen', function ($id) {
+        $menu = Menu::find($id);
+        if (!$menu) {
+            return response()->json(['error' => 'Menu not found'], 404);
+        }
+        $ruta = Storage::url($menu->imagen);
+        return response()->file($ruta);
+    });
+    Route::post('/actualizar-cliente-reserva', 'NombreControlador@actualizarClienteReserva');
 
 });

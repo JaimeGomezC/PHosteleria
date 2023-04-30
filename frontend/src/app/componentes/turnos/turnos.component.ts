@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { TurnosResponse } from 'src/app/interfaces/turnosResponse';
 import { TurnosService } from 'src/app/servicios/turnos.service';
+import { MenuService } from 'src/app/servicios/menu.service';
 import { Router } from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import { TurnosModalAddComponent } from '../turnos-modal-add/turnos-modal-add.component';
@@ -8,8 +9,6 @@ import Swal from 'sweetalert2';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
-import { DatePipe } from '@angular/common';
-
 
 @Component({
   selector: 'app-turnos',
@@ -23,15 +22,16 @@ export class TurnosComponent implements OnInit,AfterViewInit {
   displayedColumns: string[] = [ 'fecha','turno','visible','n_plazas', 'observaciones','acciones'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  arrayMenus?:any;
 
 
-  constructor(private turno:TurnosService,private router:Router,private dialog:MatDialog,private datePipe: DatePipe) {
+  constructor(private turno:TurnosService,private router:Router,private dialog:MatDialog,private menu:MenuService) {
     this.dataSource=new MatTableDataSource()
-    
    }
 
   ngOnInit(): void {
      this.cargarDatos();
+     this.cargarMenus();
   }
 
   ngAfterViewInit() {
@@ -53,7 +53,15 @@ export class TurnosComponent implements OnInit,AfterViewInit {
     (error) => {
       console.log(error)
     })
-  }  
+  }
+  cargarMenus(){
+    this.menu.getMenus().subscribe(data =>{
+      this.arrayMenus=data;
+    },
+    (error) => {
+      console.log(error)
+    })
+  }    
 
   borrar(id:any):void {
     Swal.fire({
@@ -81,13 +89,8 @@ export class TurnosComponent implements OnInit,AfterViewInit {
     this.router.navigate(['ReservaCliente']);
   }
  
-  openModal(turno: TurnosResponse) {
-    // let fechaFormateada = this.datePipe.transform(turno.fecha, 'dd/MM/yyyy');
-    // console.log(turno)
-    // console.log(fechaFormateada)
-    // let nuevo=new Date(fechaFormateada);
-    // turno.fecha=new Date(fechaFormateada);
-
+  openModal(turno: any) {
+    turno["listaMenu"]=this.arrayMenus;
     const dialogRef = this.dialog.open(TurnosModalAddComponent, {
       data: turno
     });
