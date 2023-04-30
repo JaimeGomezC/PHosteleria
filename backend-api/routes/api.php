@@ -28,13 +28,18 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::group(['middleware' => 'cors'], function(){
-    Route::post('register',[AuthController::class,'register']);
+    
     Route::post('login',[AuthController::class,'login']);
     Route::post('logout',[AuthController::class,'logout']);
+    
 });
 
 Route::middleware(['auth:sanctum'])->group(function(){
-    
+    Route::get('index', [AuthController::class, 'index']);
+    Route::delete('destroy/{user}', [AuthController::class, 'destroy']);
+    Route::post('register',[AuthController::class,'register']);
+    Route::put('update/{user}',[AuthController::class,'update']);
+
     Route::get('turnos',[TurnosController::class,'index']);
     Route::get('turnos/publicados',[TurnosController::class,'turnosPublicados']);
     Route::post('turnos',[TurnosController::class,'store']);
@@ -53,6 +58,8 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::put('reservas/{reserva}', [ReservaController::class, 'update']);
     Route::delete('reservas/{reserva}', [ReservaController::class, 'destroy']);
     Route::get('reservas/turno/{id_turno}',[ReservaController::class, 'getByTurno']);
+
+   
 
     Route::get('menus', [MenuController::class, 'index']);
     Route::post('menus', [MenuController::class, 'store']);

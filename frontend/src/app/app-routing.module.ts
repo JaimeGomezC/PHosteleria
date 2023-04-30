@@ -11,7 +11,9 @@ import { ReservaModalComponent } from './componentes/reserva-modal/reserva-modal
 import { ReservaClienteComponent } from './componentes/reserva-cliente/reserva-cliente.component';
 import { ReservaClienteModalComponent } from './componentes/reserva-cliente-modal/reserva-cliente-modal.component';
 import { MenuTurnoComponent } from './componentes/menu-turno/menu-turno.component';
-
+import { MenuTurnoModalComponent } from './componentes/menu-turno-modal/menu-turno-modal.component';
+import { UsuarioComponent } from './componentes/usuario/usuario.component';
+import { UsuarioModalComponent } from './componentes/usuario-modal/usuario-modal.component';
 
 
 
@@ -25,7 +27,9 @@ const routes: Routes = [
 {path:'ReservasModal',component:ReservaModalComponent},
 {path:'menucomida',component:MenuTurnoComponent},
 {path:'ReservaCliente',component:ReservaClienteComponent},
-
+{path:'MenuTurnoModalComponent',component:MenuTurnoModalComponent},
+{path:'Usuarios',component:UsuarioComponent},
+{path:'UsuarioModal',component:UsuarioModalComponent},
 
 {path:'reservaClienteModal',component:ReservaClienteModalComponent},
 
@@ -42,4 +46,5 @@ export const routingComponents=[ReservasComponent,InicioComponent,
   MenuComponent,TurnosModalAddComponent,
   ReservaModalComponent,ReservaClienteComponent,
   ReservaClienteModalComponent,MenuTurnoComponent,
+  MenuTurnoModalComponent,UsuarioComponent,UsuarioModalComponent
 ]

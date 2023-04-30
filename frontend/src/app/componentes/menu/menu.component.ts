@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { LoginService } from '../../servicios/login.service';
+import { UsuarioService } from '../../servicios/usuario.service';
 
 @Component({
   selector: 'app-menu',
@@ -9,7 +9,7 @@ import { LoginService } from '../../servicios/login.service';
   styleUrls: ['./menu.component.css'],
 })
 export class MenuComponent implements OnInit {
-  constructor(private loginservice: LoginService,private router: Router) {}
+  constructor(private loginservice: UsuarioService,private router: Router) {}
 
   ngOnInit(): void {}
 

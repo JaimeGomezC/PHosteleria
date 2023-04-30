@@ -16,7 +16,7 @@ import { MenuComponent } from './componentes/menu/menu.component';
 
 //Angular Material
 import { SharedModule } from './shared/shared.module';
-import { MenuTurnoModalComponent } from './componentes/menu-turno-modal/menu-turno-modal.component';
+
 
 
 
@@ -27,7 +27,7 @@ import { MenuTurnoModalComponent } from './componentes/menu-turno-modal/menu-tur
     MenuComponent, 
     FooterComponent,
     routingComponents,
-    MenuTurnoModalComponent,
+
 
     
   ],

@@ -1,0 +1,36 @@
+<!-- <h2 mat-dialog-title>{{titulo}}</h2> -->
+<mat-toolbar color="primary">
+    <span class="fill-remaining-space">{{titulo}}</span>
+  </mat-toolbar>
+<form *ngIf="!loading" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-dialog-content>
+    
+        <div class="row">
+            
+            <div class="col-4 mb-4">
+                <label class="form-label">Nombre</label>
+                <input formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.value.name==''}"/>
+                <div *ngIf="submitted" class="invalid-feedback">
+                    <div>Nombre requerido</div>
+                </div>
+            </div>
+            <div class="col-4 mb-4">
+                <label class="form-label">Correo</label>
+                <input formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.value.email==''}"/>
+            </div>
+            <div class="col-4 mb-4">
+                <label class="form-label">Contraseña</label>
+                <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.value.password==''}"/>
+            </div>
+            
+            
+        </div>
+       
+        <div class="text-center">
+            <button class="btn btn-primary me-2">Aceptar</button>
+            <button class="btn btn-secondary" type="reset" (click)="cancelar()">Cancelar</button>
+        </div>
+    
+    </mat-dialog-content>
+</form>
+

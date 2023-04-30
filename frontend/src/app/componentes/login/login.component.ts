@@ -11,7 +11,7 @@ import { Response } from 'src/app/interfaces/response';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { LoginService } from 'src/app/servicios/login.service';
+import { UsuarioService } from 'src/app/servicios/usuario.service';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private api: ApiService,
-    private loginService: LoginService,
+    private loginService: UsuarioService,
     private router: Router,
     private snack: MatSnackBar
   ) {}
