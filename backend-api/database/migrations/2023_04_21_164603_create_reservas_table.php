@@ -15,8 +15,8 @@ class CreateReservasTable extends Migration
     {
         Schema::create('reservas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_cliente')->constrained('clientes');
-            $table->foreignId('id_turno')->constrained('turnos');
+            $table->unsignedBigInteger('id_cliente');
+            $table->unsignedBigInteger('id_turno');
             $table->text('observaciones')->nullable();
             $table->date('fecha');
             $table->integer('num_comensales');
