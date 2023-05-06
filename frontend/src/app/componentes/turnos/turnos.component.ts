@@ -101,8 +101,12 @@ export class TurnosComponent implements OnInit,AfterViewInit {
   };
   
   edit_add_Turno(id:any):void {
+    const turno:any={};
+    turno["listaMenu"]=this.arrayMenus;
+
     const dialogRef = this.dialog.open(TurnosModalAddComponent,{
-      width:'40%'
+      width:'40%',
+      data:turno
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);

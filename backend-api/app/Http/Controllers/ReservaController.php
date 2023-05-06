@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Reserva;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class ReservaController extends Controller
@@ -33,22 +34,27 @@ class ReservaController extends Controller
         ]);
 
         // Crear una nueva reserva
-        $reserva = new Reserva([
-            'id_cliente' => $request->input('id_cliente'),
-            'id_turno' => $request->input('id_turno'),
-            'observaciones' => $request->input('observaciones'),
-            'fecha' => $request->input('fecha'),
-            'num_comensales' => $request->input('num_comensales'),
-            'forma_pago' => $request->input('forma_pago'),
-            'precio_total' => $request->input('precio_total'),
-            'pagado_base' => $request->input('pagado_base'),
-            'pagado_total' => $request->input('pagado_total'),
-            'codigo_verificacion' => $request->input('codigo_verificacion'),
-            'producto_extra' => $request->input('producto_extra'),
-        ]);
-        $reserva->save();
-
-        return response()->json($reserva, 201);
+        // $reserva = new Reserva([
+        //     'id_cliente' => $request->input('id_cliente'),
+        //     'id_turno' => $request->input('id_turno'),
+        //     'observaciones' => $request->input('observaciones'),
+        //     'fecha' => $request->input('fecha'),
+        //     'num_comensales' => $request->input('num_comensales'),
+        //     'forma_pago' => $request->input('forma_pago'),
+        //     'precio_total' => $request->input('precio_total'),
+        //     'pagado_base' => $request->input('pagado_base'),
+        //     'pagado_total' => $request->input('pagado_total'),
+        //     'codigo_verificacion' => $request->input('codigo_verificacion'),
+        //     'producto_extra' => $request->input('producto_extra'),
+        // ]);
+        // $reserva->save();
+        $data = [
+            'result' => 'ok',
+            'message' => 'Turno Creado',
+            'resultado' => $request->input('id_cliente')
+        ];
+        return response()->json($data, 201);
+        // return response()->json($request, 201);
     }
 
     public function show(Reserva $reserva)
@@ -90,5 +96,15 @@ class ReservaController extends Controller
         return response()->json(null, 204);
     }
 
-
+    public function insertClienteReserva(Request $request)
+    {
+        $json_params = $request->input('');
+        $result = DB::select("SELECT insert_cliente_reserva('$json_params')");
+        $data = [
+            'result' => 'ok5',
+            'message' => 'probando la function ',
+            'resultado' => '44444444444'
+        ];
+        return response()->json($data);
+    }
 }

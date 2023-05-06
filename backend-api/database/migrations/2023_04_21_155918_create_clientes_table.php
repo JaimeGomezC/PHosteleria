@@ -18,8 +18,8 @@ class CreateClientesTable extends Migration
             $table->string('nombre');
             $table->string('apellido1');
             $table->string('apellido2');
-            $table->string('email')->unique();
-            $table->string('telefono');
+            $table->string('email')->nullable(false);
+            $table->string('telefono')->nullable(false);
             $table->text('observaciones')->nullable();
             $table->date('fecha');
             $table->timestamps();
