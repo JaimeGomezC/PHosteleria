@@ -60,14 +60,14 @@
                 <div>Fecha requerida</div>
               </div>
             </div>
-            <div class="col-md-2 padding_bottom">
+            <!-- <div class="col-md-2 padding_bottom">
 							<label>ANYO</label>
 							<div class="input-group">
 								<span style="background-color: #337ab7" class="input-group-addon btn btn-primary"
 									ng-click="openLupaBusqanyo()"><i class="bi bi-search"></i></span> <input
 									class="form-control" ng-model="search.ANYO">
 							</div>
-						</div> 
+						</div>  -->
             <div class="col-2 mb-2">
               <label class="form-label">Nº comensales</label>
               <input formControlName="num_comensales" class="form-control" min="0"
@@ -78,7 +78,7 @@
             </div>
             <div class="col-2 mb-2">
               <label class="form-label">Forma de pago</label>
-              <input formControlName="telefono" class="form-control" min="0"
+              <input formControlName="forma_pago" class="form-control" min="0"
                 [ngClass]="{ 'is-invalid': submitted && f.value.forma_pago==''}" />
               <div *ngIf="submitted" class="invalid-feedback">
                 <div>forma_pago requerido</div>

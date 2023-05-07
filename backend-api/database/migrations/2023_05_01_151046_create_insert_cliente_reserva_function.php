@@ -16,21 +16,19 @@ class CreateInsertClienteReservaFunction extends Migration
         
         
         INSERT INTO clientes ( nombre, apellido1, apellido2, email, telefono, observaciones, fecha)
-        VALUES ( JSON_EXTRACT(json_params, '$.clientes[0].nombre'), JSON_EXTRACT(json_params, '$.clientes[0].apellido1'),
-        JSON_EXTRACT(json_params, '$.clientes[0].apellido2'), JSON_EXTRACT(json_params, '$.clientes[0].email'), JSON_EXTRACT(json_params, '$.clientes[0].telefono'),
-        JSON_EXTRACT(json_params, '$.clientes[0].observaciones'), JSON_EXTRACT(json_params, '$.clientes[0].fecha'));
+        VALUES ( JSON_EXTRACT(json_params, '$.nombre'), JSON_EXTRACT(json_params, '$.apellido1'),
+        JSON_EXTRACT(json_params, '$.apellido2'), JSON_EXTRACT(json_params, '$.email'), JSON_EXTRACT(json_params, '$.telefono'),
+        JSON_EXTRACT(json_params, '$.observaciones'), JSON_EXTRACT(json_params, '$.fecha'));
         
         SET id_cliente = LAST_INSERT_ID();
         
         INSERT INTO reservas ( id_cliente, id_turno, observaciones, fecha, num_comensales, forma_pago, precio_total, pagado_base, pagado_total, codigo_verificacion, producto_extra)
-        VALUES ( id_cliente, JSON_EXTRACT(json_params, '$.reservas[0].id_turno'), JSON_EXTRACT(json_params, '$.reservas.observaciones'),
-        JSON_EXTRACT(json_params, '$.reservas[0].fecha'), JSON_EXTRACT(json_params, '$.reservas[0].num_comensales'), JSON_EXTRACT(json_params, '$.reservas[0].forma_pago'),
-        JSON_EXTRACT(json_params, '$.reservas[0].precio_total'), JSON_EXTRACT(json_params, '$.reservas[0].pagado_base'), JSON_EXTRACT(json_params, '$.reservas[0].pagado_total'),
-        JSON_EXTRACT(json_params, '$.reservas[0].codigo_verificacion'), JSON_EXTRACT(json_params, '$.reservas[0].producto_extra'));
+        VALUES ( id_cliente, JSON_EXTRACT(json_params, '$.id_turno'), JSON_EXTRACT(json_params, '$.reservas.observaciones'),
+        JSON_EXTRACT(json_params, '$.fecha'), JSON_EXTRACT(json_params, '$.num_comensales'), JSON_EXTRACT(json_params, '$.forma_pago'),
+        JSON_EXTRACT(json_params, '$.precio_total'), JSON_EXTRACT(json_params, '$.pagado_base'), JSON_EXTRACT(json_params, '$.pagado_total'),
+        JSON_EXTRACT(json_params, '$.codigo_verificacion'), JSON_EXTRACT(json_params, '$.producto_extra'));
         
-  
-        
-        RETURN 'hola';
+        RETURN 'Reserva y Cliente creados';
         END;
         ";
         DB::unprepared($sql);

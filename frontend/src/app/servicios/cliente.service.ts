@@ -13,9 +13,19 @@ export class ClienteService {
 
   constructor(private http: HttpClient) { }
 
+  getAutorizacion(){
+    let token:any = sessionStorage.getItem('token')  
+    const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      });
+    return headers;
+  }
   // Método para agregar un nuevo cliente
-  agregarCliente(cliente: ClienteResponse): Observable<ClienteResponse> {
-    return this.http.post<ClienteResponse>(this.apiUrl, cliente);
+  agregarCliente(jsonParams: any): Observable<any> {
+    const requestOptions = { headers: this.getAutorizacion()};
+    const body =  jsonParams ;
+    return this.http.post<ClienteResponse>('http://localhost:8000/api/reservas/cliente' , body,requestOptions);
   }
 
   // // Método para obtener todos los clientes

@@ -31,13 +31,14 @@ Route::group(['middleware' => 'cors'], function(){
     
     Route::post('login',[AuthController::class,'login']);
     Route::post('logout',[AuthController::class,'logout']);
+    Route::post('register',[AuthController::class,'register']);
     
 });
 
 Route::middleware(['auth:sanctum'])->group(function(){
     Route::get('index', [AuthController::class, 'index']);
     Route::delete('destroy/{user}', [AuthController::class, 'destroy']);
-    Route::post('register',[AuthController::class,'register']);
+    // Route::post('register',[AuthController::class,'register']);
     Route::put('update/{user}',[AuthController::class,'update']);
 
     Route::get('turnos',[TurnosController::class,'index']);
