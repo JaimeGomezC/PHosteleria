@@ -14,7 +14,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ReservaClienteModalComponent implements OnInit {
 
   public form!: FormGroup;
-  public form2!: FormGroup;
   id?: string;
   loading = false;
   submitted = false;
@@ -33,19 +32,18 @@ export class ReservaClienteModalComponent implements OnInit {
   ) {
     console.log("aui el arraydatos");
     console.log(data);
-    console.log(data[1].cliente.nombre);
+    // console.log(data[1].cliente.nombre);
     if(data){this.titulo='EDITAR RESERVA'}else{this.titulo='NUEVA RESERVA'}
     this.form = this.formBuilder.group({
       //tabla Cliente
-      id: [data ? data[1].cliente.id : ''],
+      // id: [data ? data[1].cliente.id : ''],
       nombre: [data ? data[1].cliente.nombre : '', Validators.required],
       apellido1: [data ? data[1].cliente.apellido1 : '', Validators.required],
       apellido2: [data ? data[1].cliente.apellido2 : '', Validators.required],
       email: [data ? data[1].cliente.email : '', Validators.required],
-      telefono: [data ? data[1].cliente.telefono : '', Validators.required]
-    });
-      //tabla Reserva
-    this.form2 = this.formBuilder.group({
+      telefono: [data ? data[1].cliente.telefono : '', Validators.required],
+      //tabla Reservas
+      id_turno: ['1'],
       observaciones: [data ? data[0].reserva.observaciones : '', Validators.required],
       fecha: [data ? data[0].reserva.fecha : '', Validators.required],
       num_comensales: [data ? data[0].reserva.num_comensales : '', Validators.required],
@@ -65,15 +63,6 @@ export class ReservaClienteModalComponent implements OnInit {
     if (this.data) {
     }
   }
-  // createForm() {
-  //   this.formGroup = this.formBuilder.group({
-  //     'nombre': ['hola', Validators.required],
-  //     'lastname': [null, Validators.required],
-  //     'defaultdyn': [null, Validators.required],
-  //     'defaulttemp': [null, Validators.required],
-  //     'defaultadditional': [null, Validators.required],
-  //   });
-  // }
 
   public get f() {
     return this.form;

@@ -79,6 +79,17 @@ export class ReservaClienteComponent implements OnInit {
     })
   }
 
+  openModal(cliente: any) {
+    
+    const dialogRef = this.dialog.open(ReservaClienteModalComponent, {
+      data: cliente
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Modal cerrada con resultado: ${result}`);
+      this.cargarDatos();
+    });
+  };
+
   edit_add_Turno(item:any):void {
     this.cliente.getCliente(item.id_cliente).subscribe(respuesta =>{
       let arrayDatos=[{"reserva":item},{"cliente":respuesta}]

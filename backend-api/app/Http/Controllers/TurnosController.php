@@ -104,25 +104,11 @@ class TurnosController extends Controller
      * @param  \App\Models\Turnos  $turnos
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request,Turnos $turno)
+    public function destroy(Turnos $id)
     {
-        try {
-            // Validar que el turno existe en la base de datos
-            $id_turno = Turnos::find($turno);
-            $cliente = Turnos::findOrFail($turno);
-
-            if ($id_turno) {
-                return response()->json(['error' => 'El turno no existe'.$cliente], 404);
-            }
-
-
-            // Eliminar el turno
-            // $turno->delete();
-
-            return response()->json(['result' => true, 'message' => 'Turno Eliminado', 'turno' => $turno]);
-        } catch (\Exception $e) {
-            // Captura la excepción y maneja el error
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
+        $menu = Turnos::find($id);
+        $menu->delete();
+        return response()->json(['message' => 'Menu deleted successfully']);
+       
     }
 }

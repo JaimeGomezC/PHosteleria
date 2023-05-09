@@ -65,5 +65,11 @@ class ClienteController extends Controller
         $cliente->delete();
         return response()->json(null, 204);
     }
+
+    // public function getByCliente($id)
+    // {
+    //     $cliente = Cliente::where('id', $id)->get();
+    //     return response()->json($cliente);
+    // }
     
 }

@@ -7,7 +7,7 @@
         <mat-label>Filtro</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
       </mat-form-field>
-      <button mat-raised-button color="primary" (click)="edit_add_Turno('')">Nueva Reserva</button>
+      <button mat-raised-button color="primary" (click)="openModal('')">Nueva Reserva</button>
       <div *ngIf="loading" class="d-flex justify-content-center">
         <div class="spinner-border text-primary" role="status">
           </div>

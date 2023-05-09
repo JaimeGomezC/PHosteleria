@@ -27,34 +27,36 @@ export class TurnosModalAddComponent implements OnInit {
   ) {
     console.log("data");
     console.log(data);
-    if(data){this.titulo='EDITAR TURNO'}else{this.titulo='NUEVO TURNO'}
-    this.form = this.formBuilder.group({
-      turno: [data?.turno, Validators.required],
-      id_admin: sessionStorage.getItem('usuario'),
-      n_plazas: [data?.n_plazas, Validators.required],
-      fecha: [data?.fecha, Validators.required],
-      observaciones: [data?.observaciones],
-      id_menu: [data?.id_menu],
-      listaMenu: [data?.listaMenu],
-      visible: ['1', Validators.required],
-    });
+    if(data.id_admin){this.titulo='EDITAR TURNO'}else{this.titulo='NUEVO TURNO'};
+    
   }
 
   ngOnInit(): void {
-    if (this.data) {
-    }
+    this.form = this.formBuilder.group({
+      turno: [this.data.turno, Validators.required],
+      id_admin: sessionStorage.getItem('usuario'),
+      n_plazas: [this.data.n_plazas, Validators.required],
+      fecha: [this.data.fecha, Validators.required],
+      observaciones: [this.data.observaciones],
+      id_menu: [this.data.id_menu],
+      listaMenu: [this.data.listaMenu],
+      visible: [this.data.visible, Validators.required],
+    });
   }
 
   public get f() {
     return this.form;
+
   }
 
-  onSubmit() {
+  onSubmit(itemForm:FormGroup) {
+    console.log(this.form);
+    console.log(this.form.value);
     this.submitted = true;
-    if (this.form.invalid) {
+    if (itemForm.invalid) {
       return;
     }
-    if(this.data){
+    if(this.titulo=='EDITAR TURNO'){
       this.addEditar(this.data);
     }else{
       this.addTurno();
