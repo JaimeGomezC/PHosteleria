@@ -68,7 +68,7 @@ export class MenuTurnoModalComponent implements OnInit {
       (data) => {
         console.log('data');
         console.log(this.form.value);
-        this.snack.open('Turno añadido !!', 'Aceptar', {
+        this.snack.open('Menu añadido !!', 'Aceptar', {
           duration: 2000,
           verticalPosition: 'top',
           horizontalPosition: 'center',
