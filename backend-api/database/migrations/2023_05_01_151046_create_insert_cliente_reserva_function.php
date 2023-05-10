@@ -12,7 +12,18 @@ class CreateInsertClienteReservaFunction extends Migration
         CREATE FUNCTION insert_cliente_reserva(json_params JSON)
         RETURNS varchar(300)
         BEGIN
-        DECLARE id_cliente INT;      
+        DECLARE id_cliente INT;  
+        DECLARE v_codigo varchar(10);
+        
+        SELECT CONV(FLOOR(RAND() * 99999999999999), 10, 36) into v_codigo;
+
+        -- Comprobar si el código ya existe en la tabla
+        WHILE EXISTS(SELECT * FROM reservas WHERE codigo_verificacion = @v_codigo) 
+        DO
+        -- Si el código ya existe, generar un nuevo código aleatorio
+        SELECT CONV(FLOOR(RAND() * 99999999999999), 10, 36) into v_codigo;
+        END WHILE;
+        
         
         
         INSERT INTO clientes ( nombre, apellido1, apellido2, email, telefono, observaciones, fecha)
@@ -26,7 +37,7 @@ class CreateInsertClienteReservaFunction extends Migration
         VALUES ( id_cliente, JSON_EXTRACT(json_params, '$.id_turno'), JSON_EXTRACT(json_params, '$.reservas.observaciones'),
         JSON_EXTRACT(json_params, '$.fecha'), JSON_EXTRACT(json_params, '$.num_comensales'), JSON_EXTRACT(json_params, '$.forma_pago'),
         JSON_EXTRACT(json_params, '$.precio_total'), JSON_EXTRACT(json_params, '$.pagado_base'), JSON_EXTRACT(json_params, '$.pagado_total'),
-        JSON_EXTRACT(json_params, '$.codigo_verificacion'), JSON_EXTRACT(json_params, '$.producto_extra'));
+        v_codigo, JSON_EXTRACT(json_params, '$.producto_extra'));
         
         RETURN 'Reserva y Cliente creados';
         END;

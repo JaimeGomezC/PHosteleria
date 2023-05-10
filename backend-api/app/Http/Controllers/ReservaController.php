@@ -99,7 +99,8 @@ class ReservaController extends Controller
     public function insertClienteReserva(Request $request)
     {
         // Obtener el parámetro JSON del request
-        $json_params = json_encode($request->input());
+        $json_params = stripslashes(json_encode($request->input()));
+        // $json_params = addslashes(json_encode($request->input()));
 
         // Llamar a la función insert_cliente_reserva
         $resultado = DB::select('SELECT insert_cliente_reserva(?) AS resultado', [$json_params]);

@@ -52,22 +52,25 @@
         <hr>
         <div class="row">
           <h4>Datos de la reserva</h4>
-           <div class="col-2 mb-2">
+           <!-- <div class="col-2 mb-2">
               <label class="form-label">Fecha</label>
               <input type="date" formControlName="fecha" class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f.value.fecha==''}" />
               <div *ngIf="submitted" class="invalid-feedback">
                 <div>Fecha requerida</div>
               </div>
-            </div>
-            <!-- <div class="col-md-2 padding_bottom">
-							<label>ANYO</label>
+            </div> -->
+            <div class="col-2 mb-2">
+							<label class="form-label">Fecha del turno</label>
 							<div class="input-group">
 								<span style="background-color: #337ab7" class="input-group-addon btn btn-primary"
-									ng-click="openLupaBusqanyo()"><i class="bi bi-search"></i></span> <input
-									class="form-control" ng-model="search.ANYO">
+                (click)="openModal()"><i class="bi bi-search"></i></span> <input type="date" formControlName="fecha" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.value.fecha==''}" />
+                <div *ngIf="submitted" class="invalid-feedback">
+                  <div>Fecha requerida</div>
+                </div>
 							</div>
-						</div>  -->
+						</div> 
             <div class="col-2 mb-2">
               <label class="form-label">Nº comensales</label>
               <input formControlName="num_comensales" class="form-control" min="0"
@@ -84,6 +87,19 @@
                 <div>forma_pago requerido</div>
               </div>
             </div>
+            <!-- <div class="col-3 mb-3">
+              <label class="form-label">Forma de pago</label>
+              <select formControlName="forma_pago" class="form-select" [ngClass]="{ 'is-invalid': submitted && f.value.forma_pago=='' }">
+                <option value="">--Seleccione una forma de pago--</option>
+                <option value="contado">Contado</option>
+                <option value="bizum">Bizum</option>
+                <option value="transferencia">Transferencia</option>
+                <option value="otros">Otros</option>
+              </select>
+              <div *ngIf="submitted && f.value.forma_pago.errors" class="invalid-feedback">
+                <div>Forma de pago requerida</div>
+              </div>
+            </div> -->
             <div class="col-2 mb-2">
               <label class="form-label">precio_total</label>
               <input formControlName="precio_total" class="form-control" min="0"
@@ -110,11 +126,7 @@
             </div>
             <div class="col-2 mb-2">
               <label class="form-label">codigo_verificacion</label>
-              <input formControlName="codigo_verificacion" class="form-control" min="0"
-                [ngClass]="{ 'is-invalid': submitted && f.value.codigo_verificacion==''}" />
-              <div *ngIf="submitted" class="invalid-feedback">
-                <div>codigo_verificacion requerido</div>
-              </div>
+              <input [disabled]=false formControlName="codigo_verificacion" class="form-control" />
             </div>
             <div class="col-2 mb-2">
               <label class="form-label">producto_extra</label>
