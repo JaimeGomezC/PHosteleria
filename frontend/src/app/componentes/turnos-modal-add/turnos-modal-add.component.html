@@ -11,12 +11,12 @@
                     <div class="col-5 mb-5">
                         <label class="form-label">Turno</label>
                         <select formControlName="turno" class="form-control" placeholder="hola"
-                            [ngClass]="{ 'is-invalid': submitted && (f.value.turno=='' || f.value.turno==undefined)}">
+                            [ngClass]="{ 'is-invalid': submitted && f.controls['turno'].invalid}">
                             <option value="" hidden selected>Selecciona un turno</option>
                             <option value="Comida">Comida</option>
                             <option value="Cena">Cena</option>
                         </select>
-                        <div *ngIf="submitted" class="invalid-feedback">
+                        <div *ngIf="submitted && f.controls['turno'].invalid" class="invalid-feedback">
                             <div>Turno requerido</div>
                         </div>
                     </div>
@@ -24,34 +24,37 @@
                     <div class="col-3 mb-3">
                         <label class="form-label">Plazas</label>
                         <input type="number" formControlName="n_plazas" class="form-control" min="0"
-                            [ngClass]="{ 'is-invalid': submitted && (f.value.n_plazas=='' || f.value.n_plazas==undefined)}" />
-                        <div *ngIf="submitted" class="invalid-feedback">
+                            [ngClass]="{ 'is-invalid': submitted && f.controls['n_plazas'].invalid}" />
+                        <div *ngIf="submitted && f.controls['n_plazas'].invalid" class="invalid-feedback">
                             <div>Plazas requerido</div>
                         </div>
                     </div>
                     <div class="col-4 mb-4">
                         <label class="form-label">Fecha</label>
                         <input type="date" formControlName="fecha" class="form-control"
-                            [ngClass]="{ 'is-invalid': submitted && (f.value.fecha=='' || f.value.fecha==undefined)}" />
+                            [ngClass]="{ 'is-invalid': submitted && f.controls['fecha'].invalid}" />
+                            <div *ngIf="submitted && f.controls['fecha'].invalid" class="invalid-feedback">
+                                <div>Fecha requerida</div>
+                            </div>
                     </div>
 
                     <div class="col-6 mb-6">
                         <label class="form-label">Publicar </label>
                         <select formControlName="visible" class="form-control"
-                            [ngClass]="{ 'is-invalid': submitted && (f.value.visible=='' || f.value.visible==undefined)}">
+                            [ngClass]="{ 'is-invalid': submitted && f.controls['visible'].invalid}">
                             <option value="1">SI</option>
                             <option value="0">NO</option>
                         </select>
-                        <div *ngIf="submitted" class="invalid-feedback">
+                        <div *ngIf="submitted && f.controls['visible'].invalid" class="invalid-feedback">
                             <div>Elemento requerido</div>
                         </div>
                     </div>
                     <div class="col-6 mb-6">
                         <label class="form-label">Menu </label>
-                        <select formControlName="id_menu" class="form-control" [ngClass]="{ 'is-invalid': submitted && (f.value.id_menu=='' || f.value.id_menu==undefined)}">
+                        <select formControlName="id_menu" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.controls['id_menu'].invalid}">
                             <option value="{{opt.id}}" *ngFor="let opt of data.listaMenu">{{opt.nombre_menu}}</option>
                         </select>
-                        <div *ngIf="submitted" class="invalid-feedback">
+                        <div *ngIf="submitted && f.controls['id_menu'].invalid" class="invalid-feedback">
                             <div>Elemento requerido</div>
                         </div>
                     </div>

@@ -104,6 +104,11 @@ class AuthController extends Controller
         $user->password = Hash::make($request->password);
        
         $user->save();
-        return response()->json($user);
+        $data = [
+            'result' => 'ok',
+            'message' => 'Usuario Creado',
+            'turno' => $user
+        ];
+        return response()->json($data);
     }
 }

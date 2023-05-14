@@ -29,15 +29,14 @@ export class UsuarioModalComponent implements OnInit {
     if(data){this.titulo='EDITAR ADMINISTRADOR'}else{this.titulo='NUEVO ADMINISTRADOR'}
     this.form = this.formBuilder.group({
       name: [data?.name, Validators.required],
-      email: [data?.email, Validators.required],
-      password: ['', Validators.required],
+      email: [data?.email, [Validators.required, Validators.email]],
+      password: ['', [Validators.required,Validators.minLength(8)]],
       
     });
   }
 
   ngOnInit(): void {
-    if (this.data) {
-    }
+
   }
 
   public get f() {
@@ -45,8 +44,8 @@ export class UsuarioModalComponent implements OnInit {
   }
 
   onSubmit() {
-    this.submitted = true;
     if (this.form.invalid) {
+      this.submitted = true;
       return;
     }
     if(this.data){
@@ -59,9 +58,7 @@ export class UsuarioModalComponent implements OnInit {
   addTurno() {
     this.user.registrar(this.form.value).subscribe(
       (data) => {
-        console.log('data');
-        console.log(this.form.value);
-        this.snack.open('Turno añadido !!', 'Aceptar', {
+        this.snack.open('Usuario añadido !!', 'Aceptar', {
           duration: 2000,
           verticalPosition: 'top',
           horizontalPosition: 'center',
@@ -83,7 +80,7 @@ export class UsuarioModalComponent implements OnInit {
   addEditar(item: any): void {
     this.user.modificar(item.id,this.form.value).subscribe(//item.id,
       (data) => {
-        this.snack.open('Turno modificado !!', 'Aceptar', {
+        this.snack.open('Usuario modificado !!', 'Aceptar', {
           duration: 2000,
           verticalPosition: 'top',
           horizontalPosition: 'center',

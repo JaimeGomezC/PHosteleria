@@ -9,23 +9,23 @@
             
             <div class="col-4 mb-4">
                 <label class="form-label">Nombre</label>
-                <input formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && (f.value.turno=='' || f.value.turno==undefined)}"/>
-                <div *ngIf="submitted" class="invalid-feedback">
-                    <div>Nombre requerido</div>
-                </div>
+                <input formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.controls['name'].invalid }"/>
+  <div *ngIf="submitted && f.controls['name'].invalid" class="invalid-feedback">
+    <div>Nombre requerido</div>
+  </div>
             </div>
             <div class="col-4 mb-4">
                 <label class="form-label">Correo</label>
-                <input formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && (f.value.turno=='' || f.value.turno==undefined)}"/>
-                <div *ngIf="submitted" class="invalid-feedback">
-                    <div>Correo requerido</div>
+                <input formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.controls['email'].invalid}"/>
+                <div *ngIf="submitted && f.controls['email'].invalid" class="invalid-feedback">
+                    <div>Correo requerido o invalido</div>
                 </div>
             </div>
             <div class="col-4 mb-4">
                 <label class="form-label">Contraseña</label>
-                <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && (f.value.turno=='' || f.value.turno==undefined)}"/>
-                <div *ngIf="submitted" class="invalid-feedback">
-                    <div>Contraseña requerida</div>
+                <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.controls['password'].invalid}"/>
+                <div  *ngIf="submitted && f.controls['password'].invalid" class="invalid-feedback">
+                    <div>Contraseña requerida, mínimo 8 caracteres</div>
                 </div>
             </div>
             

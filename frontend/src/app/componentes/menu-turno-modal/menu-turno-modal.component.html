@@ -2,57 +2,51 @@
 <mat-toolbar color="primary">
     <span class="fill-remaining-space">{{titulo}}</span>
 </mat-toolbar>
-<form [formGroup]="form" (ngSubmit)="onSubmit()" class="form" enctype="multipart/form-data">
-    
-        <div class="row">
-            <div class="col-4 mb-2">
-                <label class="form-label">nombre</label>
-                <input formControlName="nombre_menu" class="form-control" 
-                    [ngClass]="{ 'is-invalid': submitted && (f.value.turno=='' || f.value.turno==undefined)}" />
-                <div *ngIf="f2['fecha'].errors?.['required']" class="invalid-feedback">
-                    <div>Nombre requerido</div>
-                </div>
-            </div>
-            <div class="col-4 mb-2">
-                <label class="form-label">imagen menu </label>
-                
-                <input type="file" formControlName="imagen_menu" class="form-control"
-                    [ngClass]="{ 'is-invalid': submitted && (f.value.turno=='' || f.value.turno==undefined)}" />
-                <div *ngIf="submitted" class="invalid-feedback">
-                    <div>imagen_menu requerido</div>
-                </div>
-            </div>
-            <div class="col-4 mb-2">
-                <label class="form-label">fecha</label>
-                <input type="date" formControlName="fecha" class="form-control" 
-                [ngClass]="{ 'is-invalid': submitted && (f.value.turno=='' || f.value.turno==undefined)}">
-                <div  class="invalid-feedback">
-                    <div>fecha requerido</div>
-                </div>
-            </div>
-            <div class="col-4 mb-2">
-                <label class="form-label">precio</label>
-                <input type="number" step="any" formControlName="precio_pax" class="form-control" min="0"
-                    [ngClass]="{ 'is-invalid': submitted && (f.value.turno=='' || f.value.turno==undefined)}" />
-                <div *ngIf="submitted" class="invalid-feedback">
-                    <div>precio requerido</div>
-                </div>
-            </div>
-            <!-- <div class="col-4 mb-2">
-                <label class="form-label">precio</label>
-                <input type="file" name="imagen" (change)="onFileSelected($event)">
-            </div> -->
-            
-            <div class="row">
-                <div class="col-12 mb-12">
-                    <label class="form-label">Observaciones</label>
-                    <textarea formControlName="observaciones" class="form-control" cols="30" rows="5"></textarea>
-                </div>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="form" action="/upload-image" enctype="multipart/form-data">
+
+    <div class="row">
+        <div class="col-12 mb-12">
+            <label class="form-label">Nombre del menu</label>
+            <input formControlName="nombre_menu" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.controls['nombre_menu'].invalid}" />
+            <div *ngIf="submitted && f.controls['nombre_menu'].invalid" class="invalid-feedback">
+                <div>Nombre requerido</div>
             </div>
         </div>
-        <div class="text-center">
-            <button class="btn btn-primary me-2">Aceptar</button>
-            <button class="btn btn-secondary" type="reset" (click)="cancelar()">Cancelar</button>
-          </div>
+        <div class="col-9 mb-9">
+            <label class="form-label">Imagen menú </label>
+            <input type="file" class="form-control" (change)="onFileSelected($event)" >
+            <div *ngIf="submitted && f.controls['imagen_menu'].invalid" class="invalid-feedback">
+                <div>Imagen menú requerida</div>
+            </div>
+        </div>
 
+        <div class="col-3 mb-3">
+            <label class="form-label">Precio</label>
+            <div class="input-group">
+                <input type="number" step="any" formControlName="precio_pax" class="form-control" min="0"
+                    [ngClass]="{ 'is-invalid': submitted && f.controls['precio_pax'].invalid }" />
+                <div class="input-group-prepend">
+                    <span class="input-group-text">&#8364;</span>
+                </div>
+            </div>
+            <div *ngIf="submitted && f.controls['precio_pax'].invalid" class="invalid-feedback">
+                <div>Precio requerido</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 mb-6">
+                <label class="form-label">Observaciones</label>
+                <textarea formControlName="observaciones" class="form-control" cols="30" rows="5"></textarea>
+            </div>
+            <div class="col-6 mb-6">
+                <label class="form-label">Imagen</label>
+                <img [src]="" alt="Imagen subida">
+            </div>
+        </div>
+    </div>
+    <div class="text-center">
+        <button class="btn btn-primary me-2">Aceptar</button>
+        <button class="btn btn-secondary" type="reset" (click)="cancelar()">Cancelar</button>
+    </div>
 </form>

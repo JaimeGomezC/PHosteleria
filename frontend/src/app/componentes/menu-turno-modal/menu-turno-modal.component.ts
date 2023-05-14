@@ -13,11 +13,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class MenuTurnoModalComponent implements OnInit {
 
   form!: FormGroup;
+  formData = new FormData();
   id?: string;
   loading = false;
   submitted = false;
   titulo?:string;
-  imagen?:File;
+  selectedFile: File | null = null;
+
 
   constructor(
     public formBuilder: FormBuilder,
@@ -32,30 +34,39 @@ export class MenuTurnoModalComponent implements OnInit {
     this.form = this.formBuilder.group({
       nombre_menu: [this.data?.nombre_menu, Validators.required],
       id_admin: sessionStorage.getItem('usuario'),
-      imagen_menu: [this.data?.n_plazas, Validators.required],
-      fecha: [this.data?.fecha, Validators.required],
-      precio_pax: [this.data?.precio, Validators.required],
+      imagen_menu: [this.data?.imagen_menu, Validators.required],
+      precio_pax: [this.data?.precio_pax, Validators.required],
       observaciones: [this.data?.observaciones]
     });
   }
 
   ngOnInit(): void {
-
+    console.log(this.form.value.imagen_menu)
   }
  
   public get f() {
-    console.dir(this.form.controls["fecha"].errors?.["required"])
-    console.dir(this.form.controls["fecha"])
-    console.dir(this.form)
     return this.form;
   }
   get f2() { return this.form.controls; }
 
-  onSubmit() {
+  
+  onSubmit(): void {
     this.submitted = true;
+
     if (this.form.invalid) {
       return;
     }
+
+    this.loading = true;
+
+    
+    this.formData.append('nombre_menu', this.form.value.nombre_menu);
+    this.formData.append('precio_pax', this.form.value.precio_pax);
+    this.formData.append('observaciones', this.form.value.observaciones);
+    if (this.selectedFile) {
+      this.formData.append('imagen_menu', this.selectedFile, this.selectedFile.name);
+    }
+
     if(this.data){
       this.addEditar(this.data);
     }else{
@@ -64,7 +75,7 @@ export class MenuTurnoModalComponent implements OnInit {
   }
 
   addTurno() {
-    this.menu.crearMenu(this.form.value).subscribe(
+    this.menu.crearMenu(this.formData).subscribe(
       (data) => {
         console.log('data');
         console.log(this.form.value);
@@ -102,9 +113,39 @@ export class MenuTurnoModalComponent implements OnInit {
       }
     );
   }
-  onFileSelected(event:any) {
-    this.form.value.imagen_menu=event.target.files[0].name;
-    this.imagen= event.target.files[0];
+  // onFileSelected(event:any) {
+  //   this.form.patchValue({
+  //     imagen_menu: event.target.files[0]
+  //   });
+  //   this.selectedFile = event.target.files[0];
+  //   // this.form.value.imagen_menu=event.target.files[0].name;
+  //   // this.imagen= event.target.files[0];
+  // }
+  onFileSelected(event: any):void {    
+    this.selectedFile = event.target.files[0];
+    console.log(this.selectedFile);
+    this.uploadImage(this.selectedFile)
+  }
+
+  async uploadImage(item:any): Promise<void> {
+    // if (item) {
+    //   try {
+    //     const response = await this.menu.uploadImage(item);
+    //     console.log(response); // Mensaje de éxito desde Laravel
+    //   } catch (error) {
+    //     console.log(error); // Mensaje de error desde Laravel
+    //   }
+    // }
+    this.menu.uploadImage(item).subscribe(
+      response=>{
+         if(response.status=='success'){
+           console.log(response);
+         }
+      },
+      error=>{
+        console.log(<any>error);
+      }
+    );
   }
   
 }

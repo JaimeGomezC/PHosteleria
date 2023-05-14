@@ -70,6 +70,11 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::get('menus/{menu}', [MenuController::class, 'show']);
     Route::put('menus/{menu}', [MenuController::class, 'update']);
     Route::delete('menus/{menu}', [MenuController::class, 'destroy']);
+    Route::post('menus/upload-image', [MenuController::class, 'uploadImage']);
+    Route::delete('menus/{menu}', [MenuController::class, 'destroy']);
+    Route::get('menus/mostrarImagen/{imagen}', [MenuController::class, 'mostrarImagen']);
+
+
     Route::get('/menus/{id}/imagen', function ($id) {
         $menu = Menu::find($id);
         if (!$menu) {
