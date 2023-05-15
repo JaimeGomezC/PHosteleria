@@ -23,7 +23,7 @@ export class MenuService {
   }
 
   // Crear una nueva reserva
-  crearMenu(menuData: any): Observable<any> {
+  crearMenu(menuData: MenuResponse): Observable<any> {
     let token:any = sessionStorage.getItem('token') 
     const headers = new HttpHeaders({
         'Content-Type': 'application/json',

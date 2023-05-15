@@ -23,25 +23,22 @@ class MenuController extends Controller
     }
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'nombre_menu' => 'required',
-            'precio_pax' => 'required',
-            'imagen_menu' => 'required|image',
-            'observaciones' => 'nullable',
-        ]);
+        // $validator = Validator::make($request->all(), [
+        //     'nombre_menu' => 'required',
+        //     'precio_pax' => 'required',
+        //     'imagen_menu' => 'nullable',
+        //     'observaciones' => 'nullable',
+        // ]);
 
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 400);
-        }
-
-        $imagenMenu = $request->file('imagen_menu');
-        $path = $imagenMenu->store('public/imagenes_menus');
-        $url = Storage::url($path);
+        // if ($validator->fails()) {
+        //     return response()->json(['error' => $validator->errors()], 400);
+        // }
 
         $menu = new Menu();
         $menu->nombre_menu = $request->input('nombre_menu');
+        $menu->id_admin = $request->input('id_admin');
         $menu->precio_pax = $request->input('precio_pax');
-        $menu->imagen_menu = $url;
+        $menu->imagen_menu =  $request->input('imagen_menu');
         $menu->observaciones = $request->input('observaciones');
         $menu->save();
 
@@ -74,10 +71,11 @@ class MenuController extends Controller
 
         $menu->nombre_menu = $request->input('nombre_menu');
         $menu->precio_pax = $request->input('precio_pax');
+        $menu->imagen_menu = $request->input('imagen_menu');
         $menu->observaciones = $request->input('observaciones');
         $menu->save();
+        return response()->json(['result' => 'ok','data' => $menu], 200);
 
-        return response()->json($menu, 200);
     }
 
     public function destroy($id)
@@ -105,8 +103,10 @@ class MenuController extends Controller
             $picture = date("His") . "-" . $name_file . "." . $extension;
 
             $file->move(public_path('public/imagenes_menus'), $picture); // Almacena la imagen en una carpeta llamada 'menu_images'
+            $baseUrl = config('app.url');
+            $imageUrl = $baseUrl . ':8000/public/imagenes_menus/' . $picture;
 
-            return response()->json(['message' => 'Imagen subida exitosamente']);
+            return response()->json(['message' => 'Imagen subida exitosamente', 'url' => $imageUrl]);
         } else {
             return response()->json(['message' => 'Error al subir la imagen. Archivo no válido.']);
         }

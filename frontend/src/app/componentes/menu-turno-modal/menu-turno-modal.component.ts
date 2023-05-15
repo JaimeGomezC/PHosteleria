@@ -19,6 +19,7 @@ export class MenuTurnoModalComponent implements OnInit {
   submitted = false;
   titulo?:string;
   selectedFile: File | null = null;
+  imagenURL="";
 
 
   constructor(
@@ -41,7 +42,8 @@ export class MenuTurnoModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.form.value.imagen_menu)
+    // console.log(this.form.value.imagen_menu)
+    this.form.controls['imagen_menu'].disable();
   }
  
   public get f() {
@@ -59,14 +61,14 @@ export class MenuTurnoModalComponent implements OnInit {
 
     this.loading = true;
 
-    
     this.formData.append('nombre_menu', this.form.value.nombre_menu);
     this.formData.append('precio_pax', this.form.value.precio_pax);
     this.formData.append('observaciones', this.form.value.observaciones);
-    if (this.selectedFile) {
-      this.formData.append('imagen_menu', this.selectedFile, this.selectedFile.name);
-    }
-
+    this.formData.append('imagen_menu', this.form.value.imagen_menu);
+    // if (this.selectedFile) {
+    //   this.formData.append('imagen_menu',this.selectedFile.name);
+    // }
+    
     if(this.data){
       this.addEditar(this.data);
     }else{
@@ -75,7 +77,7 @@ export class MenuTurnoModalComponent implements OnInit {
   }
 
   addTurno() {
-    this.menu.crearMenu(this.formData).subscribe(
+    this.menu.crearMenu(this.form.value).subscribe(
       (data) => {
         console.log('data');
         console.log(this.form.value);
@@ -113,33 +115,23 @@ export class MenuTurnoModalComponent implements OnInit {
       }
     );
   }
-  // onFileSelected(event:any) {
-  //   this.form.patchValue({
-  //     imagen_menu: event.target.files[0]
-  //   });
-  //   this.selectedFile = event.target.files[0];
-  //   // this.form.value.imagen_menu=event.target.files[0].name;
-  //   // this.imagen= event.target.files[0];
-  // }
+
   onFileSelected(event: any):void {    
     this.selectedFile = event.target.files[0];
     console.log(this.selectedFile);
-    this.uploadImage(this.selectedFile)
+    this.uploadImage(this.selectedFile);
+
   }
 
-  async uploadImage(item:any): Promise<void> {
-    // if (item) {
-    //   try {
-    //     const response = await this.menu.uploadImage(item);
-    //     console.log(response); // Mensaje de éxito desde Laravel
-    //   } catch (error) {
-    //     console.log(error); // Mensaje de error desde Laravel
-    //   }
-    // }
+  uploadImage(item:any):void {
     this.menu.uploadImage(item).subscribe(
       response=>{
-         if(response.status=='success'){
+         if(response['url']){
            console.log(response);
+           this.form.patchValue({
+            imagen_menu: response['url']
+          });
+          console.log(this.form)
          }
       },
       error=>{

@@ -54,7 +54,7 @@ export class UsuarioComponent implements OnInit {
   borrar(id:any):void {
     Swal.fire({
       title: 'Esta seguro que desea eliminar el registro?',
-      text: "Va a eliminar una turno!",
+      text: "Va a eliminar un usuario!",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -65,7 +65,7 @@ export class UsuarioComponent implements OnInit {
       if (result.isConfirmed) {
         this.user.borrar(id).subscribe(data =>{
           this.cargarDatos();
-          Swal.fire('Registro borrado!','Ha eliminado el turno.','success')
+          Swal.fire('Registro borrado!','Ha eliminado el usuario.','success')
         },
         (error) => {
           console.log(error)
