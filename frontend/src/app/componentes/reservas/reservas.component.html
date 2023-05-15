@@ -1,54 +1,9 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-4">
-            <h3>CONTÁCTENOS</h3>
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1572.081227240796!2d-1.1236971817560497!3d37.99667104775373!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd63823dc8313c85%3A0xe767e46003a0fa0f!2sIES%20La%20Flota!5e0!3m2!1ses!2ses!4v1682020913224!5m2!1ses!2ses"
-                width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"></iframe>
-
-            <hr>
-            <div class="container">
-                <form role="form" id="Formulario" action="../php/contacto2.php" method="POST">
-                    <div class="form-group">
-                        <label class="control-label" for="Nombre">Nombres</label>
-                        <input type="text" class="form-control" id="Nombre" name="Nombre"
-                            placeholder="Introduzca su nombre" required autofocus />
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="Motivo">Motivo de Contacto</label>
-                        <select name="Motivo" class="form-control">
-                            <option value="Consulta General">Consulta General</option>
-                            <option value="Realizar Pedido">Realizar Pedido</option>
-                            <option value="Informe un problema">Informe un problema</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="Empresa">Empresa</label>
-                        <input type="text" class="form-control" id="Empresa" name="Empresa"
-                            placeholder="Introduzca el nombre de su empresa" required />
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="Correo">Dirección de Correo Electrónico</label>
-                        <input type="email" class="form-control" id="Correo" name="Correo"
-                            placeholder="Introduzca su correo electrónico" required />
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="Mensaje">Mensaje</label>
-                        <textarea rows="5" cols="30" class="form-control" id="Mensaje" name="Mensaje"
-                            placeholder="Introduzca su mensaje" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-primary" value="Enviar">
-                        <input type="reset" class="btn btn-default" value="Limpiar">
-                    </div>
-                    <div id="respuesta" style="display: none;"></div>
-                </form>
-            </div>
-
-        </div>
-        <div class="col-md-8">
+            <h1>CALENDARIO DE RESERVAS</h1>
+           
+        <div class="col-md-12">
 
             <full-calendar *ngIf="calendarOptions" #fullcalendar [options]="calendarOptions">
                 <ng-template #eventContent let-arg>
