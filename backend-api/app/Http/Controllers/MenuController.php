@@ -115,30 +115,29 @@ class MenuController extends Controller
     }
 
     }
-
-    public function mostrarImagen($nombreImagen)
-{
-
-    // $path = storage_path("imagenes_menus" . DIRECTORY_SEPARATOR . $nombreImagen);
-
-    // return response()->file($path);
+    public function deleteImage(Request $request)
+    {
+        $imageName = $request->input('imagen_menu');
     
-    $rutaImagen = public_path('imagenes_menus\\' . $nombreImagen);
-    if (File::exists($rutaImagen)) {
-        return response()->file($rutaImagen);
+        if (!empty($imageName)) {
+            // Obtener la ruta completa de la imagen
+            $imagePath = public_path('') . $imageName;
+            // $imagePath ='C:\wamp64\www\ProyectoHosteleria\backend-api\public\public\imagenes_menus\073619-linux.jpg';
+    
+            // Verificar si la imagen existe
+            if (file_exists($imagePath)) {
+                // Eliminar la imagen
+                unlink($imagePath);
+    
+                // Aquí puedes realizar cualquier otra acción necesaria, como eliminar el registro de la base de datos, etc.
+    
+                return response()->json(['message' => 'Imagen eliminada correctamente'], 200);
+            } else {
+                return response()->json(['message' => 'La imagen no existe'.$imagePath], 404);
+            }
+        } else {
+            return response()->json(['message' => 'Nombre de imagen no proporcionado'], 400);
+        }
     }
-    if (File::exists($rutaImagen)) {
-
-        $contenido = File::get($rutaImagen);
-        $tipoImagen = File::mimeType($rutaImagen);
-
-        return Response::make($contenido, 200, [
-            'Content-Type' => $tipoImagen,
-            'Content-Disposition' => 'inline; filename="'.$nombreImagen.'"'
-        ]);
-    }
-
-    return response()->json(['message' => 'Error no se encuentra el archivo22: '.$rutaImagen],404);
-}
 
 }

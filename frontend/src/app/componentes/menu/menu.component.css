@@ -1,0 +1,23 @@
+
+.navbar-nav .nav-link i {
+  margin-right: 5px;
+}
+
+.menu-text {
+  margin-left: 5px;
+}
+@media (max-width: 766.98px) {
+  .navbar-nav {
+    flex-direction: row;
+  }
+
+  .navbar-nav .nav-link {
+    padding: 0 0.5rem;
+  }
+}
+
+@media (min-width: 767) {
+  .navbar-nav {
+    flex-direction: column;
+  }
+}

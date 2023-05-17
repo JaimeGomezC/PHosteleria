@@ -52,28 +52,39 @@ export class MenuTurnoComponent implements OnInit {
    })
  }  
 
- borrar(id:any):void {
-   Swal.fire({
-     title: 'Esta seguro que desea eliminar el registro?',
-     text: "Va a eliminar una turno!",
-     icon: 'warning',
-     showCancelButton: true,
-     confirmButtonColor: '#3085d6',
-     cancelButtonColor: '#d33',
-     confirmButtonText: 'Aceptar',
-     cancelButtonText: 'Cancelar'
-   }).then((result) => {
-     if (result.isConfirmed) {
-       this.menu.eliminar(id).subscribe(data =>{
-         this.cargarDatos();
-         Swal.fire('Registro borrado!','Ha eliminado el turno.','success')
-       },
-       (error) => {
-         console.log(error)
-       })
-     }
-   })
- }
+ borrar(item: any): void {
+  Swal.fire({
+    title: '¿Estás seguro de que deseas eliminar el registro?',
+    text: "¡Vas a eliminar un menu!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Aceptar',
+    cancelButtonText: 'Cancelar'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      const directorio = item.imagen_menu.substring(item.imagen_menu.indexOf("/public/"));
+      this.menu.deleteImage(directorio).subscribe(
+        () => {
+          // La imagen se ha eliminado correctamente, ahora puedes eliminar el registro de la base de datos
+          this.menu.eliminar(item.id).subscribe(
+            () => {
+              this.cargarDatos();
+              Swal.fire('¡Registro borrado!', 'Se ha eliminado el turno.', 'success');
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+  });
+}
  verReserva(id:any):void {
    this.router.navigate(['ReservaCliente']);
  }

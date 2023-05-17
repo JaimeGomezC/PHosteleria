@@ -35,15 +35,13 @@ export class MenuTurnoModalComponent implements OnInit {
     this.form = this.formBuilder.group({
       nombre_menu: [this.data?.nombre_menu, Validators.required],
       id_admin: sessionStorage.getItem('usuario'),
-      imagen_menu: [this.data?.imagen_menu, Validators.required],
+      imagen_menu: [this.data?.imagen_menu],
       precio_pax: [this.data?.precio_pax, Validators.required],
       observaciones: [this.data?.observaciones]
     });
   }
 
   ngOnInit(): void {
-    // console.log(this.form.value.imagen_menu)
-    this.form.controls['imagen_menu'].disable();
   }
  
   public get f() {
@@ -77,10 +75,29 @@ export class MenuTurnoModalComponent implements OnInit {
   }
 
   addTurno() {
+    if(this.selectedFile){
+      this.menu.uploadImage(this.selectedFile).subscribe(
+        response=>{
+           if(response['url']){
+             this.form.patchValue({
+              imagen_menu: response['url']
+            });
+            this.grabar();
+           }
+        },
+        error=>{
+          console.log(<any>error);
+        }
+      );
+    }else{
+      this.grabar();
+    }
+    
+  }
+
+  grabar() {
     this.menu.crearMenu(this.form.value).subscribe(
       (data) => {
-        console.log('data');
-        console.log(this.form.value);
         this.snack.open('Menu añadido !!', 'Aceptar', {
           duration: 2000,
           verticalPosition: 'top',
@@ -96,6 +113,7 @@ export class MenuTurnoModalComponent implements OnInit {
       }
     );
   }
+
   cancelar() {
     this.dialogRef.close();
   }
@@ -118,26 +136,6 @@ export class MenuTurnoModalComponent implements OnInit {
 
   onFileSelected(event: any):void {    
     this.selectedFile = event.target.files[0];
-    console.log(this.selectedFile);
-    this.uploadImage(this.selectedFile);
+  };
 
-  }
-
-  uploadImage(item:any):void {
-    this.menu.uploadImage(item).subscribe(
-      response=>{
-         if(response['url']){
-           console.log(response);
-           this.form.patchValue({
-            imagen_menu: response['url']
-          });
-          console.log(this.form)
-         }
-      },
-      error=>{
-        console.log(<any>error);
-      }
-    );
-  }
-  
 }

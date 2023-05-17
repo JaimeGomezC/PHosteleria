@@ -16,7 +16,7 @@ class CreateMenusTable extends Migration
         Schema::create('menus', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre_menu');
-            $table->string('imagen_menu');
+            $table->string('imagen_menu')->nullable();
             $table->decimal('precio_pax', 8, 2);
             $table->text('observaciones')->nullable();
             $table->integer('id_admin')->unsigned();

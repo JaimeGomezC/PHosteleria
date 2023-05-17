@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MenuResponse } from '../interfaces/menu';
@@ -77,6 +77,18 @@ export class MenuService {
     formData.append('imagen', file,file.name);
     formData.append('Content-Type','multipart/form-data');
     return this.http.post<any>(`${this.apiUrl}/upload-image`,formData,requestOptions);
+  }
+  deleteImage(imageName: string) {
+    const url = `${this.apiUrl}/deleteImage`;
+    let token:any = sessionStorage.getItem('token')      
+    const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      });
+      const params = new HttpParams().set('imagen_menu', imageName);
+      const requestOptions = { headers: headers, params: params };
+
+    return this.http.delete(url, requestOptions);
   }
 
 }

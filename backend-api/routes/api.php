@@ -69,20 +69,10 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::post('menus', [MenuController::class, 'store']);
     Route::get('menus/{menu}', [MenuController::class, 'show']);
     Route::put('menus/{menu}', [MenuController::class, 'update']);
+    Route::delete('menus/deleteImage', [MenuController::class, 'deleteImage']);
     Route::delete('menus/{menu}', [MenuController::class, 'destroy']);
     Route::post('menus/upload-image', [MenuController::class, 'uploadImage']);
-    Route::delete('menus/{menu}', [MenuController::class, 'destroy']);
-    Route::get('menus/mostrarImagen/{imagen}', [MenuController::class, 'mostrarImagen']);
-
-
-    Route::get('/menus/{id}/imagen', function ($id) {
-        $menu = Menu::find($id);
-        if (!$menu) {
-            return response()->json(['error' => 'Menu not found'], 404);
-        }
-        $ruta = Storage::url($menu->imagen);
-        return response()->file($ruta);
-    });
+    
     Route::post('/actualizar-cliente-reserva', 'NombreControlador@actualizarClienteReserva');
 
 });
