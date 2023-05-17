@@ -2,6 +2,9 @@
 .navbar-nav .nav-link i {
   margin-right: 5px;
 }
+.navbar-nav {
+  flex-direction: column;
+}
 
 .menu-text {
   margin-left: 5px;
@@ -10,7 +13,9 @@
   .navbar-nav {
     flex-direction: row;
   }
-
+  .navbar-nav .nav-link .menu-text {
+    display: none;
+  }
   .navbar-nav .nav-link {
     padding: 0 0.5rem;
   }
@@ -20,4 +25,25 @@
   .navbar-nav {
     flex-direction: column;
   }
+  
+}
+
+.navbar-nav .nav-link:hover {
+  background-color: #f2f2f2;
+}
+
+.navbar-nav .nav-link:active {
+  background-color: #c0c0c0;
+}
+.navbar-nav .nav-link i {
+  font-size: 24px;
+  margin-right: 5px;
+}
+
+.navbar-nav .nav-link:hover i {
+  color: blue;
+}
+
+.navbar-nav .nav-link:active i {
+  color: red;
 }
