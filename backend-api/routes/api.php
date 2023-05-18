@@ -9,6 +9,8 @@ use App\Models\Menu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\GaleriaController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -76,3 +78,6 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::post('/actualizar-cliente-reserva', 'NombreControlador@actualizarClienteReserva');
 
 });
+
+    Route::get('galeria', [GaleriaController::class, 'index']);
+

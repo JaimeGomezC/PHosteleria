@@ -16,6 +16,7 @@ import { MenuComponent } from './componentes/menu/menu.component';
 
 //Angular Material
 import { SharedModule } from './shared/shared.module';
+import { GaleriaComponent } from './galeria/galeria.component';
 
 
 
@@ -28,6 +29,7 @@ import { SharedModule } from './shared/shared.module';
     MenuComponent, 
     FooterComponent,
     routingComponents,
+    GaleriaComponent,
 
 
     
