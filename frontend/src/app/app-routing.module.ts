@@ -16,6 +16,9 @@ import { UsuarioComponent } from './componentes/usuario/usuario.component';
 import { UsuarioModalComponent } from './componentes/usuario-modal/usuario-modal.component';
 import { ConctatoComponent } from './componentes/conctato/conctato.component';
 
+import { ModalLupaComponent } from './componentes/modal-lupa/modal-lupa.component';
+import { CarouselInicioComponent } from './componentes/carousel-inicio/carousel-inicio.component';
+
 
 
 const routes: Routes = [
@@ -31,7 +34,9 @@ const routes: Routes = [
 {path:'MenuTurnoModalComponent',component:MenuTurnoModalComponent},
 {path:'Usuarios',component:UsuarioComponent},
 {path:'UsuarioModal',component:UsuarioModalComponent},
-{path:'Conctato',component:ConctatoComponent},
+{path:'Contacto',component:ConctatoComponent},
+{path:'ModalLupa',component:ModalLupaComponent},
+//{path:'CarouselInicio',component:CarouselInicioComponent},
 
 
 {path:'reservaClienteModal',component:ReservaClienteModalComponent},
@@ -50,5 +55,5 @@ export const routingComponents=[ReservasComponent,InicioComponent,
   ReservaModalComponent,ReservaClienteComponent,
   ReservaClienteModalComponent,MenuTurnoComponent,
   MenuTurnoModalComponent,UsuarioComponent,UsuarioModalComponent,
-  ConctatoComponent
+  ConctatoComponent,CarouselInicioComponent,ModalLupaComponent
 ]

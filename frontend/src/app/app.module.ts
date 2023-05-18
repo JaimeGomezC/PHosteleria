@@ -16,7 +16,7 @@ import { MenuComponent } from './componentes/menu/menu.component';
 
 //Angular Material
 import { SharedModule } from './shared/shared.module';
-import { ModalLupaComponent } from './componentes/modal-lupa/modal-lupa.component';
+
 
 
 
@@ -28,7 +28,6 @@ import { ModalLupaComponent } from './componentes/modal-lupa/modal-lupa.componen
     MenuComponent, 
     FooterComponent,
     routingComponents,
-    ModalLupaComponent,
 
 
     

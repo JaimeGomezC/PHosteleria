@@ -18,7 +18,7 @@ class CreateTurnosTable extends Migration
             $table->integer("id_admin");
             $table->integer("id_menu")->nullable();
             $table->integer("n_plazas");
-            $table->string("observaciones");
+            $table->string("observaciones")->nullable();
             $table->string("turno");
             $table->boolean('visible')->default(false);
             $table->timestamps();

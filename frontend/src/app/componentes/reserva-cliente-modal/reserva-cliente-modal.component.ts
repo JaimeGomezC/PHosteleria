@@ -66,7 +66,7 @@ export class ReservaClienteModalComponent implements OnInit {
       producto_extra: [this.data ? this.data[0].reserva.producto_extra : '', Validators.required]
     });
     this.form.controls['codigo_verificacion'].disable();
-    this.form.controls['fecha'].disable();
+    //this.form.controls['fecha'].disable();
     
   }
 

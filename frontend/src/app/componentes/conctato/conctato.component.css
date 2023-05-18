@@ -1,18 +1,34 @@
-h2{text-align: center;
-font-weight: bold;
-font-size: 200%;}
-.black{background-color: black;
+h2{
+    text-align: center;
+    font-weight: bold;
+    font-size: 200%;
+}
+.black{background-color: rgb(46, 48, 146);
     color:grey;
     border-color: black;
     display: flex;
     flex-wrap: wrap;
+    padding-bottom: 15px;
 }
 .celdas{text-align: center;
     justify-items: center;
-    align-items: center;}
+    align-items: center;
+    word-wrap: break-word;
+    margin-top: 15px;
+}
 .iconos{font-size: 200%;
     border-radius: 50px;
     border: 3px solid grey;
     padding: 30%;
-
+}
+p{
+    color: white;
+    margin-top: 10px;
+}
+h1{
+    color: rgb(46, 48, 146);
+    text-align: center;
+    font-weight: bold;
+    font-size: 200%;
+    margin-top: 15px;
 }
