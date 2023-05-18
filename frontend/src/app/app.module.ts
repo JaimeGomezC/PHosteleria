@@ -11,12 +11,13 @@ import { DatePipe } from '@angular/common';
 import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { FooterComponent } from './componentes/footer/footer.component';
 import { MenuComponent } from './componentes/menu/menu.component';
+import { GaleriaComponent } from './componentes/galeria/galeria.component';
 
 
 
 //Angular Material
 import { SharedModule } from './shared/shared.module';
-import { GaleriaComponent } from './galeria/galeria.component';
+
 
 
 
