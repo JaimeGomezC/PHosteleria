@@ -33,6 +33,17 @@ export class GaleriaService {
     return this.http.post<GaleriaResponse>(this.apiUrl, fotoData,requestOptions);
   }
 
+    // Obtener una foto por su ID
+    getFoto(id: number): Observable<GaleriaResponse> {
+      let token:any = sessionStorage.getItem('token') 
+      const headers = new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        });
+      const requestOptions = { headers: headers };
+      return this.http.get<GaleriaResponse>(`${this.apiUrl}/${id}`,requestOptions);
+    }
+
 
   // Actualizar una foto por su ID
   actualizarFoto(id: number, foto: GaleriaResponse): Observable<GaleriaResponse> {

@@ -17,6 +17,8 @@ import { GaleriaComponent } from './componentes/galeria/galeria.component';
 
 //Angular Material
 import { SharedModule } from './shared/shared.module';
+import { GaleriaAdminComponent } from './componentes/galeria-admin/galeria-admin.component';
+import { GaleriaAdminModalComponent } from './componentes/galeria-admin-modal/galeria-admin-modal.component';
 
 
 
@@ -31,8 +33,8 @@ import { SharedModule } from './shared/shared.module';
     FooterComponent,
     routingComponents,
     GaleriaComponent,
-
-
+    GaleriaAdminComponent,
+    GaleriaAdminModalComponent,
     
   ],
   imports: [

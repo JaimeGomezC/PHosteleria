@@ -18,6 +18,8 @@ import { ConctatoComponent } from './componentes/conctato/conctato.component';
 
 import { ModalLupaComponent } from './componentes/modal-lupa/modal-lupa.component';
 import { CarouselInicioComponent } from './componentes/carousel-inicio/carousel-inicio.component';
+import { GaleriaAdminComponent } from './componentes/galeria-admin/galeria-admin.component';
+import { GaleriaAdminModalComponent } from './componentes/galeria-admin-modal/galeria-admin-modal.component';
 
 
 
@@ -36,6 +38,8 @@ const routes: Routes = [
 {path:'UsuarioModal',component:UsuarioModalComponent},
 {path:'Contacto',component:ConctatoComponent},
 {path:'ModalLupa',component:ModalLupaComponent},
+{path:'GaleriaAdmin',component:GaleriaAdminComponent},
+{path:'GaleriaAdminModal',component:GaleriaAdminModalComponent},
 //{path:'CarouselInicio',component:CarouselInicioComponent},
 
 

@@ -80,4 +80,8 @@ Route::middleware(['auth:sanctum'])->group(function(){
 });
 
     Route::get('galeria', [GaleriaController::class, 'index']);
+    Route::post('galeria',[GaleriaController::class,'store']);
+    Route::get('galeria/{imagen}',[TurnosController::class,'show']);
+    Route::put('galeria/{imagen}',[TurnosController::class,'update']);
+    Route::delete('galeria/{imagen}',[TurnosController::class,'destroy']);
 

@@ -16,7 +16,6 @@ class CreateGaleriaTable extends Migration
         Schema::create('galeria', function (Blueprint $table) {
             $table->id('id');
             $table->string('nombre_imagen');
-            $table->string('titulo')->nullable();
             $table->text('descripcion')->nullable();
             $table->boolean('visible')->default(false);
             $table->unsignedBigInteger('id_admin');
