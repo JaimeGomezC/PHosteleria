@@ -19,8 +19,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatStepperModule} from '@angular/material/stepper';
-
-
+import {MatRadioModule} from '@angular/material/radio';
 
 
 @NgModule({
@@ -53,7 +52,7 @@ import {MatStepperModule} from '@angular/material/stepper';
   // MatMenuModule,
   // MatNativeDateModule,
   // MatProgressBarModule,
-  // MatRadioModule,
+  MatRadioModule,
   // MatRippleModule,
   // MatSidenavModule,
   // MatSliderModule,
@@ -76,7 +75,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatTooltipModule,
     MatSelectModule,
     MatProgressSpinnerModule,
-    MatStepperModule
+    MatStepperModule,
+    MatRadioModule
   ]
 })
 export class SharedModule { }

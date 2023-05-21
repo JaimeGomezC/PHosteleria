@@ -33,8 +33,8 @@ export class ReservasComponent implements OnInit {
   cargarDatos(){
     this.turno.getTurnosPublicados().subscribe(data =>{
           console.log('data.result')
-          console.log(data.result)
-          let turno=data.data.map((e: any) => ({ idTurno:e.id,title:e.turno, start: e.fecha, allDay: true, n_plazas:e.n_plazas,fechaReserva:e.fecha }));
+          console.log(data)
+          let turno=data.data.map((e: any) => ({ idTurno:e.id,title:e.turno, start: e.fecha, allDay: true, n_plazas:e.n_plazas,fechaReserva:e.fecha,id_menu:e.id_menu }));
           console.log(turno)
           forwardRef(() => Calendar);
           this.calendarOptions = {
@@ -70,12 +70,9 @@ export class ReservasComponent implements OnInit {
     })
   }  
   handleEventClick(arg: EventClickArg) {
-    console.log('estoy aaaa');
-    console.log(arg.event.extendedProps);
-    console.log(arg.event._def.publicId);
-    console.log(arg.event._def);
-    console.log(arg.event._instance?.range.start);
     let data=arg.event.extendedProps;
+    console.log("data")
+    console.log(data)
     this.router.navigate(['ReservasModal',data]);
   }
   // handleDateClick(arg: DateClickArg) {

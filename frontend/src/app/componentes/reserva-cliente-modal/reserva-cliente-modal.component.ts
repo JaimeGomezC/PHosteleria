@@ -1,76 +1,117 @@
-import { Component, Inject, OnInit,Directive, ElementRef } from '@angular/core';
+import {
+  Component,
+  Inject,
+  OnInit,
+  Directive,
+  ElementRef,
+} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, FormControl,Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormControl,
+  Validators,
+} from '@angular/forms';
 import { ClienteService } from 'src/app/servicios/cliente.service';
-import { MAT_DIALOG_DATA,MatDialog, MatDialogRef } from '@angular/material/dialog';
-
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TurnosResponse } from 'src/app/interfaces/turnosResponse';
 import { TurnosService } from 'src/app/servicios/turnos.service';
 import { ModalLupaComponent } from '../modal-lupa/modal-lupa.component';
 
-
 @Component({
   selector: 'app-reserva-cliente-modal',
   templateUrl: './reserva-cliente-modal.component.html',
-  styleUrls: ['./reserva-cliente-modal.component.css']
+  styleUrls: ['./reserva-cliente-modal.component.css'],
 })
 export class ReservaClienteModalComponent implements OnInit {
-
   public form!: FormGroup;
   id?: string;
   loading = false;
   submitted = false;
-  titulo?:string;
+  titulo?: string;
   // formGroup?: FormGroup;
   // post: any = '';
 
   constructor(
     public formBuilder: FormBuilder,
     private cliente: ClienteService,
-    private dialog:MatDialog,
+    private dialog: MatDialog,
     private dialogRef: MatDialogRef<ReservaClienteModalComponent>,
     private snack: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private router: Router,
-    private turno:TurnosService
-    
+    private turno: TurnosService
   ) {
-    console.log("aui el arraydatos");
+    console.log('aui el arraydatos');
     console.log(data);
     // console.log(data[1].cliente.nombre);
-    if(data){this.titulo='EDITAR RESERVA'}else{this.titulo='NUEVA RESERVA'}
-   
+    if (data) {
+      this.titulo = 'EDITAR RESERVA';
+    } else {
+      this.titulo = 'NUEVA RESERVA';
+    }
   }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       //tabla Cliente
-      id: [this.data ? this.data[1].cliente.id : ''],
-      nombre: [this.data ? this.data[1].cliente.nombre : '', Validators.required],
-      apellido1: [this.data ? this.data[1].cliente.apellido1 : '', Validators.required],
-      apellido2: [this.data ? this.data[1].cliente.apellido2 : '', Validators.required],
+      id_cliente: [this.data ? this.data[1].cliente.id : ''],
+      nombre: [
+        this.data ? this.data[1].cliente.nombre : '',
+        Validators.required,
+      ],
+      apellido1: [
+        this.data ? this.data[1].cliente.apellido1 : '',
+        Validators.required,
+      ],
+      apellido2: [
+        this.data ? this.data[1].cliente.apellido2 : '',
+        Validators.required,
+      ],
       email: [this.data ? this.data[1].cliente.email : '', Validators.required],
-      telefono: [this.data ? this.data[1].cliente.telefono : '', Validators.required],
-      observaciones_cliente: [this.data ? this.data[1].cliente.observaciones_cliente : ''],
+      telefono: [
+        this.data ? this.data[1].cliente.telefono : '',
+        Validators.required,
+      ],
+      observaciones_cliente: [
+        this.data ? this.data[1].cliente.observaciones_cliente : '',
+      ],
       //tabla Reservas
+      id_reserva: [this.data ? this.data[0].reserva.id : ''],
       id_turno: ['1'],
       fecha: [this.data ? this.data[0].reserva.fecha : '', Validators.required],
-      num_comensales: [this.data ? this.data[0].reserva.num_comensales : '', Validators.required],
-      forma_pago: [this.data ? this.data[0].reserva.forma_pago : '', Validators.required],
-      estado: [this.data ? this.data[0].reserva.estado : '', Validators.required],
+      num_comensales: [
+        this.data ? this.data[0].reserva.num_comensales : '',
+        Validators.required,
+      ],
+      forma_pago: [
+        this.data ? this.data[0].reserva.forma_pago : '',
+        Validators.required,
+      ],
+      estado: [
+        this.data ? this.data[0].reserva.estado : '',
+        Validators.required,
+      ],
       precio_total: [this.data ? this.data[0].reserva.precio_total : 0],
-      pagado_base: [this.data ? this.data[0].reserva.pagado_base : 1, ],
-      pagado_total: [this.data ? this.data[0].reserva.pagado_total : 3, ],
-      codigo_verificacion: [this.data ? this.data[0].reserva.codigo_verificacion : ''],
-      producto_extra: [this.data ? this.data[0].reserva.producto_extra : '',],
-      observaciones_reserva: [this.data ? this.data[0].reserva.observaciones_reserva : ''],
-
+      pagado_base: [this.data ? this.data[0].reserva.pagado_base : 1],
+      pagado_total: [this.data ? this.data[0].reserva.pagado_total : 3],
+      codigo_verificacion: [
+        this.data ? this.data[0].reserva.codigo_verificacion : '',
+      ],
+      producto_extra: [this.data ? this.data[0].reserva.producto_extra : ''],
+      observaciones_reserva: [
+        this.data ? this.data[0].reserva.observaciones_reserva : '',
+      ],
     });
     this.form.controls['codigo_verificacion'].disable();
     //this.form.controls['fecha'].disable();
-    
+    console.log(this.form.value);
   }
 
   public get f() {
@@ -82,9 +123,9 @@ export class ReservaClienteModalComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-    if(this.data){
+    if (this.data) {
       this.addEditar(this.data);
-    }else{
+    } else {
       this.addTurno();
     }
   }
@@ -92,9 +133,8 @@ export class ReservaClienteModalComponent implements OnInit {
   addTurno() {
     this.cliente.agregarCliente(this.form.value).subscribe(
       (data) => {
-        console.log('data');
-        console.log(this.form.value);
-        this.snack.open('Turno añadido !!', 'Aceptar', {
+        const obj = JSON.parse(data.result);
+        this.snack.open('Reserva añadida !!\n'+obj.message, 'Aceptar', {
           duration: 2000,
           verticalPosition: 'top',
           horizontalPosition: 'center',
@@ -114,14 +154,23 @@ export class ReservaClienteModalComponent implements OnInit {
   }
 
   addEditar(item: any): void {
-    this.cliente.actualizarCliente(this.form.value.id,this.form.value).subscribe(
+    this.cliente.updateCliente(this.form.value).subscribe(
       (data) => {
-        this.snack.open('Turno modificado !!', 'Aceptar', {
-          duration: 2000,
-          verticalPosition: 'top',
-          horizontalPosition: 'center',
-        });
-        this.cancelar();
+        const obj = JSON.parse(data.result);
+        if (obj.error) {
+          console.log('Mensaje:', obj.message);
+          this.snack.open(obj.message, 'Aceptar', {
+            verticalPosition: 'top',
+            horizontalPosition: 'center',
+          });
+        } else {
+          this.snack.open('Reserva modificada !!'+obj.message, 'Aceptar', {
+            duration: 2000,
+            verticalPosition: 'top',
+            horizontalPosition: 'center',
+          });
+          this.cancelar();
+        }
       },
       (error) => {
         console.log(error);
@@ -133,25 +182,22 @@ export class ReservaClienteModalComponent implements OnInit {
       (dataresult) => {
         const dialogRef = this.dialog.open(ModalLupaComponent, {
           data: {
-            datos:dataresult,
-            titulo:"Lista de Turnos",
-            camposArray:['acciones','fecha','turno','n_plazas'],//,'turno','n_plazas','observaciones'
-          }
+            datos: dataresult,
+            titulo: 'Lista de Turnos',
+            camposArray: ['acciones', 'fecha', 'turno', 'n_plazas'], //,'turno','n_plazas','observaciones'
+          },
         });
         dialogRef.componentInstance.dataEvent.subscribe((result: any) => {
           this.form.patchValue({
             fecha: result.fecha,
             turno: result.turno,
-            id_turno:result.id
+            id_turno: result.id,
           });
         });
-
-       },
+      },
       (error) => {
         console.log(error);
       }
     );
-    
-  };
-
+  }
 }

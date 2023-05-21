@@ -18,7 +18,7 @@ import { ClienteService } from 'src/app/servicios/cliente.service';
 export class ReservaClienteComponent implements OnInit {
   loading = true;
   dataSource:MatTableDataSource<ReservaResponse>;
-  displayedColumns: string[] = [ 'fecha','num_comensales','forma_pago','codigo_verificacion','observaciones','acciones'];
+  displayedColumns: string[] = [ 'fecha','num_comensales','forma_pago','codigo_verificacion','observaciones_reserva','acciones'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -104,7 +104,7 @@ export class ReservaClienteComponent implements OnInit {
     })
   }
 
-  openModal(cliente: any) {
+  openModal(cliente: any) {//NUEVA RESERVA
     
     const dialogRef = this.dialog.open(ReservaClienteModalComponent, {
       data: cliente
@@ -115,7 +115,7 @@ export class ReservaClienteComponent implements OnInit {
     });
   };
 
-  edit_add_Turno(item:any):void {
+  edit_add_Turno(item:any):void {//UPDATE RESERVA
     this.cliente.getCliente(item.id_cliente).subscribe(respuesta =>{
       let arrayDatos=[{"reserva":item},{"cliente":respuesta}]
       const dialogRef = this.dialog.open(ReservaClienteModalComponent,{
@@ -126,7 +126,7 @@ export class ReservaClienteComponent implements OnInit {
         this.cargarDatos();
       },
       (error) => {
-        console.log(error)
+        console.log(error);
       });
     },
     (error) => {

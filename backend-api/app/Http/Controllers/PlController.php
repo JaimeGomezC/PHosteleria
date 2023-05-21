@@ -54,4 +54,18 @@ class PlController extends Controller
 
         return response()->json(['plazas_libres' => $plazasLibres->plazas_libres]);
     }
+
+    public function updateClienteReserva(Request $request)
+    {
+        // Obtener el parámetro JSON del request
+        $json_params = stripslashes(json_encode($request->input()));
+        try {
+            $result = DB::selectOne('SELECT update_cliente_reserva(?) AS result', [$json_params]);
+
+            return response()->json(['result' => $result->result]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+        
+    }
 }

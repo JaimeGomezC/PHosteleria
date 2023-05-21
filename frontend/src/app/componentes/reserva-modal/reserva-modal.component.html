@@ -1,58 +1,75 @@
 <!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
     {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
   </button>  -->
-<h3>Pasos para hacer tu reserva del {{datosRecibidos.fechaReserva |date: 'dd/MM/yyyy' }}, número de plazas totales {{maxPlazas}}.</h3>
+<h3>Pasos para hacer tu reserva del {{datosRecibidos.fechaReserva |date: 'dd/MM/yyyy' }}, número de plazas totales
+  {{maxPlazas}}.</h3>
 <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
   <mat-step [stepControl]="firstFormGroup">
-  <form [formGroup]="firstFormGroup">
-    <ng-template matStepLabel>Rellena tus datos</ng-template>
-    <mat-card fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="15px">
-      <div class="col-6">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Rellena tus datos</ng-template>
+      <mat-card fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="15px">
         <div class="row">
-          <mat-form-field class="col-6">
-            <mat-label>Nombre</mat-label>
-            <input matInput placeholder="Tu nombre" formControlName="firstnombre" required>
-          </mat-form-field>
-          <mat-form-field class="col-6">
-            <mat-label>Apellidos</mat-label>
-            <input matInput placeholder="Apellidos" formControlName="firstapellidos" required>
-          </mat-form-field>
-          <mat-form-field class="col-6">
-            <mat-label>Correo electrónico</mat-label>
-            <input matInput placeholder="pat@example.com" formControlName="firstemail" required>
-            <mat-error *ngIf="f.get('firstemail')">Ingresa un correo electrónico válido.</mat-error>
-          </mat-form-field>
-          <mat-form-field class="col-6">
-            <mat-label>Teléfono</mat-label>
-            <input matInput placeholder="Teléfono" formControlName="first_tlf" required>
-          </mat-form-field>
-          <mat-form-field class="col-6">
-            <mat-label>Número de plazas</mat-label>
-            <input type="number" matInput placeholder="Número de plazas" formControlName="n_plazas" required>
-            <mat-error *ngIf="f.controls['n_plazas'].invalid">Ingresa el número valido de plazas.</mat-error>
-          </mat-form-field>
-          <mat-form-field class="col-12">
-            <mat-label>Observaciones</mat-label>
-            <textarea matInput placeholder="Observaciones" formControlName="firstobservaciones"></textarea>
-          </mat-form-field>
+          <div class="col-7">
+            <div class="row">
+              <mat-form-field class="col-6">
+                <mat-label>Nombre</mat-label>
+                <input matInput placeholder="Tu nombre" formControlName="nombre" required>
+              </mat-form-field>
+              <mat-form-field class="col-6">
+                <mat-label>1ª apellido</mat-label>
+                <input matInput placeholder="1ª apellido" formControlName="apellido1" required>
+              </mat-form-field>
+              <mat-form-field class="col-6">
+                <mat-label>2ª apellido</mat-label>
+                <input matInput placeholder="2ª Apellido" formControlName="apellido2" required>
+              </mat-form-field>
+              <mat-form-field class="col-6">
+                <mat-label>Correo electrónico</mat-label>
+                <input matInput placeholder="pat@example.com" formControlName="email" required>
+                <mat-error *ngIf="f.get('email')">Ingresa un correo electrónico válido.</mat-error>
+              </mat-form-field>
+              <mat-form-field class="col-6">
+                <mat-label>Teléfono</mat-label>
+                <input matInput placeholder="Teléfono" formControlName="telefono" required>
+              </mat-form-field>
+              <mat-form-field class="col-6">
+                <mat-label>Número de reservas</mat-label>
+                <input type="number" matInput placeholder="Número de reservas" formControlName="n_plazas" required>
+                <mat-error *ngIf="f.controls['n_plazas'].invalid">Ingresa el número valido de plazas.</mat-error>
+              </mat-form-field>
+              <mat-form-field class="col-12">
+                <mat-label>Observaciones</mat-label>
+                <textarea matInput placeholder="Observaciones" formControlName="observaciones_cliente"></textarea>
+              </mat-form-field>
+            </div>
+            <div>
+              <button class="custom-button" mat-button matStepperNext (click)="addTurno()">Siguiente</button>
+            </div>
+          </div>
+          <div class="col-5">
+            <ng-container *ngIf="urlImagen">
+              <img src="{{urlImagen}}" width="300" height="300" alt="Imagen del menu no encontrada">
+            </ng-container>
+          </div>
         </div>
-        <div>
-          <button class="custom-button" mat-button matStepperNext>Siguiente</button>
-        </div>
-      </div>
-    </mat-card>
-  </form>
-</mat-step>
+      </mat-card>
+    </form>
+  </mat-step>
   <mat-step [stepControl]="secondFormGroup">
     <form [formGroup]="secondFormGroup">
       <ng-template matStepLabel>Formas de pago de la reserva</ng-template>
-      <mat-form-field appearance="fill">
-        <mat-label>Address</mat-label>
-        <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
-      </mat-form-field>
+      
       <div>
+        <mat-radio-group formControlName="forma_pago">
+          <mat-radio-button value="cash">Al contado</mat-radio-button>
+          <mat-radio-button value="card">Tarjeta</mat-radio-button>
+        </mat-radio-group>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button matStepperNext>Next</button>
+      </div>
+      <div *ngIf="secondFormGroup.controls['forma_pago'].value === 'card'">
+        <!-- Mostrar botón para redsys aquí -->
+        <button mat-button color="primary" (click)="redirectToRedsys()">Pagar con Tarjeta</button>
       </div>
     </form>
   </mat-step>

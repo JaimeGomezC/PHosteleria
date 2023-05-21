@@ -87,7 +87,11 @@ class MenuController extends Controller
         $menu->delete();
         return response()->json(['message' => 'Menu deleted'], 200);
     }
-
+    public function getByTurno($id_turno)
+    {
+        $reservas = Menu::where('id_turno', $id_turno)->get();
+        return response()->json($reservas);
+    }
     public function uploadImage(Request $request)
     { 
        if ($request->hasFile('imagen')) {

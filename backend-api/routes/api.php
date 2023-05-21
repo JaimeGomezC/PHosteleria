@@ -63,7 +63,6 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::put('reservas/{reserva}', [ReservaController::class, 'update']);
     Route::delete('reservas/{reserva}', [ReservaController::class, 'destroy']);
     Route::get('reservas/turno/{id_turno}',[ReservaController::class, 'getByTurno']);
-    
     // TABLA MENU
     Route::get('menus', [MenuController::class, 'index']);
     Route::post('menus', [MenuController::class, 'store']);
@@ -72,10 +71,13 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::delete('menus/deleteImage', [MenuController::class, 'deleteImage']);
     Route::delete('menus/{menu}', [MenuController::class, 'destroy']);
     Route::post('menus/upload-image', [MenuController::class, 'uploadImage']);
+    Route::get('menus/turno/{id_turno}',[MenuController::class, 'getByTurno']);
     // LLAMADAS A FUNCIONES PL
     Route::post('pl/actualizar-cliente-reserva', [PlController::class, 'actualizarClienteReserva']);
     Route::get('obtenerPlazasLibres', [PlController::class, 'obtenerPlazasLibres']);
     Route::post('pl/insertClienteReserva', [PlController::class, 'insertClienteReserva']);
+    Route::post('pl/updateClienteReserva', [PlController::class, 'updateClienteReserva']);
+    
 });
 
     Route::get('galeria', [GaleriaController::class, 'index']);

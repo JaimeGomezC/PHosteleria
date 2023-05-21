@@ -11,65 +11,47 @@ export class MenuService {
 
   constructor(private http: HttpClient) { }
 
-  // Obtener todas las reservas
-  getMenus(): Observable<MenuResponse[]> {
-    let token:any = sessionStorage.getItem('token') 
+  getAutorizacion(){
+    let token:any = sessionStorage.getItem('token')  
     const headers = new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       });
-    const requestOptions = { headers: headers };
+    return headers;
+  }
+  // Obtener todas las reservas
+  getMenus(): Observable<MenuResponse[]> {
+    const requestOptions = { headers: this.getAutorizacion()};
     return this.http.get<MenuResponse[]>(this.apiUrl,requestOptions);
   }
 
   // Crear una nueva reserva
   crearMenu(menuData: MenuResponse): Observable<any> {
-    let token:any = sessionStorage.getItem('token') 
-    const headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      });
-    const requestOptions = { headers: headers };
+    const requestOptions = { headers: this.getAutorizacion()};
     return this.http.post<MenuResponse>(this.apiUrl, menuData,requestOptions);
   }
 
   // Obtener una reserva por su ID
   getMenu(id: number): Observable<MenuResponse> {
-    let token:any = sessionStorage.getItem('token') 
-    const headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      });
-    const requestOptions = { headers: headers };
+    const requestOptions = { headers: this.getAutorizacion()};
     return this.http.get<MenuResponse>(`${this.apiUrl}/${id}`,requestOptions);
   }
 
   // Actualizar una reserva por su ID
   actualizarMenu(id: number, reserva: MenuResponse): Observable<MenuResponse> {
-    let token:any = sessionStorage.getItem('token') 
-    const headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      });
-    const requestOptions = { headers: headers };
+    const requestOptions = { headers: this.getAutorizacion()};
     return this.http.put<MenuResponse>(`${this.apiUrl}/${id}`, reserva,requestOptions);
   }
 
   // Eliminar una reserva por su ID
   eliminar(id: number): Observable<MenuResponse> {
-    let token:any = sessionStorage.getItem('token')      
-    const headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      });
-     const requestOptions = { headers: headers};
+    const requestOptions = { headers: this.getAutorizacion()};
     return this.http.delete<MenuResponse>(`${this.apiUrl}/${id}`,requestOptions);
   }
   uploadImage(file: File):Observable<any> {
     const formData = new FormData();
     let token:any = sessionStorage.getItem('token')      
-    // let headers=new HttpHeaders().set('Content-Type','multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW');
-    const headers = new HttpHeaders({
+     const headers = new HttpHeaders({
       'enctype': 'multipart/form-data',
         'Authorization': `Bearer ${token}`
       });
