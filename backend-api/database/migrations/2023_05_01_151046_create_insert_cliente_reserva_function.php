@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 
 class CreateInsertClienteReservaFunction extends Migration
@@ -10,42 +9,70 @@ class CreateInsertClienteReservaFunction extends Migration
     {
         $sql = "
         CREATE FUNCTION insert_cliente_reserva(json_params JSON)
-        RETURNS varchar(300)
-        BEGIN
-        DECLARE id_cliente INT;  
-        DECLARE v_codigo varchar(10);
-        
-        SELECT CONV(FLOOR(RAND() * 99999999999999), 10, 36) into v_codigo;
+RETURNS VARCHAR(300)
+BEGIN
+    DECLARE id_cliente INT;
+    DECLARE v_codigo VARCHAR(10);
+    DECLARE plazas_totales INT;
+    DECLARE plazas_ocupadas INT;
+    DECLARE plazas_disponibles INT;
+    
+  DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        -- Obtener el estado de SQL y el mensaje de error y devolverlo como resultado
+        GET DIAGNOSTICS CONDITION 1 @sqlstate = RETURNED_SQLSTATE, @errno = MYSQL_ERRNO, @errmsg = MESSAGE_TEXT;
+        RETURN CONCAT('Error: ', @sqlstate, ' - ', @errno, ' - ', @errmsg);
+    END;
 
-        -- Comprobar si el código ya existe en la tabla
-        WHILE EXISTS(SELECT * FROM reservas WHERE codigo_verificacion = @v_codigo) 
-        DO
+
+    SELECT CONV(FLOOR(RAND() * 99999999999999), 10, 36) INTO v_codigo;
+
+    -- Comprobar si el código ya existe en la tabla
+    WHILE EXISTS(SELECT * FROM reservas WHERE codigo_verificacion = v_codigo) DO
         -- Si el código ya existe, generar un nuevo código aleatorio
-        SELECT CONV(FLOOR(RAND() * 99999999999999), 10, 36) into v_codigo;
-        END WHILE;
-        
-        
-        
-        INSERT INTO clientes ( nombre, apellido1, apellido2, email, telefono, observaciones, fecha)
-        VALUES ( JSON_EXTRACT(json_params, '$.nombre'), JSON_EXTRACT(json_params, '$.apellido1'),
-        JSON_EXTRACT(json_params, '$.apellido2'), JSON_EXTRACT(json_params, '$.email'), JSON_EXTRACT(json_params, '$.telefono'),
-        JSON_EXTRACT(json_params, '$.observaciones'), JSON_EXTRACT(json_params, '$.fecha'));
-        
-        SET id_cliente = LAST_INSERT_ID();
-        
-        INSERT INTO reservas ( id_cliente, id_turno, observaciones, fecha, num_comensales, forma_pago, precio_total, pagado_base, pagado_total, codigo_verificacion, producto_extra)
-        VALUES ( id_cliente, JSON_EXTRACT(json_params, '$.id_turno'), JSON_EXTRACT(json_params, '$.reservas.observaciones'),
-        JSON_EXTRACT(json_params, '$.fecha'), JSON_EXTRACT(json_params, '$.num_comensales'), JSON_EXTRACT(json_params, '$.forma_pago'),
-        JSON_EXTRACT(json_params, '$.precio_total'), JSON_EXTRACT(json_params, '$.pagado_base'), JSON_EXTRACT(json_params, '$.pagado_total'),
-        v_codigo, JSON_EXTRACT(json_params, '$.producto_extra'));
-        
-        RETURN 'Reserva y Cliente creados';
-        END;
+        SELECT CONV(FLOOR(RAND() * 99999999999999), 10, 36) INTO v_codigo;
+    END WHILE;
+
+    
+
+    -- Tu código SQL para obtener las plazas totales y ocupadas por turno
+    -- Reemplaza los nombres de las tablas y columnas según tu estructura de base de datos
+    SELECT n_plazas INTO plazas_totales FROM turnos WHERE id = JSON_EXTRACT(json_params, '$.id_turno');
+
+	IF plazas_totales IS NULL THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'No se encontró el turno especificado';
+    END IF;
+    SELECT SUM(num_comensales) INTO plazas_ocupadas FROM reservas WHERE id_turno = JSON_EXTRACT(json_params, '$.id_turno');
+
+    SET plazas_disponibles = plazas_totales - plazas_ocupadas;
+ IF plazas_ocupadas>=plazas_totales THEN
+        RETURN CONCAT('Todas las plazas reservadas. Plazas totales: ', plazas_totales,' plazas_ocupadas: ', plazas_ocupadas,' plazas_disponibles: ', plazas_disponibles,' id_turno:',JSON_EXTRACT(json_params, '$.id_turno'));
+    END IF;
+    -- Verificar si el número de plazas disponibles después de restar las comensales de la reserva
+    -- es inferior al 10% de las plazas totales
+    IF plazas_disponibles< (0.1 * plazas_totales) THEN
+    RETURN 'El número de plazas disponibles es insuficiente';
+    END IF;
+
+    INSERT INTO clientes (nombre, apellido1, apellido2, email, telefono, observaciones_cliente, fecha)
+    VALUES (JSON_EXTRACT(json_params, '$.nombre'), JSON_EXTRACT(json_params, '$.apellido1'),
+    JSON_EXTRACT(json_params, '$.apellido2'), JSON_EXTRACT(json_params, '$.email'), JSON_EXTRACT(json_params, '$.telefono'),
+    JSON_EXTRACT(json_params, '$.observaciones_cliente'), JSON_EXTRACT(json_params, '$.fecha'));
+
+    SET id_cliente = LAST_INSERT_ID();
+    INSERT INTO reservas (id_cliente, id_turno, observaciones_reserva, fecha, num_comensales, forma_pago, precio_total, pagado_base, pagado_total, codigo_verificacion, producto_extra, estado)
+    VALUES (id_cliente, JSON_EXTRACT(json_params, '$.id_turno'), JSON_EXTRACT(json_params, '$.reservas.observaciones_reserva'),
+    JSON_EXTRACT(json_params, '$.fecha'), JSON_EXTRACT(json_params, '$.num_comensales'), JSON_EXTRACT(json_params, '$.forma_pago'),
+    JSON_EXTRACT(json_params, '$.precio_total'), JSON_EXTRACT(json_params, '$.pagado_base'), JSON_EXTRACT(json_params, '$.pagado_total'),
+    v_codigo, JSON_EXTRACT(json_params, '$.producto_extra'), JSON_EXTRACT(json_params, '$.estado'));
+
+    RETURN CONCAT('Plazas totales: ', plazas_totales,' plazas_ocupadas: ', plazas_ocupadas,' plazas_disponibles: ', plazas_disponibles,' id_turno:',JSON_EXTRACT(json_params, '$.id_turno'));
+END
         ";
         DB::unprepared($sql);
     }
     public function down()
     {
-        DB::unprepared('DROP FUNCTION IF EXISTS insert_cliente_reserva');
+        DB::unprepared("DROP FUNCTION IF EXISTS insert_cliente_reserva");
     }
 }

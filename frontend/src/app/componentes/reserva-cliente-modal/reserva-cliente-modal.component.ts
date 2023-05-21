@@ -53,17 +53,20 @@ export class ReservaClienteModalComponent implements OnInit {
       apellido2: [this.data ? this.data[1].cliente.apellido2 : '', Validators.required],
       email: [this.data ? this.data[1].cliente.email : '', Validators.required],
       telefono: [this.data ? this.data[1].cliente.telefono : '', Validators.required],
+      observaciones_cliente: [this.data ? this.data[1].cliente.observaciones_cliente : ''],
       //tabla Reservas
       id_turno: ['1'],
-      observaciones: [this.data ? this.data[0].reserva.observaciones : '', Validators.required],
       fecha: [this.data ? this.data[0].reserva.fecha : '', Validators.required],
       num_comensales: [this.data ? this.data[0].reserva.num_comensales : '', Validators.required],
       forma_pago: [this.data ? this.data[0].reserva.forma_pago : '', Validators.required],
-      precio_total: [this.data ? this.data[0].reserva.precio_total : '', Validators.required],
-      pagado_base: [this.data ? this.data[0].reserva.pagado_base : '', Validators.required],
-      pagado_total: [this.data ? this.data[0].reserva.pagado_total : '', Validators.required],
+      estado: [this.data ? this.data[0].reserva.estado : '', Validators.required],
+      precio_total: [this.data ? this.data[0].reserva.precio_total : 0],
+      pagado_base: [this.data ? this.data[0].reserva.pagado_base : 1, ],
+      pagado_total: [this.data ? this.data[0].reserva.pagado_total : 3, ],
       codigo_verificacion: [this.data ? this.data[0].reserva.codigo_verificacion : ''],
-      producto_extra: [this.data ? this.data[0].reserva.producto_extra : '', Validators.required]
+      producto_extra: [this.data ? this.data[0].reserva.producto_extra : '',],
+      observaciones_reserva: [this.data ? this.data[0].reserva.observaciones_reserva : ''],
+
     });
     this.form.controls['codigo_verificacion'].disable();
     //this.form.controls['fecha'].disable();
@@ -132,13 +135,14 @@ export class ReservaClienteModalComponent implements OnInit {
           data: {
             datos:dataresult,
             titulo:"Lista de Turnos",
-            camposArray:['fecha','turno','acciones'],//,'turno','n_plazas','observaciones'
+            camposArray:['acciones','fecha','turno','n_plazas'],//,'turno','n_plazas','observaciones'
           }
         });
         dialogRef.componentInstance.dataEvent.subscribe((result: any) => {
           this.form.patchValue({
             fecha: result.fecha,
-            turno: result.turno
+            turno: result.turno,
+            id_turno:result.id
           });
         });
 

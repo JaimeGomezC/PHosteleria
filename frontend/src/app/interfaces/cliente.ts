@@ -5,6 +5,6 @@ export interface ClienteResponse {
     apellido2: string;
     email: string;
     telefono: string;
-    observaciones: string;
+    observaciones_cliente: string;
     fecha: Date;
 }

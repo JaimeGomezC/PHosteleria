@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PlController;
 use App\Http\Controllers\TurnosController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ReservaController;
@@ -34,6 +35,7 @@ Route::group(['middleware' => 'cors'], function(){
     Route::post('login',[AuthController::class,'login']);
     Route::post('logout',[AuthController::class,'logout']);
     Route::post('register',[AuthController::class,'register']);
+    Route::get('turnos/publicados',[TurnosController::class,'turnosPublicados']);
     
 });
 
@@ -42,31 +44,27 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::delete('destroy/{user}', [AuthController::class, 'destroy']);
     // Route::post('register',[AuthController::class,'register']);
     Route::put('update/{user}',[AuthController::class,'update']);
-
+    // TABLA TURNOS
     Route::get('turnos',[TurnosController::class,'index']);
-    Route::get('turnos/publicados',[TurnosController::class,'turnosPublicados']);
     Route::post('turnos',[TurnosController::class,'store']);
     Route::get('turnos/{turno}',[TurnosController::class,'show']);
     Route::put('turnos/{turno}',[TurnosController::class,'update']);
     Route::delete('turnos/{turno}',[TurnosController::class,'destroy']);
-
+    // TABLA CLIENTES
     Route::get('clientes', [ClienteController::class, 'index']);
     Route::get('clientes/{cliente}', [ClienteController::class, 'show']);
     Route::post('clientes',[ClienteController::class,'store']);
     Route::put('clientes/{cliente}', [ClienteController::class, 'update']);
     Route::delete('clientes/{cliente}', [ClienteController::class, 'destroy']);
-
+    // TABLA RESERVAS
     Route::get('reservas', [ReservaController::class, 'index']);
     Route::post('reservas', [ReservaController::class, 'store']);
     Route::get('reservas/{reserva}', [ReservaController::class, 'show']);
     Route::put('reservas/{reserva}', [ReservaController::class, 'update']);
     Route::delete('reservas/{reserva}', [ReservaController::class, 'destroy']);
     Route::get('reservas/turno/{id_turno}',[ReservaController::class, 'getByTurno']);
-    Route::post('reservas/cliente', [ReservaController::class, 'insertClienteReserva']);
-
-
-   
-
+    
+    // TABLA MENU
     Route::get('menus', [MenuController::class, 'index']);
     Route::post('menus', [MenuController::class, 'store']);
     Route::get('menus/{menu}', [MenuController::class, 'show']);
@@ -74,9 +72,10 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::delete('menus/deleteImage', [MenuController::class, 'deleteImage']);
     Route::delete('menus/{menu}', [MenuController::class, 'destroy']);
     Route::post('menus/upload-image', [MenuController::class, 'uploadImage']);
-    
-    Route::post('/actualizar-cliente-reserva', 'NombreControlador@actualizarClienteReserva');
-
+    // LLAMADAS A FUNCIONES PL
+    Route::post('pl/actualizar-cliente-reserva', [PlController::class, 'actualizarClienteReserva']);
+    Route::get('obtenerPlazasLibres', [PlController::class, 'obtenerPlazasLibres']);
+    Route::post('pl/insertClienteReserva', [PlController::class, 'insertClienteReserva']);
 });
 
     Route::get('galeria', [GaleriaController::class, 'index']);

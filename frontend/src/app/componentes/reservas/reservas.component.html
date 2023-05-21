@@ -1,16 +1,13 @@
 
 <div class="container">
     <div class="row">
-            <h1>CALENDARIO DE RESERVAS</h1>
-           
-        <div class="col-md-12">
-
+        <h1>CALENDARIO DE RESERVAS</h1>
+        <div class="col-md-12 calendar-container"> <!-- Agregamos la clase "calendar-container" -->
             <full-calendar *ngIf="calendarOptions" #fullcalendar [options]="calendarOptions">
                 <ng-template #eventContent let-arg>
                     <b>{{ arg.event.title }}</b> - {{ arg.event.start.getDate() }}
                 </ng-template>
             </full-calendar>
         </div>
-
     </div>
 </div>

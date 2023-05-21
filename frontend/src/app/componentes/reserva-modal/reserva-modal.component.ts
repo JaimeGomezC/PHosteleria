@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, ValidationErrors, Validators} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ClienteService } from 'src/app/servicios/cliente.service';
 
@@ -11,17 +11,28 @@ import { ClienteService } from 'src/app/servicios/cliente.service';
 })
 export class ReservaModalComponent implements OnInit {
   first=false;
-  fecha?:any;
+  datosRecibidos?:any;
+  maxPlazas?:any;
+  plazavalidar?:boolean=false;
  
-  constructor(private _formBuilder: FormBuilder,private router:ActivatedRoute,private cliente:ClienteService ) {}
-  ngOnInit(): void {
+  constructor(private _formBuilder: FormBuilder,private router:ActivatedRoute,private cliente:ClienteService ) {
     this.router.params.subscribe(params => {
-      const datos = params; // Datos recibidos
-      this.fecha=datos;
-      console.log(datos);
-      console.log(this);
-      console.log(this.fecha);
+      console.log('Datos recibidos');
+      console.log(params);
+      const datos = params;
+      this.datosRecibidos=params;
+      this.maxPlazas=parseInt(datos['n_plazas']) ;
+      console.log(this.maxPlazas);
+     
+      if (this.maxPlazas && this.firstFormGroup.controls['n_plazas'].value > this.maxPlazas) {
+        // Mostrar error en el HTML
+        const nPlazasControl = this.firstFormGroup.controls['n_plazas'];
+        nPlazasControl.setErrors({ 'exceedsMaxPlazas': true });
+      }
     });
+  }
+  ngOnInit(): void {
+    
   }
 
   firstFormGroup = this._formBuilder.group({
@@ -29,7 +40,8 @@ export class ReservaModalComponent implements OnInit {
     firstapellidos: ['', Validators.required],
     firstemail: ['', Validators.required],
     first_tlf: ['', Validators.required],
-    firstobservaciones: ['']
+    n_plazas: ['',[Validators.required,this.nPlazasValidar()]],
+    firstobservaciones: [''],
   });
   secondFormGroup = this._formBuilder.group({
     secondCtrl: ['', Validators.required],
@@ -41,6 +53,28 @@ export class ReservaModalComponent implements OnInit {
     return "Correo incorrecto"
   }
 
+  // superaPlazas(item:any) {
+  //   this.firstFormGroup.controls["n_plazas"].valueChanges.subscribe((result => {
+  //     console.log(`cambios: ${result}`);
+  //     console.dir(this.firstFormGroup)
+  //     console.log("holaaaaa")
+  //     console.log(this.firstFormGroup.get('n_plazas'))
+  //   }));
+  // }
+  nPlazasValidar() {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const n_plazas = control.value;
+      if (n_plazas > this.maxPlazas) {
+        this.plazavalidar=true;
+        return { n_plazasSuperior: true };
+      }
+      this.plazavalidar=false;
+      return null;
+    };
+  }
+  public get f() {
+    return this.firstFormGroup;
+  }
   // grabar() {
   //   this.cliente.(this.form.value).subscribe(
   //     (data) => {

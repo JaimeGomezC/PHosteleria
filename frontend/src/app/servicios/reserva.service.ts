@@ -11,16 +11,17 @@ export class ReservaService {
 
   constructor(private http: HttpClient) { }
 
-  // Obtener todas las reservas
-  getReservas(): Observable<ReservaResponse[]> {
-    let token:any = sessionStorage.getItem('token')
-      
+  getAutorizacion(){
+    let token:any = sessionStorage.getItem('token')  
     const headers = new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       });
-      
-    const requestOptions = { headers: headers };
+    return headers;
+  }
+  // Obtener todas las reservas
+  getReservas(): Observable<ReservaResponse[]> {
+    const requestOptions = { headers: this.getAutorizacion()};
     return this.http.get<ReservaResponse[]>(this.apiUrl,requestOptions);
   }
 
@@ -30,8 +31,13 @@ export class ReservaService {
   }
 
   // Obtener una reserva por su ID
-  getReserva(id: number): Observable<ReservaResponse> {
-    return this.http.get<ReservaResponse>(`${this.apiUrl}/${id}`);
+  getReserva(id: number): Observable<ReservaResponse[]> {
+    return this.http.get<ReservaResponse[]>(`${this.apiUrl}/${id}`);
+  }
+  // Obtener una reserva por su ID_TURNO
+  getReservaTurno(idTurno: number): Observable<ReservaResponse[]> {
+    const requestOptions = { headers: this.getAutorizacion()};
+    return this.http.get<ReservaResponse[]>(`${this.apiUrl}/turno/${idTurno}`,requestOptions);
   }
 
   // Actualizar una reserva por su ID

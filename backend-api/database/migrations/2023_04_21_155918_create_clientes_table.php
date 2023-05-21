@@ -20,7 +20,7 @@ class CreateClientesTable extends Migration
             $table->string('apellido2');
             $table->string('email')->nullable(false);
             $table->string('telefono')->nullable(false);
-            $table->text('observaciones')->nullable();
+            $table->text('observaciones_cliente')->nullable();
             $table->date('fecha');
             $table->timestamps();
         });

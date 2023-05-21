@@ -64,17 +64,6 @@ class TurnosController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Turnos  $turnos
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Turnos $turnos)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

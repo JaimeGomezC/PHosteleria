@@ -7,7 +7,7 @@
       <mat-dialog-content>
 
         <div class="row">
-          <h4>Datos del cliente</h4>
+          <h4><b>Datos del cliente</b></h4>
           <div class="col-2 mb-2">
             <label class="form-label">Nombre</label>
             <input formControlName="nombre" class="form-control" min="0"
@@ -33,14 +33,6 @@
               </div>
             </div>
             <div class="col-2 mb-2">
-              <label class="form-label">Correo</label>
-              <input formControlName="email" class="form-control" min="0"
-                [ngClass]="{ 'is-invalid': submitted && f.value.email==''}" />
-              <div *ngIf="submitted" class="invalid-feedback">
-                <div>Correo requerido</div>
-              </div>
-            </div>
-            <div class="col-2 mb-2">
               <label class="form-label">Teléfono</label>
               <input formControlName="telefono" class="form-control" min="0"
                 [ngClass]="{ 'is-invalid': submitted && f.value.telefono==''}" />
@@ -48,10 +40,25 @@
                 <div>Teléfono requerido</div>
               </div>
             </div>
+            <div class="col-4 mb-4">
+              <label class="form-label">Correo</label>
+              <input formControlName="email" class="form-control" min="0"
+                [ngClass]="{ 'is-invalid': submitted && f.value.email==''}" />
+              <div *ngIf="submitted" class="invalid-feedback">
+                <div>Correo requerido</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 mb-12">
+                <label class="form-label">Observaciones cliente</label>
+                <textarea formControlName="observaciones_cliente" class="form-control" cols="30" rows="3"></textarea>
+              </div>
+    
+            </div>
         </div>
         <hr>
         <div class="row">
-          <h4>Datos de la reserva</h4>
+          <h4><b>Datos de la reserva</b></h4>
            <!-- <div class="col-2 mb-2">
               <label class="form-label">Fecha</label>
               <input type="date" formControlName="fecha" class="form-control"
@@ -79,36 +86,28 @@
                 <div>Nº comensales requerido</div>
               </div>
             </div>
-            <div class="col-2 mb-2">
+           
+            <div class="col-3 mb-3">
               <label class="form-label">Forma de pago</label>
-              <input formControlName="forma_pago" class="form-control" min="0"
-                [ngClass]="{ 'is-invalid': submitted && f.value.forma_pago==''}" />
-              <div *ngIf="submitted" class="invalid-feedback">
-                <div>forma_pago requerido</div>
-              </div>
-            </div>
-            <!-- <div class="col-3 mb-3">
-              <label class="form-label">Forma de pago</label>
-              <select formControlName="forma_pago" class="form-select" [ngClass]="{ 'is-invalid': submitted && f.value.forma_pago=='' }">
-                <option value="">--Seleccione una forma de pago--</option>
+              <select formControlName="forma_pago" class="form-select" 
+                [ngClass]="{ 'is-invalid': submitted && f.controls['forma_pago'].errors }">
+                <option value="" disabled selected>Seleccionar forma de pago</option>
                 <option value="contado">Contado</option>
-                <option value="bizum">Bizum</option>
-                <option value="transferencia">Transferencia</option>
-                <option value="otros">Otros</option>
+                <option value="tarjeta">Tarjeta</option>
               </select>
-              <div *ngIf="submitted && f.value.forma_pago.errors" class="invalid-feedback">
+              <div *ngIf="submitted && f.controls['forma_pago'].errors" class="invalid-feedback">
                 <div>Forma de pago requerida</div>
               </div>
-            </div> -->
+            </div>
             <div class="col-2 mb-2">
-              <label class="form-label">precio_total</label>
-              <input formControlName="precio_total" class="form-control" min="0"
-                [ngClass]="{ 'is-invalid': submitted && f.value.precio_total==''}" />
+              <label class="form-label">estado</label>
+              <input formControlName="estado" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.value.estado==''}" />
               <div *ngIf="submitted" class="invalid-feedback">
                 <div>precio_total requerido</div>
               </div>
-            </div>
-            <div class="col-2 mb-2">
+            <!-- </div>
+             <div class="col-2 mb-2">
               <label class="form-label">pagado_base</label>
               <input formControlName="pagado_base" class="form-control" min="0"
                 [ngClass]="{ 'is-invalid': submitted && f.value.pagado_base==''}" />
@@ -122,26 +121,25 @@
                 [ngClass]="{ 'is-invalid': submitted && f.value.pagado_total==''}" />
               <div *ngIf="submitted" class="invalid-feedback">
                 <div>pagado_total requerido</div>
-              </div>
+              </div> -->
             </div>
             <div class="col-2 mb-2">
               <label class="form-label">codigo_verificacion</label>
               <input [disabled]=false formControlName="codigo_verificacion" class="form-control" />
             </div>
-            <div class="col-2 mb-2">
+            <!-- <div class="col-2 mb-2">
               <label class="form-label">producto_extra</label>
               <input formControlName="producto_extra" class="form-control" min="0"
                 [ngClass]="{ 'is-invalid': submitted && f.value.producto_extra==''}" />
               <div *ngIf="submitted" class="invalid-feedback">
                 <div>producto_extra requerido</div>
               </div>
-            </div>
-
+            </div> -->
         </div>
         <div class="row">
           <div class="col-12 mb-12">
             <label class="form-label">Observaciones</label>
-            <textarea formControlName="observaciones" class="form-control" cols="30" rows="5"></textarea>
+            <textarea formControlName="observaciones_reserva" class="form-control" cols="30" rows="3"></textarea>
           </div>
 
         </div>

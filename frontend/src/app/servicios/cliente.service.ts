@@ -25,7 +25,7 @@ export class ClienteService {
   agregarCliente(jsonParams: any): Observable<any> {
     const requestOptions = { headers: this.getAutorizacion()};
     const body =  jsonParams ;
-    return this.http.post<ClienteResponse>('http://localhost:8000/api/reservas/cliente' , body,requestOptions);
+    return this.http.post<ClienteResponse>('http://localhost:8000/api/pl/insertClienteReserva' , body,requestOptions);
   }
 
   // // Método para obtener todos los clientes

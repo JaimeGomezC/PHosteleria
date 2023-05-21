@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ReservaService } from 'src/app/servicios/reserva.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import Swal from 'sweetalert2';
 import { MatPaginator } from '@angular/material/paginator';
@@ -26,12 +26,37 @@ export class ReservaClienteComponent implements OnInit {
   constructor(private reserva:ReservaService,
     private router:Router,
     private dialog:MatDialog,
-    private cliente:ClienteService) {
+    private cliente:ClienteService,
+    private routerUrl:ActivatedRoute) {
     this.dataSource=new MatTableDataSource()
    }
 
   ngOnInit(): void {
-    this.cargarDatos();
+    this.routerUrl.params.subscribe(params => {
+      console.log('Datos recibidos');
+      console.log(params);
+      const datos = params;
+      if(params["idTurno"]){
+        this.reserva.getReservaTurno(params["idTurno"]).subscribe(data =>{
+          this.dataSource.data=data;
+          this.loading = false;
+          console.log(data)
+    },
+    (error) => {
+      console.log(error)
+    })
+      }else{
+        this.reserva.getReservas().subscribe(data =>{
+          this.dataSource.data=data;
+          this.loading = false;
+          console.log(data)
+    },
+    (error) => {
+      console.log(error)
+    })
+      }
+    });
+    
   }
 
   ngAfterViewInit() {

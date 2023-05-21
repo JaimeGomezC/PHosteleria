@@ -86,7 +86,7 @@ export class TurnosComponent implements OnInit,AfterViewInit {
     })
   }
   verReserva(id:any):void {
-    this.router.navigate(['ReservaCliente']);
+    this.router.navigate(['ReservaCliente',{idTurno:id}]);
   }
  
   openModal(turno: any) {
