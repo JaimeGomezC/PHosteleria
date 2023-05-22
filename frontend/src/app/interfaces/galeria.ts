@@ -1,8 +1,7 @@
 export interface GaleriaResponse {
     id: number;
-    imagen: string;
     nombre_imagen: string;
-    titulo: string;
+    imagen_url: string;
     descripcion: string;
     visible: boolean;
     id_admin: number;

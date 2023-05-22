@@ -18,7 +18,7 @@ export class GaleriaAdminComponent implements OnInit {
 
   loading = true;
   dataSource:MatTableDataSource<GaleriaResponse>;
-  displayedColumns: string[] = [ 'nombre_imagen','titulo','descripcion','acciones'];
+  displayedColumns: string[] = [ 'nombre_imagen','descripcion','observaciones','acciones'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -63,7 +63,7 @@ export class GaleriaAdminComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
-        const directorio = item.imagen.substring(item.imagen.indexOf("/public/"));
+        const directorio = item.imagen_url.substring(item.imagen_url.indexOf("/public/"));
         this.galeria.deleteImage(directorio).subscribe(
           () => {
             // La imagen se ha eliminado correctamente, ahora puedes eliminar el registro de la base de datos

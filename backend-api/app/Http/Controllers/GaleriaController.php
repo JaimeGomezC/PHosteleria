@@ -49,7 +49,7 @@ class GaleriaController extends Controller
 
     public function update(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), [
+        /*$validator = Validator::make($request->all(), [
             'nombre_imagen' => 'nullable',
             'descripcion' => 'nullable',
             'observaciones' => 'nullable',
@@ -57,7 +57,7 @@ class GaleriaController extends Controller
 
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 400);
-        }
+        }*/
 
         $imagen = Galeria::find($id);
         if (!$imagen) {
@@ -66,7 +66,7 @@ class GaleriaController extends Controller
 
         $imagen->nombre_imagen = $request->input('nombre_imagen');
         $imagen->descripcion = $request->input('descripcion');
-        $imagen->url = $request->input('url');
+        $imagen->imagen_url = $request->input('imagen_url');
         $imagen->observaciones = $request->input('observaciones');
         $imagen->save();
         return response()->json(['result' => 'ok','data' => $imagen], 200);
@@ -122,7 +122,7 @@ class GaleriaController extends Controller
     }
     public function deleteImage(Request $request)
     {
-        $imageName = $request->input('url');
+        $imageName = $request->input('imagen_url');
     
         if (!empty($imageName)) {
             // Obtener la ruta completa de la imagen
@@ -141,7 +141,7 @@ class GaleriaController extends Controller
                 return response()->json(['message' => 'La imagen no existe'.$imagePath], 404);
             }
         } else {
-            return response()->json(['message' => 'Nombre de imagen no proporcionado'], 400);
+            return response()->json(['message' => 'Nombre de imagen no proporcionado' . $imageName], 400);
         }
     }
 

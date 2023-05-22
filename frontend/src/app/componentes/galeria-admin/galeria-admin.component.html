@@ -19,17 +19,18 @@
         <!-- Position Column -->
         <ng-container matColumnDef="nombre_imagen">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
-          <td mat-cell *matCellDef="let element"> {{element.nombre_menu}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.nombre_imagen}} </td>
         </ng-container>
         <!-- Position Column -->
        
-        <ng-container matColumnDef="titulo">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header > Titulo </th>
-          <td mat-cell *matCellDef="let element"> {{element.precio_pax}} </td>
-        </ng-container>
         <ng-container matColumnDef="descripcion">
-          <th mat-header-cell *matHeaderCellDef> Descripcion </th>
-          <td mat-cell *matCellDef="let element"> {{element.observaciones}} </td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header > Descripcion </th>
+          <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+        </ng-container>
+        <ng-container matColumnDef="observaciones">
+          <th mat-header-cell *matHeaderCellDef> Previsualizacion </th>
+          <td mat-cell *matCellDef="let element"> <img src={{element.imagen_url}} class="previsualizacionImagen" alt="">  </td>
+          
         </ng-container>
         <ng-container matColumnDef="acciones">
           <th mat-header-cell *matHeaderCellDef>  </th>

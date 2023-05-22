@@ -14,8 +14,9 @@ class Galeria extends Model
     protected $fillable = [
         'id',
         'nombre_imagen',
-        'titulo',
+        'imagen_url',
         'descripcion',
+        'observaciones',
         'visible',
         'id_admin',
     ];

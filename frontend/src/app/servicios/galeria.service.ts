@@ -87,7 +87,7 @@ export class GaleriaService {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       });
-      const params = new HttpParams().set('foto', fotoName);
+      const params = new HttpParams().set('imagen_url', fotoName);
       const requestOptions = { headers: headers, params: params };
 
     return this.http.delete(url, requestOptions);

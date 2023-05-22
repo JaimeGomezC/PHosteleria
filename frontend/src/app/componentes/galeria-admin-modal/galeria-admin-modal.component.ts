@@ -34,11 +34,11 @@ export class GaleriaAdminModalComponent implements OnInit {
     console.log(data);
     if(data){this.titulo='EDITAR IMAGEN'}else{this.titulo='NUEVA IMAGEN'}
     this.form = this.formBuilder.group({
-      nombre_imagen: [this.data?.nombre_imagen, Validators.required],
+      nombre_imagen: [this.data?.nombre_imagen, /*Validators.required*/],
       id_admin: sessionStorage.getItem('usuario'),
-      titulo: [this.data?.titulo, Validators.required],
-      descripcion: [this.data?.descripcion, Validators.required]/*,
-      observaciones: [this.data?.observaciones]*/
+      imagen_url: [this.data?.imagen_url, /*Validators.required*/],      
+      descripcion: [this.data?.descripcion, /*Validators.required*/],
+      observaciones: [this.data?.observaciones]
     });
   }
 
@@ -62,8 +62,9 @@ export class GaleriaAdminModalComponent implements OnInit {
 
     this.formData.append('nombre_imagen', this.form.value.nombre_imagen);
     this.formData.append('descripcion', this.form.value.desccripcion);
-    //this.formData.append('observaciones', this.form.value.observaciones);
-    this.formData.append('titulo', this.form.value.titulo);
+    this.formData.append('observaciones', this.form.value.observaciones);
+    this.formData.append('imagen_url', this.form.value.imagen_url);
+
     // if (this.selectedFile) {
     //   this.formData.append('imagen_menu',this.selectedFile.name);
     // }
@@ -81,7 +82,7 @@ export class GaleriaAdminModalComponent implements OnInit {
         response=>{
            if(response['url']){
              this.form.patchValue({
-              imagen_menu: response['url']
+              imagen_url: response['url']
             });
             this.grabar();
            }
