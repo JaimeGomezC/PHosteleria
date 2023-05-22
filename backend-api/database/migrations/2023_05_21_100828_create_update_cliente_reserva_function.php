@@ -25,7 +25,7 @@ BEGIN
     BEGIN
         -- Obtener el estado de SQL y el mensaje de error y devolverlo como resultado
         GET DIAGNOSTICS CONDITION 1 @sqlstate = RETURNED_SQLSTATE, @errno = MYSQL_ERRNO, @errmsg = MESSAGE_TEXT;
-        RETURN JSON_OBJECT('error',true', CONCAT('Error: ', @sqlstate, ' - ', @errno, ' - ', @errmsg));
+        RETURN JSON_OBJECT('error', TRUE, 'message', CONCAT('Error: ', @sqlstate, ' - ', @errno, ' - ', @errmsg));
     END;
 
     SELECT n_plazas INTO plazas_totales FROM turnos WHERE id = JSON_EXTRACT(json_params, '$.id_turno');
@@ -39,7 +39,7 @@ BEGIN
     SET plazas_disponibles = plazas_totales - plazas_ocupadas;
 
     IF plazas_ocupadas >= plazas_totales THEN
-        RETURN JSON_OBJECT('error',true', message', CONCAT('Todas las plazas reservadas. Plazas totales: ', plazas_totales, ' plazas_ocupadas: ', plazas_ocupadas, ' plazas_disponibles: ', plazas_disponibles, ' id_turno:', JSON_EXTRACT(json_params, '$.id_turno')));
+        RETURN JSON_OBJECT('error', TRUE, 'message', CONCAT('Todas las plazas reservadas. Plazas totales: ', plazas_totales, ' plazas_ocupadas: ', plazas_ocupadas, ' plazas_disponibles: ', plazas_disponibles, ' id_turno:', JSON_EXTRACT(json_params, '$.id_turno')));
     END IF;
 
     UPDATE clientes
