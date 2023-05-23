@@ -64,21 +64,25 @@
           <mat-radio-button value="cash">Al contado</mat-radio-button>
           <mat-radio-button value="card">Tarjeta</mat-radio-button>
         </mat-radio-group>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+       
       </div>
       <div *ngIf="secondFormGroup.controls['forma_pago'].value === 'card'">
         <!-- Mostrar botón para redsys aquí -->
         <button mat-button color="primary" (click)="redirectToRedsys()">Pagar con Tarjeta</button>
       </div>
+      <div>
+        <button class="custom-button" mat-button matStepperPrevious >Volver</button>
+        <button class="custom-button" mat-button matStepperNext >Siguiente</button>
+      </div>
     </form>
   </mat-step>
   <mat-step>
-    <ng-template matStepLabel>Guarda tu código de reserva</ng-template>
+    <ng-template matStepLabel>Confirma tu código de reserva</ng-template>
     <p>You are now done.</p>
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
+    
+    <div> 
+      <button class="custom-button" mat-button matStepperPrevious >Volver</button>
+      <button class="custom-button" mat-button matStepperNext >Siguiente</button>
     </div>
   </mat-step>
 </mat-stepper>

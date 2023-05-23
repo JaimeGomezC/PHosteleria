@@ -49,7 +49,7 @@ export class ReservaModalComponent implements OnInit {
     n_plazas: ['',[Validators.required,this.nPlazasValidar()]],
     observaciones_cliente: [''],
     idTurno: [this.datosRecibidos ? this.datosRecibidos.idTurno : ''],
-    fecha: [this.datosRecibidos ? this.datosRecibidos.fechaReserva : '', Validators.required],
+    fecha: [this.datosRecibidos ? this.datosRecibidos.fechaReserva : ''],
     forma_pago: [''],
     estado: [''],
     precio_total: [''],
