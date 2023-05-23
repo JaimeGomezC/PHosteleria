@@ -20,6 +20,7 @@ import { ModalLupaComponent } from './componentes/modal-lupa/modal-lupa.componen
 import { CarouselInicioComponent } from './componentes/carousel-inicio/carousel-inicio.component';
 import { GaleriaAdminComponent } from './componentes/galeria-admin/galeria-admin.component';
 import { GaleriaAdminModalComponent } from './componentes/galeria-admin-modal/galeria-admin-modal.component';
+import { CarouselComponent } from './componentes/carousel/carousel.component';
 
 
 
@@ -41,6 +42,7 @@ const routes: Routes = [
 {path:'GaleriaAdmin',component:GaleriaAdminComponent},
 {path:'GaleriaAdminModal',component:GaleriaAdminModalComponent},
 //{path:'CarouselInicio',component:CarouselInicioComponent},
+{path:'Carousel', component:CarouselComponent},
 
 
 {path:'reservaClienteModal',component:ReservaClienteModalComponent},
@@ -59,5 +61,5 @@ export const routingComponents=[ReservasComponent,InicioComponent,
   ReservaModalComponent,ReservaClienteComponent,
   ReservaClienteModalComponent,MenuTurnoComponent,
   MenuTurnoModalComponent,UsuarioComponent,UsuarioModalComponent,
-  ConctatoComponent,CarouselInicioComponent,ModalLupaComponent
+  ConctatoComponent,CarouselInicioComponent,ModalLupaComponent,CarouselComponent
 ]

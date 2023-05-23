@@ -19,6 +19,7 @@ import { GaleriaComponent } from './componentes/galeria/galeria.component';
 import { SharedModule } from './shared/shared.module';
 import { GaleriaAdminComponent } from './componentes/galeria-admin/galeria-admin.component';
 import { GaleriaAdminModalComponent } from './componentes/galeria-admin-modal/galeria-admin-modal.component';
+import { CarouselComponent } from './componentes/carousel/carousel.component';
 
 
 
@@ -35,6 +36,7 @@ import { GaleriaAdminModalComponent } from './componentes/galeria-admin-modal/ga
     GaleriaComponent,
     GaleriaAdminComponent,
     GaleriaAdminModalComponent,
+    CarouselComponent,
     
   ],
   imports: [

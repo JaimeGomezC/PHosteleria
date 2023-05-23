@@ -33,3 +33,8 @@ levantar el servidor: php artisan serve
 Crear migration: php artisan make:migration create_turnos_table
 Ejecutar migration: php artisan migrate
 Crear modelo y controlador: php artisan make:model Turnos -mcr
+
+Carousel (Estoy en ello)
+https://www.youtube.com/watch?v=iE9C3gKGn1Y
+https://codingdiksha.com/angular-image-slider-lightbox-tutorial/
+npm i ng-image-slider --force
