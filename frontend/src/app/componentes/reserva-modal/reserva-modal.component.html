@@ -34,8 +34,8 @@
               </mat-form-field>
               <mat-form-field class="col-6">
                 <mat-label>Número de reservas</mat-label>
-                <input type="number" matInput placeholder="Número de reservas" formControlName="n_plazas" required>
-                <mat-error *ngIf="f.controls['n_plazas'].invalid">Ingresa el número valido de plazas.</mat-error>
+                <input type="number" matInput placeholder="Número de reservas" formControlName="num_comensales" required>
+                <mat-error *ngIf="f.controls['num_comensales'].invalid">Ingresa el número valido de plazas.</mat-error>
               </mat-form-field>
               <mat-form-field class="col-12">
                 <mat-label>Observaciones</mat-label>
@@ -43,7 +43,7 @@
               </mat-form-field>
             </div>
             <div>
-              <button class="custom-button" mat-button matStepperNext (click)="addTurno()">Siguiente</button>
+              <button type="submit" class="custom-button" mat-button matStepperNext (click)="addTurno()">Siguiente</button>
             </div>
           </div>
           <div class="col-5">

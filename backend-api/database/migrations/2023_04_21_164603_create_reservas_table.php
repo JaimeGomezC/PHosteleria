@@ -25,7 +25,7 @@ class CreateReservasTable extends Migration
             $table->decimal('precio_total', 10, 2)->nullable();
             $table->decimal('pagado_base', 10, 2)->nullable();
             $table->decimal('pagado_total', 10, 2)->nullable();
-            $table->string('codigo_verificacion')->unique()/*->charset('utf8mb4')->collation('utf8mb4_0900_ai_ci')*/;
+            $table->string('codigo_verificacion')->unique()->charset('utf8mb4')->collation('utf8mb4_0900_ai_ci');
             $table->text('producto_extra')->nullable();
             $table->timestamps();
             

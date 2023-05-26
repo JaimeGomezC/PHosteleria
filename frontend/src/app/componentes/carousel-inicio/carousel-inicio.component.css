@@ -1,15 +1,34 @@
-.carousel-item{
-    
+.carousel-item {
+  height: 400px; /* Ajusta la altura según tus necesidades */
 }
 
-.carousel-item img{
-    height: 400px;
-    object-fit:none;/*Ajustar esto*/
+.carousel-caption {
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para el caption */
+  color: #fff; /* Color del texto del caption */
+  padding: 10px; /* Espaciado interno del caption */
 }
 
-@media (max-width: 560px){
-    .carousel-item img {
-        height: 300px;
-        object-fit: cover;
-    }
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: #000; /* Color de fondo para los iconos de navegación */
+  color: #fff; /* Color de los iconos de navegación */
+  padding: 10px; /* Espaciado interno de los iconos de navegación */
+}
+
+.carousel-indicators li {
+  background-color: #000; /* Color de fondo para los indicadores */
+  border: none; /* Quita el borde de los indicadores */
+  width: 10px; /* Ancho de los indicadores */
+  height: 10px; /* Alto de los indicadores */
+  margin: 0 4px; /* Espaciado horizontal entre los indicadores */
+}
+
+.carousel-indicators .active {
+  background-color: #fff; /* Color de fondo para el indicador activo */
+}
+
+.carousel-inner img {
+  width: 100%; /* Ajusta el ancho de las imágenes al 100% del contenedor */
+  height: 100%; /* Ajusta la altura de las imágenes al 100% del contenedor */
+  object-fit: cover; /* Ajusta la imagen para llenar el contenedor sin deformarse */
 }

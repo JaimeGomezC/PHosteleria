@@ -14,6 +14,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ReservaModalComponent implements OnInit {
   first=false;
+  public firstFormGroup!: any;
   datosRecibidos?:any;
   maxPlazas?:any;
   plazavalidar?:boolean=false;
@@ -27,37 +28,41 @@ export class ReservaModalComponent implements OnInit {
       this.datosRecibidos=params;
       this.maxPlazas=parseInt(datos['n_plazas']) ;
       console.log(this.maxPlazas);
-      if(params["id_menu"]){
+      if(params["id_menu"]!="null"){
         this.getMenuImg(params["id_menu"]);
       }
-      if (this.maxPlazas && this.firstFormGroup.controls['n_plazas'].value > this.maxPlazas) {
-        // Mostrar error en el HTML
-        const nPlazasControl = this.firstFormGroup.controls['n_plazas'];
-        nPlazasControl.setErrors({ 'exceedsMaxPlazas': true });
-      }
+      
     });
   }
   ngOnInit(): void {
+    this.cagardatos()
   }
-
-  firstFormGroup = this._formBuilder.group({
-    nombre: ['', Validators.required],
-    apellido1: ['', Validators.required],
-    apellido2: ['', Validators.required],
-    email: ['', Validators.required],
-    telefono: ['', Validators.required],
-    n_plazas: ['',[Validators.required,this.nPlazasValidar()]],
-    observaciones_cliente: [''],
-    idTurno: [this.datosRecibidos ? this.datosRecibidos.idTurno : ''],
-    fecha: [this.datosRecibidos ? this.datosRecibidos.fechaReserva : ''],
-    forma_pago: [''],
-    estado: [''],
-    precio_total: [''],
-    pagado_base: [''],
-    pagado_total: [''],
-    codigo_verificacion: [''],
-    producto_extra: [''],
-  });
+  cagardatos(){
+    this.firstFormGroup = this._formBuilder.group({
+      nombre: ['', Validators.required],
+      apellido1: ['', Validators.required],
+      apellido2: ['', Validators.required],
+      email: ['', Validators.required],
+      telefono: ['', Validators.required],
+      num_comensales: ['',[Validators.required,this.nPlazasValidar()]],
+      observaciones_cliente: [''],
+      id_turno: [1],
+      fecha: [this.datosRecibidos ? this.datosRecibidos.fechaReserva : ''],
+      forma_pago: [''],
+      estado: [''],
+      precio_total: [0],
+      pagado_base: [0],
+      pagado_total: [0],
+      codigo_verificacion: [''],
+      producto_extra: [''],
+    });
+    if (this.maxPlazas && this.firstFormGroup.controls['num_comensales'].value > this.maxPlazas) {
+      // Mostrar error en el HTML
+      const nPlazasControl = this.firstFormGroup.controls['num_comensales'];
+      nPlazasControl.setErrors({ 'exceedsMaxPlazas': true });
+    }
+  }
+  
   secondFormGroup = this._formBuilder.group({
     forma_pago: ['', Validators.required],
   });
@@ -97,7 +102,7 @@ export class ReservaModalComponent implements OnInit {
     );
   }
   addTurno() {
-    this.cliente.agregarCliente(this.firstFormGroup.value).subscribe(
+    this.cliente.agregarCliente(this.f.value).subscribe(
       (data) => {
         const obj = JSON.parse(data.result);
         this.snack.open('Reserva añadida !!\n'+obj.message, 'Aceptar', {

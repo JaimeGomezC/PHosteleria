@@ -8,30 +8,36 @@ import { GaleriaService } from 'src/app/servicios/galeria.service';
 })
 
 export class CarouselInicioComponent {
+  images: any[] = [];
+  activeIndex: number = 0;
 
-  items?:any;
   constructor(private galeria:GaleriaService) {
 
    }
 
    ngOnInit(): void {
-    this.cargarDatos();
-
+    this.galeria.getFotosGaleria().subscribe(data =>{
+      console.log(data);
+      if(data.length>0){
+        this.images = data;
+        this.images[0].active = true;
+      } 
+         
+    },
+    (error) => {
+      console.log(error)
+    })
     
  }
 
 
- cargarDatos(){
-  this.galeria.getFotosGaleria().subscribe(data =>{
-    console.log(data);
-    this.items = data;    
-  },
-  (error) => {
-    console.log(error)
-  })
+prevSlide() {
+  this.activeIndex = (this.activeIndex - 1 + this.images.length) % this.images.length;
 }
 
-
+nextSlide() {
+  this.activeIndex = (this.activeIndex + 1) % this.images.length;
+}
 
 }
 
