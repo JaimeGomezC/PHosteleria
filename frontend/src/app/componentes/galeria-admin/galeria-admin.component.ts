@@ -101,7 +101,7 @@ export class GaleriaAdminComponent implements OnInit {
   
   edit_add_Foto(id:any):void {
     const dialogRef = this.dialog.open(GaleriaAdminModalComponent,{
-      width:'40%'
+
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);

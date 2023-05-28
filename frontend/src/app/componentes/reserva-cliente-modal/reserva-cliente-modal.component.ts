@@ -1,26 +1,10 @@
-import {
-  Component,
-  Inject,
-  OnInit,
-  Directive,
-  ElementRef,
-} from '@angular/core';
+import {Component,Inject,OnInit,} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import {
-  FormBuilder,
-  FormGroup,
-  FormControl,
-  Validators,
-} from '@angular/forms';
+import {FormBuilder,FormGroup,FormControl,Validators,} from '@angular/forms';
 import { ClienteService } from 'src/app/servicios/cliente.service';
-import {
-  MAT_DIALOG_DATA,
-  MatDialog,
-  MatDialogRef,
-} from '@angular/material/dialog';
-
+import {MAT_DIALOG_DATA,MatDialog, MatDialogRef,} from '@angular/material/dialog';
+import Swal from 'sweetalert2';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { TurnosResponse } from 'src/app/interfaces/turnosResponse';
 import { TurnosService } from 'src/app/servicios/turnos.service';
 import { ModalLupaComponent } from '../modal-lupa/modal-lupa.component';
 
@@ -110,7 +94,6 @@ export class ReservaClienteModalComponent implements OnInit {
       ],
     });
     this.form.controls['codigo_verificacion'].disable();
-    //this.form.controls['fecha'].disable();
     console.log(this.form.value);
   }
 
@@ -134,18 +117,31 @@ export class ReservaClienteModalComponent implements OnInit {
     this.cliente.agregarCliente(this.form.value).subscribe(
       (data) => {
         const obj = JSON.parse(data.result);
-        this.snack.open('Reserva añadida !!\n'+obj.message, 'Aceptar', {
-          duration: 2000,
-          verticalPosition: 'top',
-          horizontalPosition: 'center',
-        });
-        this.cancelar();
+        console.dir(obj)
+        if(obj.error){
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: obj.message,
+          })
+        }else{
+          Swal.fire(
+            'Reserva realizada!',
+             obj.message,
+            'success'
+          );
+        }
+        
+        // this.cancelar();
       },
       (error) => {
-        this.snack.open(error.message, 'Aceptar', {
-          verticalPosition: 'top',
-          horizontalPosition: 'center',
-        });
+        console.dir(error)
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          footer: '<a href="">Why do I have this issue?</a>'
+        })
       }
     );
   }

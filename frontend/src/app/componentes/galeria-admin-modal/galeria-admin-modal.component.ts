@@ -16,7 +16,6 @@ export class GaleriaAdminModalComponent implements OnInit {
 
   form!: FormGroup;
   formData = new FormData();
-  id?: string;
   loading = false;
   submitted = false;
   titulo?:string;
@@ -34,9 +33,9 @@ export class GaleriaAdminModalComponent implements OnInit {
     console.log(data);
     if(data){this.titulo='EDITAR IMAGEN'}else{this.titulo='NUEVA IMAGEN'}
     this.form = this.formBuilder.group({
-      nombre_imagen: [this.data?.nombre_imagen, /*Validators.required*/],
+      nombre_imagen: [this.data?.nombre_imagen,Validators.required],
       id_admin: sessionStorage.getItem('usuario'),
-      imagen_url: [this.data?.imagen_url, /*Validators.required*/],      
+      imagen_url: [this.data?.imagen_url],      
       descripcion: [this.data?.descripcion, /*Validators.required*/],
       observaciones: [this.data?.observaciones]
     });
