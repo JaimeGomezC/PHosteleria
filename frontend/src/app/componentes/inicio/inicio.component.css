@@ -1,0 +1,111 @@
+.container-portada {
+  position: relative;
+  width: 100%;
+  height: 800px;
+  padding: auto;
+}
+
+.imagen-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.imagen-fondo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  animation: movimiento 20s infinite linear alternate;
+}
+
+@keyframes movimiento {
+  0% {
+      background-position: top left;
+  }
+  25% {
+      background-position: bottom right;
+  }
+  50% {
+      background-position: top right;
+  }
+  75% {
+      background-position: bottom left;
+  }
+  100% {
+      background-position: top left;
+  }
+}
+
+.imagen-actual {
+  z-index: 0;
+}
+
+.imagen-nueva {
+  z-index: 1;
+}
+
+.container-portada.cambiando .imagen-actual {
+  opacity: 0;
+}
+
+.container-portada.cambiando .imagen-nueva {
+  opacity: 1;
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.fade-in {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.capa {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)); /* Agregado */
+}
+
+.detalle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  position: relative;
+  z-index: 5; /* Asegúrate de que esté por encima de las imágenes */
+}
+
+.detalle {
+  color:white;
+  font-weight: 300;
+  position: absolute; /* Cambia a posición absoluta */
+  top: 80%; /* Alinea verticalmente en el centro */
+  left: 50%; /* Alinea horizontalmente en el centro */
+  transform: translate(-50%, -50%); /* Centra el contenido */
+  z-index: 2; /* Establece un z-index más alto para estar por encima de las imágenes */
+}
+
+button {
+  background-color: #014ab3;
+  color: white;
+  padding: 12px 24px;
+  font-size: 18px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #388bb0;
+}

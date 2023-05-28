@@ -1,9 +1,10 @@
 footer {
-    position: relative;
-    background-color: #f5f5f5;
-    padding: 20px;
-    text-align: center;
-  }
+  position: sticky;
+  bottom: 0;
+  padding: 20px;
+  background-color: #f5f5f5;
+  text-align: center;
+}
   /* Estilos para pantallas más pequeñas */
 @media screen and (max-width: 767px) {
     footer {

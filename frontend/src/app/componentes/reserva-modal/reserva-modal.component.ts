@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ClienteService } from 'src/app/servicios/cliente.service';
 import { MenuService } from 'src/app/servicios/menu.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import Swal from 'sweetalert2';
 
 
 
@@ -42,7 +43,7 @@ export class ReservaModalComponent implements OnInit {
       nombre: ['', Validators.required],
       apellido1: ['', Validators.required],
       apellido2: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', [Validators.required,Validators.email]],
       telefono: ['', Validators.required],
       num_comensales: ['',[Validators.required,this.nPlazasValidar()]],
       observaciones_cliente: [''],
@@ -102,22 +103,36 @@ export class ReservaModalComponent implements OnInit {
     );
   }
   addTurno() {
-    this.cliente.agregarCliente(this.f.value).subscribe(
-      (data) => {
-        const obj = JSON.parse(data.result);
-        this.snack.open('Reserva añadida !!\n'+obj.message, 'Aceptar', {
-          duration: 2000,
-          verticalPosition: 'top',
-          horizontalPosition: 'center',
-        });
-      },
-      (error) => {
-        this.snack.open(error.message, 'Aceptar', {
-          verticalPosition: 'top',
-          horizontalPosition: 'center',
-        });
+    Swal.fire({
+      title: 'Va a relaizar la reserva',
+      text: "Va a eliminar una reserva!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.cliente.agregarCliente(this.f.value).subscribe(
+          (data) => {
+            const obj = JSON.parse(data.result);
+            this.snack.open('Reserva añadida !!\n'+obj.message, 'Aceptar', {
+              duration: 2000,
+              verticalPosition: 'top',
+              horizontalPosition: 'center',
+            });
+          },
+          (error) => {
+            this.snack.open(error.message, 'Aceptar', {
+              verticalPosition: 'top',
+              horizontalPosition: 'center',
+            });
+          }
+        );
       }
-    );
+    })
+    
   }
   redirectToRedsys(): void {
     // Aquí puedes agregar la lógica para redirigir al usuario a Redsys

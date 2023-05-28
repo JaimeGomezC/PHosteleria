@@ -1,18 +1,24 @@
-<app-navbar></app-navbar>
+<nav>
+    <app-navbar></app-navbar>
+</nav>
 
-<div class="bootstrap-wrapper" *ngIf="login.isLoggedIn()">
-    <div class="row">
-        <div class="col-md-2">
-            <app-menu></app-menu>
+<body>
+    <div class="content">
+        <div class="bootstrap-wrapper" *ngIf="login.isLoggedIn()">
+            <div class="row">
+                <div class="col-md-2">
+                    <app-menu></app-menu>
+                </div>
+                <div class="col-md-10">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
         </div>
-        <div class="col-md-10">
+        <div class="bootstrap-wrapper" *ngIf="!login.isLoggedIn()">
             <router-outlet></router-outlet>
         </div>
     </div>
-</div>
-<div class="bootstrap-wrapper" *ngIf="!login.isLoggedIn()">
-    <router-outlet></router-outlet>
-</div>
-
-
-<app-footer></app-footer>
+</body>
+<footer class="footer">
+    <app-footer></app-footer>
+</footer>
