@@ -19,7 +19,7 @@ class CreateGaleriaTable extends Migration
             $table->string('imagen_url');
             $table->text('descripcion')->nullable();
             $table->text('observaciones')->nullable();
-            $table->boolean('visible')->default(false);
+            $table->string('tipo');
             $table->unsignedBigInteger('id_admin');
             //$table->foreign('id_admin')->references('id')->on('admins')->onDelete('cascade');
             $table->timestamps();

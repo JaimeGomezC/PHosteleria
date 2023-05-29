@@ -17,22 +17,23 @@ export class InicioComponent implements OnInit {
 
   ngOnInit() {
     this.obtenerImagenesDeAPI();
-    if(this.imagenes.length>1){
-      setInterval(() => {
-        this.cambiarImagen();
-      }, 8000);
-    }else{
-      this.imagenes.push({imagen_url:"../assets/imagenes/fondoCocina.jpg"})
-      this.imagenActual = this.imagenes[0].imagen_url;
-    }
+    
     
   }
 
   obtenerImagenesDeAPI() {
-    this.galeria.getFotosGaleria().subscribe(data => {
+    this.galeria.searchByTipo('inicio').subscribe(data => {
       this.imagenes = data;
       if (this.imagenes.length > 0) {
         this.imagenActual = this.imagenes[this.indexActual].imagen_url;
+      }
+      if(this.imagenes.length>1){
+        setInterval(() => {
+          this.cambiarImagen();
+        }, 8000);
+      }else{
+        this.imagenes.push({imagen_url:"../assets/imagenes/fondoCocina.jpg"})
+        this.imagenActual = this.imagenes[0].imagen_url;
       }
     },
     (error) => {

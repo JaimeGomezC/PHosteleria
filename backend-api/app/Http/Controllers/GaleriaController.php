@@ -24,6 +24,7 @@ class GaleriaController extends Controller
         $galeria->nombre_imagen = $request->input('nombre_imagen');
         $galeria->id_admin = $request->input('id_admin');
         $galeria->descripcion = $request->input('descripcion');
+        $galeria->tipo =  $request->input('tipo');
         $galeria->imagen_url =  $request->input('imagen_url');
         $galeria->observaciones = $request->input('observaciones');
         $galeria->save();
@@ -67,6 +68,7 @@ class GaleriaController extends Controller
         $imagen->nombre_imagen = $request->input('nombre_imagen');
         $imagen->descripcion = $request->input('descripcion');
         $imagen->imagen_url = $request->input('imagen_url');
+        $imagen->tipo =  $request->input('tipo');
         $imagen->observaciones = $request->input('observaciones');
         $imagen->save();
         return response()->json(['result' => 'ok','data' => $imagen], 200);
@@ -77,7 +79,11 @@ class GaleriaController extends Controller
         $galeria->update($request->all());
         return response()->json($galeria);*/
     }
-
+    public function searchByTipo($tipo)
+    {
+        $galeria = Galeria::where('tipo', $tipo)->get();
+        return response()->json($galeria);
+    }
     public function destroy($id)
     {
 

@@ -5,7 +5,7 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form" action="/upload-image" enctype="multipart/form-data">
 
     <div class="row">
-        <div class="col-12 mb-12">
+        <div class="col-10 mb-10">
             <label class="form-label">Nombre de la imagen</label>
             <input formControlName="nombre_imagen" class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f.controls['nombre_imagen'].invalid}" />
@@ -13,6 +13,19 @@
                 <div>Nombre requerido</div>
             </div>
         </div>
+        <div class="col-2 mb-2">
+            <label class="form-label">Tipo de imagen</label>
+            <select formControlName="tipo" class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.controls['tipo'].invalid}">
+              <option value="" [attr.disabled]="true" [attr.selected]="true" >Selecciona un tipo</option>
+              <option value="inicio">Inicio</option>
+              <option value="galeria">Galería</option>
+              <option value="zigzag">Zigzag</option>
+            </select>
+            <div *ngIf="submitted && f.controls['tipo'].invalid" class="invalid-feedback">
+              <div>Tipo requerido</div>
+            </div>
+          </div>
         <div class="col-12 mb-12">
             <label class="form-label">URL imagen</label>
             <div class="input-group">
