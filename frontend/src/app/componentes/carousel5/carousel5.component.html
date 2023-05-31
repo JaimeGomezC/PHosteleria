@@ -1,16 +1,39 @@
-<p>carousel works!</p>
 <section>
     <div class="container">
         <div class="carousel">
-            <input type="radio" name="slides" checked="checked" id="slide-1">
+            <!--<input type="radio" name="slides" checked="checked" id="slide-1">
             <input type="radio" name="slides" id="slide-2">
             <input type="radio" name="slides" id="slide-3">
             <input type="radio" name="slides" id="slide-4">
             <input type="radio" name="slides" id="slide-5">
-            <input type="radio" name="slides" id="slide-6">
+            <input type="radio" name="slides" id="slide-6">-->
+
+            <!--<div *ngFor="let registro of registrosss; let i = index">
+                <input type="radio" name="slides" [class.active]="i < cantidadRegistrosss">-->
+                <!-- Resto de tu contenido -->
+              <!--</div>-->
+
+                <input *ngFor="let image of images; let i = index" type="radio" name="slides" id="slide-{{i+1}}" >
+                <!-- Resto de tu contenido -->
 
 
-            <ul class="carousel__slides">
+                <ul class="carousel__slides">
+                    <li *ngFor="let image of images; let i = index" class="carousel__slide">
+                        <figure>
+                            <div>
+                                <img src="{{image.imagen_url}}" alt="">
+                            </div>
+                            <figcaption>
+                                <h1>{{image.nombre_imagen}}</h1>
+                                <span class="credit">{{image.descripcion}}</span>
+                            </figcaption>
+                        </figure>
+                    </li>
+                </ul>
+
+
+
+            <!--<ul class="carousel__slides">
                 <li class="carousel__slide">
                     <figure>
                         <div>
@@ -77,8 +100,15 @@
                         </figcaption>
                     </figure>
                 </li>
-            </ul>    
+            </ul> -->   
+
             <ul class="carousel__thumbnails">
+                <li *ngFor="let image of images; let i = index">
+                    <label for="slide-{{i+1}}"><img src="{{image.imagen_url}}" alt=""></label>
+                </li>
+            </ul>
+
+            <!--<ul class="carousel__thumbnails">
                 <li>
                     <label for="slide-1"><img src="https://picsum.photos/id/1041/150/150" alt=""></label>
                 </li>
@@ -97,7 +127,7 @@
                 <li>
                     <label for="slide-6"><img src="https://picsum.photos/id/1052/150/150" alt=""></label>
                 </li>
-            </ul>
+            </ul>-->
         </div>
     </div>
 </section>

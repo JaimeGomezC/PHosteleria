@@ -21,6 +21,7 @@ import { CarouselInicioComponent } from './componentes/carousel-inicio/carousel-
 import { GaleriaAdminComponent } from './componentes/galeria-admin/galeria-admin.component';
 import { GaleriaAdminModalComponent } from './componentes/galeria-admin-modal/galeria-admin-modal.component';
 import { CarouselComponent } from './componentes/carousel/carousel.component';
+import { GaleriaComponent } from './componentes/galeria/galeria.component';
 
 
 
@@ -38,6 +39,7 @@ const routes: Routes = [
 {path:'Usuarios',component:UsuarioComponent},
 {path:'UsuarioModal',component:UsuarioModalComponent},
 {path:'Contacto',component:ConctatoComponent},
+{path:'Galeria',component:GaleriaComponent},
 {path:'ModalLupa',component:ModalLupaComponent},
 {path:'GaleriaAdmin',component:GaleriaAdminComponent},
 {path:'GaleriaAdminModal',component:GaleriaAdminModalComponent},
@@ -61,5 +63,5 @@ export const routingComponents=[ReservasComponent,InicioComponent,
   ReservaModalComponent,ReservaClienteComponent,
   ReservaClienteModalComponent,MenuTurnoComponent,
   MenuTurnoModalComponent,UsuarioComponent,UsuarioModalComponent,
-  ConctatoComponent,CarouselInicioComponent,ModalLupaComponent,CarouselComponent
+  ConctatoComponent,GaleriaComponent,CarouselInicioComponent,ModalLupaComponent,CarouselComponent
 ]

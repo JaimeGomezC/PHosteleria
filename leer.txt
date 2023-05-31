@@ -38,3 +38,20 @@ Carousel (Estoy en ello)
 https://www.youtube.com/watch?v=iE9C3gKGn1Y
 https://codingdiksha.com/angular-image-slider-lightbox-tutorial/
 npm i ng-image-slider --force
+
+https://ng-bootstrap.github.io/#/components/carousel/examples
+
+1- npm install bootstrap bootstrap-icons
+
+//HAcer carousel con html y css
+https://freefrontend.com/css-carousels/
+
+https://codepen.io/siiron/pen/QWwLoMy
+
+https://codepen.io/dp_lewis/pen/WNZQzN
+
+29/05/2023
+$ npm install sass --save-dev
+
+
+npm i bootstrap-icons

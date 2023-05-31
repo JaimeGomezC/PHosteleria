@@ -1,0 +1,165 @@
+$numeroRegistros: 300; // Cambia el valor según tus necesidades (Poner un numero alto ya que este es el numero maximo de imagenes que se pueden mostrar)
+@mixin aspect-ratio($width, $height) {
+    position: relative;
+      
+    &:before {
+      display: block;
+      content: "";
+      width: 70%;
+      padding-top: ($height / $width) * 100%;
+    }
+      
+    > img {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          width: 100%;
+          height: 100%;
+    }
+  }
+  
+  // Styling
+  
+  section {
+      background: #F4F4F4;
+      padding: 50px 0;
+  }
+  
+  .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+  }
+  
+  .carousel {
+      display: block;
+      text-align: left;
+      position: relative;
+      margin-bottom: 22px;
+      
+      > input {
+          clip: rect(1px, 1px, 1px, 1px);
+          clip-path: inset(50%);
+          height: 1px;
+          width: 1px;
+          margin: -1px;
+          overflow: hidden;
+          padding: 0;
+          position: absolute;
+          
+          @for $i from 1 through $numeroRegistros {
+            &:nth-of-type(#{$i}):checked ~ .carousel__slides .carousel__slide:first-of-type {
+              margin-left: (-100% * ($i - 1));
+            }
+            &:nth-of-type(#{$i}):checked ~ .carousel__thumbnails li:nth-of-type(#{$i}) {
+                  box-shadow: 0px 0px 0px 5px rgba(0,0,255,0.5);
+            }
+            
+          }
+          
+
+      }
+  }
+  
+  .carousel__slides {
+      position: relative;
+      z-index: 1;
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
+      white-space: nowrap;
+      box-sizing: border-box;
+      display: flex;
+  }
+  
+  .carousel__slide {
+      position: relative;
+      display: block;
+      flex: 1 0 100%;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      transition: all 300ms ease-out;
+      vertical-align: top;
+      box-sizing: border-box;
+      white-space: normal;
+      
+      figure {
+          display: flex;
+          margin: 0;
+      }
+      
+      div {
+          @include aspect-ratio(3, 2);
+          width: 100%;
+      }
+      
+      img {
+          display: block;
+          flex: 1 1 auto;
+          object-fit: cover;
+      }
+      
+      figcaption {
+          align-self: flex-end;
+          padding: 20px 20px 0 20px;
+          flex: 0 0 auto;
+          width: 25%;
+          min-width: 150px;
+      }
+      
+      .credit {
+          margin-top: 1rem;
+          color: rgba(0, 0, 0, 0.5);
+          display: block;        
+      }
+      
+      &.scrollable {
+          overflow-y: scroll;
+      }
+  }
+  
+  .carousel__thumbnails {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      
+      margin: 0 -10px;
+      
+      .carousel__slides + & {
+          margin-top: 20px;
+      }
+      
+      li {        
+          flex: 1 1 auto;
+          max-width: calc((100% / 6) - 20px);  
+          margin: 0 10px;
+          transition: all 300ms ease-in-out;
+      }
+      
+      label {
+          display: block;
+          @include aspect-ratio(1,1);
+          
+                    
+          &:hover,
+          &:focus {
+              cursor: pointer;
+              
+              img {
+                  box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.25);
+                  transition: all 300ms ease-in-out;
+              }
+          }
+      }
+      
+      img {
+          display: block;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+      }
+  }

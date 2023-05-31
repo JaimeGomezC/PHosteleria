@@ -20,6 +20,10 @@ import { SharedModule } from './shared/shared.module';
 import { GaleriaAdminComponent } from './componentes/galeria-admin/galeria-admin.component';
 import { GaleriaAdminModalComponent } from './componentes/galeria-admin-modal/galeria-admin-modal.component';
 import { CarouselComponent } from './componentes/carousel/carousel.component';
+import { Carousel2Component } from './componentes/carousel2/carousel2.component';
+import { Carousel3Component } from './componentes/carousel3/carousel3.component';
+import { Carousel4Component } from './componentes/carousel4/carousel4.component';
+import { Carousel5Component } from './componentes/carousel5/carousel5.component';
 
 
 
@@ -37,6 +41,10 @@ import { CarouselComponent } from './componentes/carousel/carousel.component';
     GaleriaAdminComponent,
     GaleriaAdminModalComponent,
     CarouselComponent,
+    Carousel2Component,
+    Carousel3Component,
+    Carousel4Component,
+    Carousel5Component,
     
   ],
   imports: [
