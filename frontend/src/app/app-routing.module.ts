@@ -43,8 +43,8 @@ const routes: Routes = [
 {path:'ModalLupa',component:ModalLupaComponent},
 {path:'GaleriaAdmin',component:GaleriaAdminComponent},
 {path:'GaleriaAdminModal',component:GaleriaAdminModalComponent},
-//{path:'CarouselInicio',component:CarouselInicioComponent},
-{path:'Carousel', component:CarouselComponent},
+// {path:'CarouselInicio',component:CarouselInicioComponent},
+{path:'Carousel', component:CarouselInicioComponent},
 
 
 {path:'reservaClienteModal',component:ReservaClienteModalComponent},
@@ -63,5 +63,5 @@ export const routingComponents=[ReservasComponent,InicioComponent,
   ReservaModalComponent,ReservaClienteComponent,
   ReservaClienteModalComponent,MenuTurnoComponent,
   MenuTurnoModalComponent,UsuarioComponent,UsuarioModalComponent,
-  ConctatoComponent,GaleriaComponent,CarouselInicioComponent,ModalLupaComponent,CarouselComponent
+  ConctatoComponent,CarouselInicioComponent,ModalLupaComponent,CarouselComponent
 ]

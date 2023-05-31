@@ -24,7 +24,7 @@
         <!-- Position Column -->
         <ng-container matColumnDef="num_comensales">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Nº Comensales </th>
-          <td mat-cell *matCellDef="let element"> {{element.num_comensales}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.num_comensales | number}} </td>
         </ng-container>
         <!-- Weight Column -->
         <ng-container matColumnDef="forma_pago">
@@ -34,7 +34,7 @@
         <!-- Name Column -->
         <ng-container matColumnDef="codigo_verificacion">
           <th mat-header-cell *matHeaderCellDef mat-sort-header > codigo_verificacion </th>
-          <td mat-cell *matCellDef="let element"> {{element.codigo_verificacion}} </td>
+          <td mat-cell *matCellDef="let element" > {{element.codigo_verificacion}} </td>
         </ng-container>
         <!-- Symbol Column -->
         <ng-container matColumnDef="observaciones_reserva">

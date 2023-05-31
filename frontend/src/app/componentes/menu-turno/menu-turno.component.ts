@@ -91,7 +91,7 @@ export class MenuTurnoComponent implements OnInit {
 
  openModal(menu: MenuResponse) {
    const dialogRef = this.dialog.open(MenuTurnoModalComponent, {
-     data: menu
+     data: menu,
    });
    dialogRef.afterClosed().subscribe(result => {
      console.log(`Modal cerrada con resultado: ${result}`);
@@ -101,7 +101,7 @@ export class MenuTurnoComponent implements OnInit {
  
  edit_add_Turno(id:any):void {
    const dialogRef = this.dialog.open(MenuTurnoModalComponent,{
-     width:'40%'
+     
    });
    dialogRef.afterClosed().subscribe(result => {
      console.log(`Dialog result: ${result}`);

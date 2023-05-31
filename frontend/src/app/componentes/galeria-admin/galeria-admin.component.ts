@@ -18,7 +18,7 @@ export class GaleriaAdminComponent implements OnInit {
 
   loading = true;
   dataSource:MatTableDataSource<GaleriaResponse>;
-  displayedColumns: string[] = [ 'nombre_imagen','descripcion','observaciones','acciones'];
+  displayedColumns: string[] = [ 'nombre_imagen','tipo','descripcion','observaciones','acciones'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -101,7 +101,7 @@ export class GaleriaAdminComponent implements OnInit {
   
   edit_add_Foto(id:any):void {
     const dialogRef = this.dialog.open(GaleriaAdminModalComponent,{
-      width:'40%'
+
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);

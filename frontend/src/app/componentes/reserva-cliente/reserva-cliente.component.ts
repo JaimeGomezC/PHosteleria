@@ -107,7 +107,8 @@ export class ReservaClienteComponent implements OnInit {
   openModal(cliente: any) {//NUEVA RESERVA
     
     const dialogRef = this.dialog.open(ReservaClienteModalComponent, {
-      data: cliente
+      data: cliente,
+      width:'80%'
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Modal cerrada con resultado: ${result}`);

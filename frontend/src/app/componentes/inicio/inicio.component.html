@@ -1,5 +1,17 @@
-<p>descargarse logo,imagenes, video de la facebook y ver las necisidades de la página principal</p>
 
-<app-carousel-inicio></app-carousel-inicio>
-
-<img class="img-fluid" src="../assets/imagenes/fondoCocina.jpg" alt="Logo centro La Flota">
+<div class="container-portada">
+    <div class="imagen-container">
+        <div class="imagen-fondo imagen-actual fade-in" [style.background-image]="'url(' + imagenActual + ')'"></div>
+        <div class="capa imagen-actual fade-in"></div>
+    </div>
+    <!-- <div class="imagen-container">
+        <div class="imagen-fondo imagen-actual fade-out" [style.background-image]="'url(' + imagenNueva + ')'"></div>
+        <div class="capa imagen-actual fade-out"></div>
+    </div> -->
+    
+    <div class="detalle">
+        <h1>Escuela de Hostelería y Turismo de Murcia "La Flota"</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit autem laboriosam vero provident magni quisquam illum aliquam architecto aperiam deleniti, quasi eveniet. Tempore similique sint quia, libero necessitatibus distinctio voluptates?</p>
+        <button class="btn btn-primary" routerLink="/reservas">RESERVAR</button>
+    </div>
+</div>

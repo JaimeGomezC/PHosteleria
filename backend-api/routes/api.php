@@ -84,6 +84,7 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::post('galeria',[GaleriaController::class,'store']);
     Route::get('galeria/{imagen}',[GaleriaController::class,'show']);
     Route::put('galeria/{imagen}',[GaleriaController::class,'update']);
+    Route::get('/galeria/search/{tipo}',[GaleriaController::class,'searchByTipo']);
     Route::delete('galeria/deleteImage',[GaleriaController::class,'deleteImage']);
     Route::delete('galeria/{imagen}',[GaleriaController::class,'destroy']);
     Route::post('galeria/upload-foto', [GaleriaController::class, 'uploadImage']);

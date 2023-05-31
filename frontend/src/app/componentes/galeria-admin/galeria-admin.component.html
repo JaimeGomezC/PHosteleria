@@ -19,9 +19,12 @@
         <!-- Position Column -->
         <ng-container matColumnDef="nombre_imagen">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
-          <td mat-cell *matCellDef="let element" class="tituloImagen"> {{element.nombre_imagen | slice:0:20}} </td>
+          <td mat-cell *matCellDef="let element" > {{element.nombre_imagen | slice:0:20}} </td>
         </ng-container>
-        <!-- Position Column -->
+        <ng-container matColumnDef="tipo">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo </th>
+          <td mat-cell *matCellDef="let element" > {{element.tipo}} </td>
+        </ng-container>
        
         <ng-container matColumnDef="descripcion">
           <th mat-header-cell *matHeaderCellDef mat-sort-header > Descripcion </th>

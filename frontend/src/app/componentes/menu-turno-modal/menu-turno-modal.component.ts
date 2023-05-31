@@ -14,13 +14,13 @@ export class MenuTurnoModalComponent implements OnInit {
 
   form!: FormGroup;
   formData = new FormData();
-  id?: string;
   loading = false;
   submitted = false;
   titulo?:string;
   selectedFile: File | null = null;
   imagenURL="";
 
+ 
 
   constructor(
     public formBuilder: FormBuilder,
@@ -32,6 +32,10 @@ export class MenuTurnoModalComponent implements OnInit {
   ) {
     console.log(data);
     if(data){this.titulo='EDITAR MENU'}else{this.titulo='NUEVO MENU'}
+   
+  }
+
+  ngOnInit(): void {
     this.form = this.formBuilder.group({
       nombre_menu: [this.data?.nombre_menu, Validators.required],
       id_admin: sessionStorage.getItem('usuario'),
@@ -39,9 +43,6 @@ export class MenuTurnoModalComponent implements OnInit {
       precio_pax: [this.data?.precio_pax, Validators.required],
       observaciones: [this.data?.observaciones]
     });
-  }
-
-  ngOnInit(): void {
   }
  
   public get f() {

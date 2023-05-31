@@ -1,5 +1,11 @@
 .carousel-item {
-  height: 400px; /* Ajusta la altura según tus necesidades */
+  height: 600px; /* Establece la altura deseada para el contenedor */
+}
+
+.carousel-item img {
+  max-height: 100%; /* Ajusta la altura máxima de la imagen al contenedor */
+  width: auto; /* Permite que el ancho de la imagen se ajuste automáticamente */
+  object-fit: contain; /* Ajusta la imagen para mantener la relación de aspecto */
 }
 
 .carousel-caption {
@@ -25,10 +31,4 @@
 
 .carousel-indicators .active {
   background-color: #fff; /* Color de fondo para el indicador activo */
-}
-
-.carousel-inner img {
-  width: 100%; /* Ajusta el ancho de las imágenes al 100% del contenedor */
-  height: 100%; /* Ajusta la altura de las imágenes al 100% del contenedor */
-  object-fit: cover; /* Ajusta la imagen para llenar el contenedor sin deformarse */
 }

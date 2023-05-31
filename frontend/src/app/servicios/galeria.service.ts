@@ -21,7 +21,10 @@ export class GaleriaService {
     const requestOptions = { headers: headers };
     return this.http.get<GaleriaResponse[]>(this.apiUrl,requestOptions);
   }
-
+  searchByTipo(tipo: string): Observable<any> {
+    const url = `${this.apiUrl}/search/${tipo}`;
+    return this.http.get(url);
+  }
   // Añadir una nueva foto
   añadirFoto(fotoData: GaleriaResponse): Observable<any> {
     let token:any = sessionStorage.getItem('token') 

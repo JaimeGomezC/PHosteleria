@@ -1,0 +1,11 @@
+app-footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 9999; /* Asegúrate de que el z-index sea más alto que otros componentes */
+  }
+  
+  .container {
+    margin-bottom: 80px; /* Ajusta el margen inferior según la altura del footer */
+  }

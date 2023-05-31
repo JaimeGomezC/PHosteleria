@@ -40,18 +40,15 @@ class CreateInsertClienteReservaFunction extends Migration
                 SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'No se encontró el turno especificado';
             END IF;
         
-            SELECT IFNULL(SUM(num_comensales), 0) INTO plazas_ocupadas FROM reservas WHERE id_turno = JSON_EXTRACT(json_params, '$.id_turno');
-        
+            SELECT IFNULL(SUM(num_comensales), 0) INTO plazas_ocupadas FROM reservas WHERE id_turno = JSON_UNQUOTE(JSON_EXTRACT(json_params, '$.id_turno'));
+        	
+            IF  plazas_totales < plazas_ocupadas THEN
+                RETURN JSON_OBJECT('error',TRUE,'message', 'No hay plazas disponibles, se han reservado el máx de plazas');
+            END IF;
             SET plazas_disponibles = plazas_totales - plazas_ocupadas;
         
-            IF plazas_ocupadas >= plazas_totales THEN
-                RETURN JSON_OBJECT('error',true, 'message', CONCAT('Todas las plazas reservadas. Plazas totales: ', plazas_totales, ' plazas_ocupadas: ', plazas_ocupadas, ' plazas_disponibles: ', plazas_disponibles, ' id_turno:', JSON_EXTRACT(json_params, '$.id_turno')));
-            END IF;
-        
-            -- Verificar si el número de plazas disponibles después de restar las comensales de la reserva
-            -- es inferior al 10% de las plazas totales
-            IF plazas_disponibles < (0.1 * plazas_totales) THEN
-                RETURN JSON_OBJECT('error',true, 'message', 'El número de plazas disponibles es insuficiente');
+            IF JSON_UNQUOTE(JSON_EXTRACT(json_params, '$.num_comensales')) > (plazas_disponibles + ROUND(0.1 * plazas_totales)) THEN
+                RETURN JSON_OBJECT('error',TRUE,'message', 'No hay plazas disponibles');
             END IF;
         
             INSERT INTO clientes (nombre, apellido1, apellido2, email, telefono, observaciones_cliente, fecha)
@@ -85,7 +82,7 @@ class CreateInsertClienteReservaFunction extends Migration
                 JSON_UNQUOTE(JSON_EXTRACT(json_params, '$.estado'))
             );
         
-            RETURN JSON_OBJECT('message', CONCAT('Plazas totales: ', plazas_totales, ' plazas_ocupadas: ', plazas_ocupadas, ' plazas_disponibles: ', plazas_disponibles, ' id_turno:', JSON_EXTRACT(json_params, '$.id_turno')));
+            RETURN JSON_OBJECT('message', CONCAT('Plazas totales: ', plazas_totales, ' plazas_ocupadas: ', plazas_ocupadas+JSON_UNQUOTE(JSON_EXTRACT(json_params, '$.num_comensales')), ' plazas_disponibles: ', plazas_disponibles-JSON_UNQUOTE(JSON_EXTRACT(json_params, '$.num_comensales'))));
         END
         ";
         DB::unprepared($sql);
