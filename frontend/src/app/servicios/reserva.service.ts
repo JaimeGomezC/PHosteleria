@@ -47,15 +47,12 @@ export class ReservaService {
 
   // Eliminar una reserva por su ID
   eliminar(id: number): Observable<ReservaResponse> {
-    let token:any = sessionStorage.getItem('token')
-      
-    const headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      });
-
-     const requestOptions = { headers: headers};
+    const requestOptions = { headers: this.getAutorizacion()};
     return this.http.delete<ReservaResponse>(`${this.apiUrl}/${id}`,requestOptions);
   }
 
+  // Eliminar una reserva por su ID
+  calcularPlazasVacantes(idTurno: number): Observable<any> {
+    return this.http.get<ReservaResponse>(`${this.apiUrl}/plazasVacantes/${idTurno}`);
+  }
 }

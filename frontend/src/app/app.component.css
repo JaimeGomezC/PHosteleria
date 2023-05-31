@@ -1,11 +1,41 @@
-app-footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    z-index: 9999; /* Asegúrate de que el z-index sea más alto que otros componentes */
-  }
-  
-  .container {
-    margin-bottom: 80px; /* Ajusta el margen inferior según la altura del footer */
-  }
+.content {
+  min-height: 100vh;
+  padding-bottom: 100px; /* Ajusta el espacio inferior para el footer */
+}
+
+.container {
+  margin-top: 20px; /* Ajusta el margen superior */
+  margin-bottom: 20px; /* Ajusta el margen inferior */
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  background-color: #f8f9fa;
+  text-align: center;
+}
+
+.custom-menu-container {
+  margin-left: 0; /* Elimina el margen izquierdo */
+}
+
+.container {
+  margin-top: 20px; /* Ajusta el margen superior */
+  margin-bottom: 20px; /* Ajusta el margen inferior */
+}
+
+.custom-menu-container {
+  margin-left: 0; /* Elimina el margen izquierdo */
+}
+
+.app-menu {
+  position: sticky;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  background-color: #f8f9fa;
+  padding: 20px;
+}

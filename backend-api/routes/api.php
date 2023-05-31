@@ -36,7 +36,9 @@ Route::group(['middleware' => 'cors'], function(){
     Route::post('logout',[AuthController::class,'logout']);
     Route::post('register',[AuthController::class,'register']);
     Route::get('turnos/publicados',[TurnosController::class,'turnosPublicados']);
-    
+    Route::get('reservas/plazasVacantes/{id_turno}',[ReservaController::class, 'calcularPlazasVacantes']);
+    Route::post('pl/insertClienteReserva', [PlController::class, 'insertClienteReserva']);
+
 });
 
 Route::middleware(['auth:sanctum'])->group(function(){
@@ -75,7 +77,6 @@ Route::middleware(['auth:sanctum'])->group(function(){
     // LLAMADAS A FUNCIONES PL
     Route::post('pl/actualizar-cliente-reserva', [PlController::class, 'actualizarClienteReserva']);
     Route::get('obtenerPlazasLibres', [PlController::class, 'obtenerPlazasLibres']);
-    Route::post('pl/insertClienteReserva', [PlController::class, 'insertClienteReserva']);
     Route::post('pl/updateClienteReserva', [PlController::class, 'updateClienteReserva']);
     
 });

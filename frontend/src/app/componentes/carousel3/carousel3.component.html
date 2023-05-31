@@ -1,4 +1,4 @@
-<p>carousel3 works!</p>
+<!-- <p>carousel3 works!</p>
 <div class="slider">
 	<div class="slide-track">
 		<div class="slide">
@@ -44,4 +44,16 @@
 			<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/7.png" height="100" width="250" alt="" />
 		</div>
 	</div>
-</div>
+</div> -->
+
+
+<div class="carousel-container">
+	<div class="carousel">
+	  <h1>Carousel con API</h1>
+	  <div class="slide-track">
+		<div class="slide" *ngFor="let imageURL of images">
+		  <img [src]="imageURL.imagen_url" height="600" width="800" alt="imagenes" />
+		</div>
+	  </div>
+	</div>
+  </div>
