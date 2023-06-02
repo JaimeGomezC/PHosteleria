@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Turnos;
+use App\Models\Reserva;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -20,14 +21,33 @@ class TurnosController extends Controller
     }
     public function turnosPublicados()
     {
-        $turnos = Turnos::where('visible', 1)->get();
+    $turnos = Turnos::where('visible', 1)->get();
+    $response = [];
 
-        return response()->json([
-            'result' => 'ok',
-            'data' => $turnos
-        ], 200);
+    foreach ($turnos as $turno) {
+        $plazasTotales = $turno->n_plazas;
+        $plazasOcupadas = Reserva::where('id_turno', $turno->id)->where('estado', '<>', 'Anulado')->sum('num_comensales');
+
+        if ($plazasTotales == $plazasOcupadas) {
+            $disponibilidad = 'red';
+        } 
+        elseif ($plazasTotales < $plazasOcupadas) {
+            $disponibilidad = 'red';
+        } else {
+            $disponibilidad = 'green';
+        }
+
+        $response[] = [
+            'data' => $turno,
+            'plazasTotales' => $plazasTotales,
+            'plazasOcupadas' => $plazasOcupadas,
+            'disponibilidad' => $disponibilidad
+        ];
     }
 
+    return response()->json(['result' => 'ok', 'data' => $response], 200);
+    }
+   
     /**
      * Show the form for creating a new resource.
      *

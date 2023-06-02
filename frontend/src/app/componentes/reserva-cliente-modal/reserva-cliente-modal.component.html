@@ -101,8 +101,13 @@
             </div>
             <div class="col-2 mb-2">
               <label class="form-label">estado</label>
-              <input formControlName="estado" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f.value.estado==''}" />
+              <select formControlName="estado" class="form-select" [ngClass]="{ 'is-invalid': submitted && f.controls['estado'].errors }">
+                <option value="" disabled selected>Seleccionar forma de pago</option>
+                <option value="Pendiente de pago">Pendiente de pago</option>
+                <option value="Pagado">Pagado</option>
+                <option value="Anulada">Anulada</option>
+                <option value="Finalizada">Finalizada</option>
+              </select>
               <div *ngIf="submitted" class="invalid-feedback">
                 <div>precio_total requerido</div>
               </div>

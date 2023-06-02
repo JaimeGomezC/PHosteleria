@@ -17,6 +17,9 @@ button {
  }
 
  .modal-content {
-   max-height: 400px; /* Establece la altura máxima del contenido del modal */
-   overflow-y: auto; /* Agrega una barra de desplazamiento vertical si el contenido excede la altura máxima */
+   max-height: 600px; /* Establece la altura máxima del contenido del modal */
  }
+ img{
+   width: 200px;
+   height: 200px;
+}

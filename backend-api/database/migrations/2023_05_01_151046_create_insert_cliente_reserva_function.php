@@ -40,7 +40,7 @@ class CreateInsertClienteReservaFunction extends Migration
                 SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'No se encontró el turno especificado';
             END IF;
         
-            SELECT IFNULL(SUM(num_comensales), 0) INTO plazas_ocupadas FROM reservas WHERE id_turno = JSON_UNQUOTE(JSON_EXTRACT(json_params, '$.id_turno'));
+            SELECT IFNULL(SUM(num_comensales), 0) INTO plazas_ocupadas FROM reservas WHERE id_turno = JSON_UNQUOTE(JSON_EXTRACT(json_params, '$.id_turno')) AND estado <> 'Anulado';
         	
             IF  plazas_totales < plazas_ocupadas THEN
                 RETURN JSON_OBJECT('error',TRUE,'message', 'No hay plazas disponibles, se han reservado el máx de plazas');
