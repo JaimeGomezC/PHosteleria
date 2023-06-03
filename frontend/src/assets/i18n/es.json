@@ -4,5 +4,11 @@
     "galeria": "Galería",
     "contacto": "Contacto",
     "bienvenido": "¡Bienvenido!",
-    "conctato":"conctato"
+    "conctato":"Conctato",
+    "direccion":"DIRECCION",
+    "llamanos":"LLAMANOS",
+    "calendario":"CALENDARIO DE RESERVAS",
+    "reservaCompleta":"Reserva completa",
+    "disponible":"Disponible",
+    "importante":"IMPORTANTE: En caso de que alguno de los comensales tuviera alguna intolerancia o alergia alimentaria, por favor, indíquelo en el apartado Observaciones. De no indicarlo con antelación y tratarse de un menú fijo no aseguramos la posibilidad de adaptación."
   }

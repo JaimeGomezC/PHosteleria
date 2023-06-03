@@ -6,6 +6,8 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin, { DateClickArg, EventDragStopArg } from '@fullcalendar/interaction';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import { TurnosService } from 'src/app/servicios/turnos.service';
+import { TraductorService } from 'src/app/servicios/traductor.service';
+
 
 @Component({
   selector: 'app-reservas',
@@ -18,8 +20,8 @@ export class ReservasComponent implements OnInit {
     password:new FormControl('',Validators.required)
   })
   datosTurnos?:TurnosService;
-  constructor(private turno:TurnosService, private router:Router) {   }
-  
+  constructor(private turno:TurnosService, private router:Router, private traductorService: TraductorService) {   }
+  public tr=this.traductorService;
   calendarOptions?: CalendarOptions;
   eventsModel: any;
   @ViewChild('fullcalendar') fullcalendar?: FullCalendarComponent;

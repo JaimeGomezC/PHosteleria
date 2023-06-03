@@ -1,8 +1,14 @@
 {
-    "inicio": "Home",
-    "reservas": "Bookings",
-    "galeria": "Gallery",
-    "contacto": "Contact",
-    "bienvenido": "Welcome!",
-    "conctato":"contact"
-  }
+  "inicio": "Home",
+  "reservas": "Reservations",
+  "galeria": "Gallery",
+  "contacto": "Contact",
+  "bienvenido": "Welcome!",
+  "conctato": "Contact",
+  "direccion": "ADDRESS",
+  "llamanos": "CALL US",
+  "calendario": "RESERVATION CALENDAR",
+  "reservaCompleta": "Complete Reservation",
+  "disponible": "Available",
+  "importante": "IMPORTANT: In case any of the diners has any food intolerance or allergy, please indicate it in the Observations section. If not indicated in advance and it is a fixed menu, we do not guarantee the possibility of adaptation."
+}

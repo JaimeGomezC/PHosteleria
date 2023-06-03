@@ -10,35 +10,38 @@
     <div class="collapse navbar-collapse" id="navbarMenu2">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link active" href="#">{{ tr.translate('inicio', tr.idiomaActual) }}</a>
+          <a class="nav-link active" href="#">{{ tr.translate('inicio', tr.idiomaSeleccionado) }}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/reservas">{{ tr.translate('reservas', tr.idiomaActual) }}</a>
+          <a class="nav-link" routerLink="/reservas">{{ tr.translate('reservas', tr.idiomaSeleccionado) }}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="Galeria">{{ tr.translate('galeria', tr.idiomaActual) }}</a>
+          <a class="nav-link" href="Galeria">{{ tr.translate('galeria', tr.idiomaSeleccionado) }}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="Contacto">{{ tr.translate('contacto', tr.idiomaActual) }}</a>
+          <a class="nav-link" href="Contacto">{{ tr.translate('contacto', tr.idiomaSeleccionado) }}</a>
         </li>
       </ul>
       <form class="d-flex">
-        <div class="dropdown">
-         
-          
-          <ul class="dropdown" aria-labelledby="languageDropdown">
-            <select class="form-select" (change)="cambiarIdioma($event.srcElement)">
-              <option value="es">Español</option>
-              <option value="en">English</option>
-              <!-- Agrega otras opciones de idioma según tus necesidades -->
-            </select>
-           
+        <div class="language">
+          <div class="language-selected" (click)="cambiarIdioma('es')">
+            <img [src]="rutaImagen" alt="Idioma" class="language-flag">
+            <span>Español</span>
+          </div>
+          <ul>
+            <li><span href="#" class="es" (click)="cambiarIdioma('es')">Español</span></li>
+            <li><span href="#" class="en" (click)="cambiarIdioma('en')">English</span></li>
+            <li><span href="#" class="pt" (click)="cambiarIdioma('pt')">Português</span></li>
+            <li><span href="#" class="fr" (click)="cambiarIdioma('fr')">Frances</span></li>
           </ul>
         </div>
+
         <a class="btn btn-primary" href="login" role="button" style="background-color: #3b5998;">
           <i class="bi bi-person-circle"></i> Login
         </a>
       </form>
     </div>
   </div>
+
+  
 </nav>

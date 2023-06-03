@@ -32,7 +32,7 @@ export class UsuarioComponent implements OnInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-    this.dataSource.paginator._intl.itemsPerPageLabel="Turnos por página"
+    // this.dataSource.paginator._intl.itemsPerPageLabel="Turnos por página"
     this.dataSource.sort = this.sort;
   }
 

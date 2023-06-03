@@ -1,17 +1,21 @@
 
 <div class="container">
     <div class="row">
-      <h1>CALENDARIO DE RESERVAS</h1>
+      <h1>{{ tr.translate('calendario', tr.idiomaSeleccionado) }}</h1>
       <div class="col-md-12">
         <!-- Agregamos la leyenda -->
         <div class="legend">
-          <div class="legend-item" *ngFor="let item of legendItems">
-            <div class="legend-color" [style.background-color]="item.color"></div>
-            <div class="legend-text">{{ item.text }}</div>
+          <div class="legend-item">
+            <div class="legend-color" style="background-color: #ff0000;"></div>
+            <div class="legend-text">{{ tr.translate('reservaCompleta', tr.idiomaSeleccionado) }}</div>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color" style="background-color: green;"></div>
+            <div class="legend-text">{{ tr.translate('disponible', tr.idiomaSeleccionado) }}</div>
           </div>
         </div>
         
-        <p>IMPORTANTE: En caso de que alguno de los comensales tuviera alguna intolerancia o alergia alimentaria, por favor, indíquelo en el apartado Observaciones. De no indicarlo con antelación y tratarse de un menú fijo no aseguramos la posibilidad de adaptación</p>
+        <p>{{ tr.translate('importante', tr.idiomaSeleccionado) }}</p>
       </div>
       <div class="col-md-10 calendar-container">
         <full-calendar *ngIf="calendarOptions" #fullcalendar [options]="calendarOptions">

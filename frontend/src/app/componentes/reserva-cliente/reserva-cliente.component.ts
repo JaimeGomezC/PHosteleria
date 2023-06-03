@@ -61,7 +61,7 @@ export class ReservaClienteComponent implements OnInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-    this.dataSource.paginator._intl.itemsPerPageLabel="Reservas por página"
+    this.paginator._intl.itemsPerPageLabel="Reservas por página"
     this.dataSource.sort = this.sort;
   }
 

@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  formSubmit(form: Login) {
+  formSubmit(form: any) {
     if (form.email.trim() == '' || form.email == null) {
       // Swal.fire('Introduzca el email','Email','success');
       this.snack.open('El email es requerido !!', 'Aceptar', {
