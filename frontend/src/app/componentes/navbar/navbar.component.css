@@ -1,70 +1,59 @@
 .navbar-nav .nav-link:hover {
-    background-color: #f2f2f2;
-  }
-  
-  .navbar-nav .nav-link:active {
-    background-color: #c0c0c0;
-  }
-  .navbar-nav .nav-link:hover {
-    color: blue;
-  }
-  
-  .navbar-nav .nav-link:active {
-    color: red;
-  }
- 
-/* 
-  select#idioma option[value="es"]   { background-image:url(../../../assets/imagenes/en-flag.png);   }
-  select {
-    height: 50px;
-    line-height: 50px;
-    font-size: 12pt;
-   } */
-
-   
-.language {
-    position: relative;
-    width: 120px;
-    margin-left: 40px;
-    font-weight: bold;
+  background-color: #f2f2f2;
 }
+
+.navbar-nav .nav-link:active {
+  background-color: #c0c0c0;
+}
+
+.navbar-nav .nav-link:hover {
+  color: blue;
+}
+
+.navbar-nav .nav-link:active {
+  color: red;
+}
+
+.language {
+  position: relative;
+  width: 120px;
+  margin-left: 40px;
+  font-weight: bold;
+  z-index: 999; /* Establecer un valor alto para z-index */
+}
+
 .language-selected {
   display: flex;
   align-items: center;
-  color: #fff;
+  color: black;
   cursor: pointer;
 }
-/* .language-selected::before{
-  content: '';
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  background-image:url(../../../assets/imagenes/es-flag.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  margin-right: 10px;
 
-} */
-.language ul{
-  position:absolute;
+.language ul {
+  position: absolute;
   width: 140px;
   background-color: #fff;
   border: 1px solid #f8f8f8;
   padding-top: 10px;
   display: none;
+  z-index: 999; /* Establecer un valor alto para z-index */
 }
-.language ul li{
+
+.language ul li {
   list-style: none;
 }
-.language ul li span{
+
+.language ul li span {
   display: block;
   color: #c0c0c0;
   padding-top: 5px 10px;
 }
-.language ul li:hover{
+
+.language ul li:hover {
   background-color: #f8f8f8;
 }
-.language ul li span::before{
+
+.language ul li span::before {
   content: '';
   display: inline-block;
   width: 25px;
@@ -74,22 +63,27 @@
   vertical-align: middle;
   margin-right: 10px;
 }
-span.en::before{
+
+span.en::before {
   background-image: url(../../../assets/imagenes/en-flag.png);
 }
-span.es::before{
+
+span.es::before {
   background-image: url(../../../assets/imagenes/es-flag.png);
 }
-span.fr::before{
+
+span.fr::before {
   background-image: url(../../../assets/imagenes/fr-flag.png);
 }
-span.pt::before{
+
+span.pt::before {
   background-image: url(../../../assets/imagenes/pt-flag.png);
 }
 
-.language:hover ul{
+.language:hover ul {
   display: block;
 }
+
 .language-flag {
   width: 430px;
   height: 40px;

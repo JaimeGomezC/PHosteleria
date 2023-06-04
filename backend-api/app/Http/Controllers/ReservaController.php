@@ -7,6 +7,8 @@ use App\Models\Turnos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ReservaExport;
 
 class ReservaController extends Controller
 {
@@ -123,6 +125,10 @@ class ReservaController extends Controller
         'message' => $resultado,
         'resultado' => 'Reserva y cliente añadido'
         ]);
+    }
+    public function exportReservas()
+    {
+        return Excel::download(new ReservaExport, 'turnos.xlsx');
     }
    
 }

@@ -18,7 +18,7 @@ import { ClienteService } from 'src/app/servicios/cliente.service';
 export class ReservaClienteComponent implements OnInit {
   loading = true;
   dataSource:MatTableDataSource<ReservaResponse>;
-  displayedColumns: string[] = [ 'fecha','num_comensales','forma_pago','codigo_verificacion','observaciones_reserva','acciones'];
+  displayedColumns: string[] = [ 'fecha','num_comensales','estado','forma_pago','codigo_verificacion','observaciones_reserva','acciones'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -136,4 +136,7 @@ export class ReservaClienteComponent implements OnInit {
     
   }
 
+  exportarReservas() {
+    this.reserva.exportReservas();
+  }
 }

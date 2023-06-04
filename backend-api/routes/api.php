@@ -6,6 +6,7 @@ use App\Http\Controllers\TurnosController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\ExportController;
 use App\Models\Menu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +39,7 @@ Route::group(['middleware' => 'cors'], function(){
     Route::get('turnos/publicados',[TurnosController::class,'turnosPublicados']);
     Route::get('reservas/plazasVacantes/{id_turno}',[ReservaController::class, 'calcularPlazasVacantes']);
     Route::post('pl/insertClienteReserva', [PlController::class, 'insertClienteReserva']);
+    
 
 });
 
@@ -52,6 +54,8 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::get('turnos/{turno}',[TurnosController::class,'show']);
     Route::put('turnos/{turno}',[TurnosController::class,'update']);
     Route::delete('turnos/{turno}',[TurnosController::class,'destroy']);
+    Route::get('turnos2',[TurnosController::class,'exportTurnos']);
+
     // TABLA CLIENTES
     Route::get('clientes', [ClienteController::class, 'index']);
     Route::get('clientes/{cliente}', [ClienteController::class, 'show']);
@@ -65,6 +69,8 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::put('reservas/{reserva}', [ReservaController::class, 'update']);
     Route::delete('reservas/{reserva}', [ReservaController::class, 'destroy']);
     Route::get('reservas/turno/{id_turno}',[ReservaController::class, 'getByTurno']);
+    Route::get('reservasExport',[ReservaController::class,'exportReservas']);
+
     // TABLA MENU
     Route::get('menus', [MenuController::class, 'index']);
     Route::post('menus', [MenuController::class, 'store']);
@@ -80,7 +86,6 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::post('pl/updateClienteReserva', [PlController::class, 'updateClienteReserva']);
     
 });
-
     Route::get('galeria', [GaleriaController::class, 'index']);
     Route::post('galeria',[GaleriaController::class,'store']);
     Route::get('galeria/{imagen}',[GaleriaController::class,'show']);

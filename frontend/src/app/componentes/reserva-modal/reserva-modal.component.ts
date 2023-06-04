@@ -142,22 +142,22 @@ export class ReservaModalComponent implements OnInit {
         console.dir(this.stepper)
         this.stepper.next();
         this.isEditable=false;
-        // this.cliente.agregarCliente(this.f.value).subscribe(
-        //   (data) => {
-        //     const obj = JSON.parse(data.result);
-        //     this.snack.open('Reserva añadida !!\n'+obj.message, 'Aceptar', {
-        //       duration: 2000,
-        //       verticalPosition: 'top',
-        //       horizontalPosition: 'center',
-        //     });
-        //   },
-        //   (error) => {
-        //     this.snack.open(error.message, 'Aceptar', {
-        //       verticalPosition: 'top',
-        //       horizontalPosition: 'center',
-        //     });
-        //   }
-        // );
+        this.cliente.agregarCliente(this.f.value).subscribe(
+          (data) => {
+            const obj = JSON.parse(data.result);
+            this.snack.open('Reserva añadida !!\n'+obj.message, 'Aceptar', {
+              duration: 2000,
+              verticalPosition: 'top',
+              horizontalPosition: 'center',
+            });
+          },
+          (error) => {
+            this.snack.open(error.message, 'Aceptar', {
+              verticalPosition: 'top',
+              horizontalPosition: 'center',
+            });
+          }
+        );
       }
     })
     

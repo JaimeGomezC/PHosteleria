@@ -6,6 +6,8 @@ use App\Models\Turnos;
 use App\Models\Reserva;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\TurnosExport;
 
 class TurnosController extends Controller
 {
@@ -120,4 +122,32 @@ class TurnosController extends Controller
         return response()->json(['message' => 'Menu deleted successfully']);
        
     }
+    // public function exportTurnos()
+    // {
+    //     $data = [
+    //         [
+    //             'fecha' => '2023-06-01',
+    //             'turno' => 'Mañana',
+    //             'n_plazas' => 10,
+    //             'observaciones' => 'Sin observaciones',
+    //         ],
+    //         [
+    //             'fecha' => '2023-06-02',
+    //             'turno' => 'Tarde',
+    //             'n_plazas' => 8,
+    //             'observaciones' => 'Turno tarde',
+    //         ],
+    //         // Agrega más datos de prueba si es necesario
+    //     ];
+    
+    // return Excel::download(function ($excel) use ($data) {
+    //     $excel->sheet('Turnos', function ($sheet) use ($data) {
+    //         $sheet->fromArray($data);
+    //     });
+    // }, 'turnos.xlsx');
+    // }
+    public function exportTurnos()
+{
+    return Excel::download(new TurnosExport, 'turnos.xlsx');
+}
 }

@@ -63,12 +63,12 @@
       <div class="radio-group-vertical">
         <mat-radio-group class="payment-options" formControlName="forma_pago">
           <mat-radio-button value="contado">Al contado</mat-radio-button>
-          <mat-radio-button value="Tarjeta">Tarjeta
-          <div *ngIf="secondFormGroup.controls['forma_pago'].value === 'Tarjeta'" class="card-payment">
-            <!-- Mostrar botón para redsys aquí -->
-            <button mat-button color="primary" (click)="redirectToRedsys()">Pagar con Tarjeta</button>
-          </div></mat-radio-button>
+          <mat-radio-button value="Tarjeta">Tarjeta</mat-radio-button>
         </mat-radio-group>
+        <div *ngIf="secondFormGroup.controls['forma_pago'].value === 'Tarjeta'" class="card-payment">
+          <!-- Mostrar botón para redsys aquí -->
+          <button mat-button color="primary" (click)="redirectToRedsys()">Pagar con Tarjeta</button>
+        </div>
       </div>
       
       <div>

@@ -116,4 +116,8 @@ export class TurnosComponent implements OnInit,AfterViewInit {
       console.log(error)
     });
   }
+
+  exportarTurnos() {
+    this.turno.exportTurnos();
+  }
 }

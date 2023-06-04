@@ -1,29 +1,29 @@
 <div class="container-fluid">
-    <nav>
-      <app-navbar></app-navbar>
-    </nav>
-    
-    <div class="content">
-      <div class="row">
-        <div class="col-lg-2 custom-menu-container">
-          <app-menu></app-menu>
-        </div>
-        <div class="col-lg-10">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-12" *ngIf="login.isLoggedIn()">
-                <router-outlet></router-outlet>
-              </div>
-              <div class="col-lg-12" *ngIf="!login.isLoggedIn()">
-                <router-outlet></router-outlet>
-              </div>
+  <nav>
+    <app-navbar></app-navbar>
+  </nav>
+  
+  <div class="content">
+    <div class="row">
+      <div class="col-lg-2 custom-menu-container" *ngIf="login.isLoggedIn()">
+        <app-menu></app-menu>
+      </div>
+      <div class="col-lg-10" *ngIf="login.isLoggedIn()">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <router-outlet></router-outlet>
             </div>
           </div>
         </div>
       </div>
+      <div class="col-lg-12" *ngIf="!login.isLoggedIn()">
+        <router-outlet></router-outlet>
+      </div>
     </div>
-    
-    <footer class="footer">
-      <app-footer></app-footer>
-    </footer>
   </div>
+  
+  <footer class="footer">
+    <app-footer></app-footer>
+  </footer>
+</div>

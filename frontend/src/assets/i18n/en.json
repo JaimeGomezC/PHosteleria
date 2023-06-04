@@ -5,10 +5,16 @@
   "contacto": "Contact",
   "bienvenido": "Welcome!",
   "conctato": "Contact",
-  "direccion": "ADDRESS",
-  "llamanos": "CALL US",
-  "calendario": "RESERVATION CALENDAR",
-  "reservaCompleta": "Complete Reservation",
+  "direccion": "Address",
+  "llamanos": "Call us",
+  "calendario": "Reservation Calendar",
+  "reservaCompleta": "Reservation Complete",
   "disponible": "Available",
-  "importante": "IMPORTANT: In case any of the diners has any food intolerance or allergy, please indicate it in the Observations section. If not indicated in advance and it is a fixed menu, we do not guarantee the possibility of adaptation."
+  "importante": "IMPORTANT: If any of the diners have any food intolerance or allergy, please indicate it when selecting the date, in the Observations section. If not indicated in advance and it is a fixed menu, we cannot guarantee the possibility of adaptation.",
+  "siguenos": "Follow us",
+  "horario": "Restaurant service hours: from 14:00 to 17:00*\n* As it is a training space and due to the students' schedule, the entrance of diners to the practice restaurant will be at most at 15:00 and the closing time will be at 17:00.\n\nSome service days may vary depending on the students' training calendar.",
+  "menu": "Reservations can be made for tables of up to 8 diners.\nThe menus are published on this page approximately one week in advance and may undergo slight changes due to last-minute adjustments.",
+  "inicio_titulo": "Murcia School of Hospitality and Tourism 'La Flota'",
+  "inicio_saludo": "The mission of the school is to guarantee our students excellent theoretical and practical training in the hospitality and food sector, both in management aspects and in product elaboration, all focused on achieving the employment of our students.",
+  "inicio_reserva": "RESERVE"
 }
