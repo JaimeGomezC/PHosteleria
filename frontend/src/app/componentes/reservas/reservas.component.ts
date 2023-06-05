@@ -6,6 +6,8 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin, { DateClickArg, EventDragStopArg } from '@fullcalendar/interaction';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import { TurnosService } from 'src/app/servicios/turnos.service';
+import { TraductorService } from 'src/app/servicios/traductor.service';
+
 
 @Component({
   selector: 'app-reservas',
@@ -18,23 +20,28 @@ export class ReservasComponent implements OnInit {
     password:new FormControl('',Validators.required)
   })
   datosTurnos?:TurnosService;
-  constructor(private turno:TurnosService, private router:Router) {   }
-  
+  constructor(private turno:TurnosService, private router:Router, private traductorService: TraductorService) {   }
+  public tr=this.traductorService;
   calendarOptions?: CalendarOptions;
   eventsModel: any;
   @ViewChild('fullcalendar') fullcalendar?: FullCalendarComponent;
+  legendItems: any[]=[];
 
   ngOnInit() {
     // need for load calendar bundle first
-    
+    this.legendItems = [
+      { color: 'red', text: 'Reserva completa' },
+      { color: 'green', text: 'Disponible' }
+    ];
     this.cargarDatos();
     
   }
   cargarDatos(){
     this.turno.getTurnosPublicados().subscribe(data =>{
           console.log('data.result')
-          console.log(data)
-          let turno=data.data.map((e: any) => ({ idTurno:e.id,title:e.turno, start: e.fecha, allDay: true, n_plazas:e.n_plazas,fechaReserva:e.fecha,id_menu:e.id_menu }));
+          console.log(data.data)
+          console.log(data.data.disponibilidad)
+          let turno=data.data.map((e: any) => ({ idTurno:e.data.id,title:e.data.turno, start: e.data.fecha, allDay: true, n_plazas:e.data.n_plazas,fechaReserva:e.data.fecha,id_menu:e.data.id_menu,color:e.disponibilidad }));
           console.log(turno)
           forwardRef(() => Calendar);
           this.calendarOptions = {
@@ -45,7 +52,7 @@ export class ReservasComponent implements OnInit {
             locale: "es",
             firstDay: 1,
             initialEvents: turno,
-            eventColor: '#0a53be',
+            eventColor: turno.color,
             // customButtons: {
             //   myCustomButton: {
             //     text: 'Evento!',

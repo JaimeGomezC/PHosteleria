@@ -10,6 +10,8 @@ import { GaleriaService } from 'src/app/servicios/galeria.service';
 export class CarouselInicioComponent {
   images: any[] = [];
   activeIndex: number = 0;
+  selectedImage: string | null = null;
+
 
   constructor(private galeria:GaleriaService) {
 
@@ -37,6 +39,14 @@ prevSlide() {
 
 nextSlide() {
   this.activeIndex = (this.activeIndex + 1) % this.images.length;
+}
+
+showImage(imageURL: string): void {
+  this.selectedImage = imageURL;
+}
+
+closeModal(): void {
+  this.selectedImage = null;
 }
 
 }

@@ -1,13 +1,38 @@
 
 <div class="container">
     <div class="row">
-        <h1>CALENDARIO DE RESERVAS</h1>
-        <div class="col-md-12 calendar-container"> <!-- Agregamos la clase "calendar-container" -->
-            <full-calendar *ngIf="calendarOptions" #fullcalendar [options]="calendarOptions">
-                <ng-template #eventContent let-arg>
-                    <b>{{ arg.event.title }}</b> - {{ arg.event.start.getDate() }}
-                </ng-template>
-            </full-calendar>
+      <h1>{{ tr.translate('calendario', tr.idiomaSeleccionado) }}</h1>
+      <div class="col-md-6">
+        <!-- Agregamos la leyenda -->
+        <div class="legend">
+          <div class="legend-item">
+            <div class="legend-color" style="background-color: #ff0000;"></div>
+            <div class="legend-text">{{ tr.translate('reservaCompleta', tr.idiomaSeleccionado) }}</div>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color" style="background-color: green;"></div>
+            <div class="legend-text">{{ tr.translate('disponible', tr.idiomaSeleccionado) }}</div>
+          </div>
         </div>
+        <div style="white-space: pre-line;">
+          <p>{{ tr.translate('importante', tr.idiomaSeleccionado) }}</p>
+          <p>{{ tr.translate('horario', tr.idiomaSeleccionado) }}</p>
+          <p>{{ tr.translate('menu', tr.idiomaSeleccionado) }}</p>
+          <a href="https://www.cctmurcia.es/es/menus">cctmurcia.es</a><br>
+          <a href="https://www.esh.es/restaurante-azajal/">www.esh.es/restaurante-azajal</a><br>
+          <a href="https://www.ehib.es/escuela-de-hoteleria/oferta-academica.asp">La Escuela de Hostelería de les Illes Balears</a><br>
+          <a href="https://hosteleriayturismocartagena.es/">https://hosteleriayturismocartagena.es/</a><br>
+          <a href="https://fpvesta.com/">https://fpvesta.com/</a><br>
+          <a href="https://escueladehosteleriaitm.com/">https://escueladehosteleriaitm.com/</a><br>
+        </div>
+        
+      </div>
+      <div class="col-md-6 ">
+        <full-calendar *ngIf="calendarOptions" #fullcalendar [options]="calendarOptions">
+          <ng-template #eventContent let-arg>
+            <b>{{ arg.event.title }}</b> - {{ arg.event.start.getDate() }}
+          </ng-template>
+        </full-calendar>
+      </div>
     </div>
-</div>
+  </div>

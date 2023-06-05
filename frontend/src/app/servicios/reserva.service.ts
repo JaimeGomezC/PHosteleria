@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ReservaResponse } from '../interfaces/reserva';
+import { saveAs } from 'file-saver'
 
 @Injectable({
   providedIn: 'root'
@@ -47,15 +48,27 @@ export class ReservaService {
 
   // Eliminar una reserva por su ID
   eliminar(id: number): Observable<ReservaResponse> {
-    let token:any = sessionStorage.getItem('token')
-      
-    const headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      });
-
-     const requestOptions = { headers: headers};
+    const requestOptions = { headers: this.getAutorizacion()};
     return this.http.delete<ReservaResponse>(`${this.apiUrl}/${id}`,requestOptions);
   }
 
+  // Eliminar una reserva por su ID
+  calcularPlazasVacantes(idTurno: number): Observable<any> {
+    return this.http.get<ReservaResponse>(`${this.apiUrl}/plazasVacantes/${idTurno}`);
+  }
+  exportReservas() {
+    const requestOptions = {
+      headers: this.getAutorizacion(),
+      responseType: 'blob' as 'json' // Especifica el tipo de respuesta como blob
+    };
+    
+    return this.http.get<any>(`${this.apiUrl}Export`, requestOptions).subscribe(response => {
+      if (response instanceof Blob) {
+        saveAs(response, 'reservas.xlsx');
+      } else {
+        const blob = new Blob([response], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        saveAs(blob, 'reservas.xlsx');
+      }
+    });
+  }
 }

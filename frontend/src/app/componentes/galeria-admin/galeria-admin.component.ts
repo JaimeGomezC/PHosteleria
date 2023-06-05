@@ -32,7 +32,7 @@ export class GaleriaAdminComponent implements OnInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-    this.dataSource.paginator._intl.itemsPerPageLabel="Fotos por página"
+    // this.dataSource.paginator._intl.itemsPerPageLabel="Fotos por página"
     this.dataSource.sort = this.sort;
   }
  

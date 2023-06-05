@@ -1,0 +1,20 @@
+{
+    "inicio": "Inicio",
+    "reservas": "Reservas",
+    "galeria": "Galería",
+    "contacto": "Contacto",
+    "bienvenido": "¡Bienvenido!",
+    "conctato":"Conctato",
+    "direccion":"DIRECCION",
+    "llamanos":"LLAMANOS",
+    "calendario":"CALENDARIO DE RESERVAS",
+    "reservaCompleta":"Reserva completa",
+    "disponible":"Disponible",
+    "importante":"IMPORTANTE: En caso de que alguno de los comensales tuviera alguna intolerancia o alergia alimentaria, por favor, indíquelo al seleccionar la fecha, en el apartado Observaciones. De no indicarlo con antelación y tratarse de un menú fijo no aseguramos la posibilidad de adaptación.",
+    "siguenos":"SIGUENOS",
+    "horario":"Horario de servicio del comedor: de 14 a 17 horas*\n* Al tratarse de un espacio de formación y debido a la jornada de los alumnos, la entrada de comensales al comedor de prácticas será como máximo a las 15 h y el cierre será a las 17 h.\n\nAlgunos días de servicio pueden variar en función del calendario formativo de los alumnos.",
+    "menu":"Las reservas podrán efectuarse en mesas de máximo 8 comensales.\nLos menús se publican en esta página con aproximadamente una semana de antelación y podrán sufrir ligeros cambios por ajustes de última hora.",
+    "inicio_titulo":"Escuela de Hostelería y Turismo de Murcia 'La Flota'",
+    "inicio_saludo":"La misión de la escuela es la de garantizar a nuestro alumnado una formación excelente teórica y práctica en el sector de la hostelería y alimentación, tanto en los aspectos de gestión como de elaboración de productos y todo ello enfocado a conseguir la inserción laboral de nuestros alumnos.",
+    "inicio_reserva":"RESERVA"
+  }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GaleriaService } from 'src/app/servicios/galeria.service';
+import { TraductorService } from 'src/app/servicios/traductor.service';
+
 
 @Component({
   selector: 'app-inicio',
@@ -13,7 +15,8 @@ export class InicioComponent implements OnInit {
   indexActual: number = 0; // Índice de la imagen actual
   indexNueva: number = 1; // Índice de la nueva imagen
 
-  constructor(private galeria:GaleriaService) { }
+  constructor(private galeria:GaleriaService,private traductorService: TraductorService) { }
+  public tr=this.traductorService;
 
   ngOnInit() {
     this.obtenerImagenesDeAPI();

@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Reserva;
+use App\Models\Turnos;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ReservaExport;
 
 class ReservaController extends Controller
 {
@@ -95,7 +98,19 @@ class ReservaController extends Controller
         $reserva->delete();
         return response()->json(null, 204);
     }
+    public function calcularPlazasVacantes($turnoId)
+    {
+        $turno = Turnos::find($turnoId);
+        if (!$turno) {
+            return response()->json(['error' => 'El turno no existe'], 404);
+        }
 
+        $plazasTotales = $turno->n_plazas;
+        $plazasOcupadas = Reserva::where('id_turno', $turnoId)->sum('num_comensales');
+        $plazasVacantes = $plazasTotales - $plazasOcupadas;
+
+        return response()->json(['plazas_vacantes' => $plazasVacantes]);
+    }
     public function insertClienteReserva(Request $request)
     {
         // Obtener el parámetro JSON del request
@@ -110,6 +125,10 @@ class ReservaController extends Controller
         'message' => $resultado,
         'resultado' => 'Reserva y cliente añadido'
         ]);
-        
     }
+    public function exportReservas()
+    {
+        return Excel::download(new ReservaExport, 'turnos.xlsx');
+    }
+   
 }

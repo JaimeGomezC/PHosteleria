@@ -1,0 +1,20 @@
+{
+  "inicio": "Accueil",
+  "reservas": "Réservations",
+  "galeria": "Galerie",
+  "contacto": "Contact",
+  "bienvenido": "Bienvenue !",
+  "conctato": "Contact",
+  "direccion": "Adresse",
+  "llamanos": "Appelez-nous",
+  "calendario": "Calendrier des réservations",
+  "reservaCompleta": "Réservation complète",
+  "disponible": "Disponible",
+  "importante": "IMPORTANT : Si l'un des convives a une intolérance alimentaire ou une allergie, veuillez l'indiquer lors de la sélection de la date, dans la section Observations. Si cela n'est pas indiqué à l'avance et qu'il s'agit d'un menu fixe, nous ne pouvons pas garantir la possibilité d'adaptation.",
+  "siguenos": "Suivez-nous",
+  "horario": "Horaires du restaurant : de 14h à 17h*\n* Comme il s'agit d'un espace de formation et en raison de l'horaire des étudiants, l'entrée des convives au restaurant d'application se fera au plus tard à 15h et la fermeture se fera à 17h.\n\nCertains jours de service peuvent varier en fonction du calendrier de formation des étudiants.",
+  "menu": "Les réservations peuvent être effectuées pour des tables jusqu'à 8 convives.\nLes menus sont publiés sur cette page environ une semaine à l'avance et peuvent subir de légères modifications en raison d'ajustements de dernière minute.",
+  "inicio_titulo": "École de restauration et de tourisme de Murcie 'La Flota'",
+  "inicio_saludo": "La mission de l'école est de garantir à nos étudiants une formation théorique et pratique excellente dans le secteur de l'hôtellerie et de l'alimentation, tant dans les aspects de gestion que dans l'élaboration de produits, le tout axé sur l'insertion professionnelle de nos étudiants.",
+  "inicio_reserva": "RÉSERVER"
+}

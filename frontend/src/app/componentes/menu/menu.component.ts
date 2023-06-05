@@ -24,7 +24,7 @@ export class MenuComponent implements OnInit {
           if (data.result=='ok') {
             sessionStorage.removeItem('token');
             this.router.navigate(['']);
-            Swal.fire('Sesión', data.message, 'success');
+            Swal.fire('Sesión','Cerrada', 'success');
           }else{
             Swal.fire('Sesión', data.message, 'warning');
           }
