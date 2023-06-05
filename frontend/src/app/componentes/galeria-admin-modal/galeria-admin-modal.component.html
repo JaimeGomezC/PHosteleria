@@ -30,7 +30,7 @@
             <label class="form-label">URL imagen</label>
             <div class="input-group">
                 <input type="text"  formControlName="imagen_url" class="form-control"
-                    [ngClass]="{ 'is-invalid': submitted && f.controls['imagen_url'].invalid }" [attr.disabled]="true"/>
+                    [ngClass]="{ 'is-invalid': submitted && f.controls['imagen_url'].invalid }" [class.disabled]="true"/>
             </div>
         </div>
         <div class="col-12 mb-12">

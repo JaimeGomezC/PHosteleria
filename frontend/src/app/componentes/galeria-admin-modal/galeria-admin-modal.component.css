@@ -2,3 +2,9 @@
     max-height: 400px; /* Establece la altura máxima del contenido del modal */
     overflow-y: auto; /* Agrega una barra de desplazamiento vertical si el contenido excede la altura máxima */
   }
+
+  .disabled {
+    pointer-events: none;
+    background-color: #D3D3D3;
+    opacity: 0.5;
+  }

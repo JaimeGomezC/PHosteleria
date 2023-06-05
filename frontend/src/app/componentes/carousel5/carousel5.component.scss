@@ -6,7 +6,7 @@ $numeroRegistros: 300; // Cambia el valor según tus necesidades (Poner un numer
       display: block;
       content: "";
       width: 70%;
-      padding-top: ($height / $width) * 100%;
+      padding-top: calc($height / $width) * 100%;
     }
       
     > img {

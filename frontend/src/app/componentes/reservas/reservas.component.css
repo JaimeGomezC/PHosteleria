@@ -60,3 +60,11 @@ p{
 .legend-text {
   font-size: 14px;
 }
+
+.calendario{
+  cursor: default;
+}
+
+.calendario_fechaSeleccionable{
+  cursor: pointer;
+}
