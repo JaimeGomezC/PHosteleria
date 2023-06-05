@@ -59,8 +59,9 @@ npm i bootstrap-icons
 04/06/2023
 npm install angular-web-storage 
 
-
-
-composer require maatwebsite/excel
+05/06/2023
+Si trabajas con XAMPP C:\xampp\php\php.ini
+    descomentar extension=zip y extension=gd
 composer update
+//viene el composer.json se debe instalar con el update --composer require maatwebsite/excel
 npm install file-saver

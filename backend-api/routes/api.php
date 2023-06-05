@@ -7,6 +7,7 @@ use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ExportController;
+use App\Http\Controllers\CorreoController;
 use App\Models\Menu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,7 +33,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::group(['middleware' => 'cors'], function(){
-    
     Route::post('login',[AuthController::class,'login']);
     Route::post('logout',[AuthController::class,'logout']);
     Route::post('register',[AuthController::class,'register']);
@@ -86,6 +86,7 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::post('pl/updateClienteReserva', [PlController::class, 'updateClienteReserva']);
     
 });
+    Route::post('correo', [CorreoController::class, 'enviarCorreo']);
     Route::get('galeria', [GaleriaController::class, 'index']);
     Route::post('galeria',[GaleriaController::class,'store']);
     Route::get('galeria/{imagen}',[GaleriaController::class,'show']);
@@ -95,6 +96,8 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::delete('galeria/{imagen}',[GaleriaController::class,'destroy']);
     Route::post('galeria/upload-foto', [GaleriaController::class, 'uploadImage']);
     
+
+
 
 
 
