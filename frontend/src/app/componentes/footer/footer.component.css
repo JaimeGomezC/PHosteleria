@@ -8,18 +8,22 @@ footer {
   /* Estilos para pantallas más pequeñas */
 @media screen and (max-width: 767px) {
     footer {
-      position: relative;
+      position: fixed;
       padding: 10px;
       font-size: 14px;
+      width: 100%;
+      left: 0;
     }
   }
   
   /* Estilos para pantallas medianas */
   @media screen and (min-width: 768px) and (max-width: 991px) {
     footer {
-      position: relative;
+      position: fixed;
       padding: 15px;
       font-size: 16px;
+      width: 100%;
+      left: 0;
     }
   }
   
