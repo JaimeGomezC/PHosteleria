@@ -3,11 +3,17 @@
       <span>Administradores</span>
     </mat-toolbar>
     <mat-card>
-      <mat-form-field>
-        <mat-label>Filtro</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
+    <div class="row align-items-center">
+      <div class="col-9">
+        <mat-form-field class="col-12">
+          <mat-label>Filtro</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
       </mat-form-field>
-      <button mat-raised-button color="primary" (click)="edit_add_Turno('')">Nuevo Administrador</button>
+    </div>
+    <div class="col-3">
+      <button mat-raised-button color="primary" class="col-12" (click)="edit_add_Turno('')">Nuevo Administrador</button>
+    </div>
+  </div>
       <div *ngIf="loading" class="d-flex justify-content-center">
         <div class="spinner-border text-primary" role="status">
           </div>

@@ -11,10 +11,11 @@
     </mat-form-field>
     </div>
   <div class="col-3">
-    <button mat-raised-button color="primary" class="col-12" (click)="edit_add_Turno('')">Nuevo Turno</button>
+    <button mat-raised-button color="primary" class="col-12 añadir" (click)="edit_add_Turno('')">Nuevo Turno</button>
+    <button mat-raised-button color="primary" class="col-12 bg-success" (click)="exportarTurnos()">Exportar Turnos</button>
   </div>
 </div>
-    <button mat-raised-button color="primary" (click)="exportarTurnos()">Exportar Turnos</button>
+    
 
     <div *ngIf="loading" class="d-flex justify-content-center">
       <div class="spinner-border text-primary" role="status">
