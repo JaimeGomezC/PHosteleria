@@ -7,6 +7,8 @@ import interactionPlugin, { DateClickArg, EventDragStopArg } from '@fullcalendar
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import { TurnosService } from 'src/app/servicios/turnos.service';
 import { TraductorService } from 'src/app/servicios/traductor.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 
 @Component({
@@ -20,7 +22,7 @@ export class ReservasComponent implements OnInit {
     password:new FormControl('',Validators.required)
   })
   datosTurnos?:TurnosService;
-  constructor(private turno:TurnosService, private router:Router, private traductorService: TraductorService) {   }
+  constructor(private turno:TurnosService, private router:Router, private traductorService: TraductorService,private snack: MatSnackBar) {   }
   public tr=this.traductorService;
   calendarOptions?: CalendarOptions;
   eventsModel: any;
@@ -79,8 +81,15 @@ export class ReservasComponent implements OnInit {
   handleEventClick(arg: EventClickArg) {
     let data=arg.event.extendedProps;
     console.log("data")
-    console.log(data)
-    this.router.navigate(['ReservasModal',data]);
+      if (arg.event.backgroundColor !== 'red') {
+        this.router.navigate(['ReservasModal', data]);
+      }else{
+        this.snack.open('Turno completo !!','', {
+          duration: 2000,
+          verticalPosition: 'top',
+          horizontalPosition: 'center',
+        });
+      }
   }
   // handleDateClick(arg: DateClickArg) {
   //   console.log('estoy aqui');

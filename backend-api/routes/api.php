@@ -68,7 +68,7 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::get('reservas/{reserva}', [ReservaController::class, 'show']);
     Route::put('reservas/{reserva}', [ReservaController::class, 'update']);
     Route::delete('reservas/{reserva}', [ReservaController::class, 'destroy']);
-    Route::get('reservas/turno/{id_turno}',[ReservaController::class, 'getByTurno']);
+    Route::get('reservas/turno/{reserva}',[ReservaController::class, 'getByTurno']);
     Route::get('reservasExport',[ReservaController::class,'exportReservas']);
 
     // TABLA MENU
