@@ -89,7 +89,7 @@
   color:white;
   font-weight: 300;
   position: absolute; /* Cambia a posición absoluta */
-  top: 80%; /* Alinea verticalmente en el centro */
+  top: 55%; /* Alinea verticalmente en el centro */
   left: 50%; /* Alinea horizontalmente en el centro */
   transform: translate(-50%, -50%); /* Centra el contenido */
   z-index: 2; /* Establece un z-index más alto para estar por encima de las imágenes */

@@ -2,6 +2,8 @@
 <mat-toolbar color="primary">
     <span class="fill-remaining-space">{{titulo}}</span>
 </mat-toolbar>
+<mat-card>
+    <mat-card-content>
 <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form" action="/upload-image" enctype="multipart/form-data">
 
     <div class="row">
@@ -33,11 +35,11 @@
                     [ngClass]="{ 'is-invalid': submitted && f.controls['imagen_url'].invalid }" [class.disabled]="true"/>
             </div>
         </div>
-        <div class="col-12 mb-12">
+        <div class="col-10 mb-10">
             <label class="form-label">Descripcion</label>
             <div class="input-group">
-                <input type="text" step="any" formControlName="descripcion" class="form-control" min="0"
-                    [ngClass]="{ 'is-invalid': submitted && f.controls['descripcion'].invalid }" />
+                <textarea step="any" formControlName="descripcion" class="form-control" min="0"
+                    [ngClass]="{ 'is-invalid': submitted && f.controls['descripcion'].invalid }" cols="30" rows="5"></textarea>
                 <!--<div class="input-group-prepend">
                     <span class="input-group-text">&#8364;</span>
                 </div>-->
@@ -68,3 +70,5 @@
         <button class="btn btn-secondary" type="reset" (click)="cancelar()">Cancelar</button>
     </div>
 </form>
+</mat-card-content>
+</mat-card>
