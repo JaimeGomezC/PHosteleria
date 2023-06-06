@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, forwardRef } from '@angular/core';
+import { Component, OnInit, ViewChild, Renderer2,forwardRef } from '@angular/core';
 import { FormControl,FormGroup,Validators,FormControlName} from '@angular/forms';
 import { Router } from '@angular/router';
 import { CalendarOptions,Calendar, EventClickArg, DateSelectArg,EventApi } from '@fullcalendar/core'; // useful for typechecking
@@ -7,6 +7,8 @@ import interactionPlugin, { DateClickArg, EventDragStopArg } from '@fullcalendar
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import { TurnosService } from 'src/app/servicios/turnos.service';
 import { TraductorService } from 'src/app/servicios/traductor.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 
 @Component({
@@ -20,7 +22,8 @@ export class ReservasComponent implements OnInit {
     password:new FormControl('',Validators.required)
   })
   datosTurnos?:TurnosService;
-  constructor(private turno:TurnosService, private router:Router, private traductorService: TraductorService) {   }
+  constructor(private turno:TurnosService, private router:Router, private traductorService: TraductorService,private snack: MatSnackBar,
+    private renderer: Renderer2) {   }
   public tr=this.traductorService;
   calendarOptions?: CalendarOptions;
   eventsModel: any;
@@ -36,6 +39,30 @@ export class ReservasComponent implements OnInit {
     this.cargarDatos();
     
   }
+  toggleRenunciaSection() {
+    const renunciaSection = document.getElementById('renuncia-section');
+    if (renunciaSection) {
+      const displayStyle = renunciaSection.style.display;
+      if (displayStyle === 'none') {
+        this.renderer.setStyle(renunciaSection, 'display', 'block');
+      } else {
+        this.renderer.setStyle(renunciaSection, 'display', 'none');
+      }
+    }
+  }
+
+  toggleRecordarSection() {
+    const recordarSection = document.getElementById('recordar-section');
+    if (recordarSection) {
+      const displayStyle = recordarSection.style.display;
+      if (displayStyle === 'none') {
+        this.renderer.setStyle(recordarSection, 'display', 'block');
+      } else {
+        this.renderer.setStyle(recordarSection, 'display', 'none');
+      }
+    }
+  }
+
   cargarDatos(){
     this.turno.getTurnosPublicados().subscribe(data =>{
           console.log('data.result')
@@ -79,8 +106,15 @@ export class ReservasComponent implements OnInit {
   handleEventClick(arg: EventClickArg) {
     let data=arg.event.extendedProps;
     console.log("data")
-    console.log(data)
-    this.router.navigate(['ReservasModal',data]);
+      if (arg.event.backgroundColor !== 'red') {
+        this.router.navigate(['ReservasModal', data]);
+      }else{
+        this.snack.open('Turno completo !!','', {
+          duration: 2000,
+          verticalPosition: 'top',
+          horizontalPosition: 'center',
+        });
+      }
   }
   // handleDateClick(arg: DateClickArg) {
   //   console.log('estoy aqui');

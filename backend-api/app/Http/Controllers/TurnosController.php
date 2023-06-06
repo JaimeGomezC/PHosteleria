@@ -30,12 +30,10 @@ class TurnosController extends Controller
         $plazasTotales = $turno->n_plazas;
         $plazasOcupadas = Reserva::where('id_turno', $turno->id)->where('estado', '<>', 'Anulado')->sum('num_comensales');
 
-        if ($plazasTotales == $plazasOcupadas) {
+        if ($plazasTotales <= $plazasOcupadas) {
             $disponibilidad = 'red';
         } 
-        elseif ($plazasTotales < $plazasOcupadas) {
-            $disponibilidad = 'red';
-        } else {
+         else {
             $disponibilidad = 'green';
         }
 
@@ -109,43 +107,19 @@ class TurnosController extends Controller
         return response()->json($data);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Turnos  $turnos
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Turnos $id)
+   
+    public function destroy(Turnos $turno)
     {
-        $menu = Turnos::find($id);
-        $menu->delete();
-        return response()->json(['message' => 'Menu deleted successfully']);
+
+    
+        if (!$turno) {
+            return response()->json(['error' => 'turno not found'], 404);
+        }
+        $turno->delete();
+        return response()->json(['message' => 'Turno deleted'], 200);
        
     }
-    // public function exportTurnos()
-    // {
-    //     $data = [
-    //         [
-    //             'fecha' => '2023-06-01',
-    //             'turno' => 'Mañana',
-    //             'n_plazas' => 10,
-    //             'observaciones' => 'Sin observaciones',
-    //         ],
-    //         [
-    //             'fecha' => '2023-06-02',
-    //             'turno' => 'Tarde',
-    //             'n_plazas' => 8,
-    //             'observaciones' => 'Turno tarde',
-    //         ],
-    //         // Agrega más datos de prueba si es necesario
-    //     ];
     
-    // return Excel::download(function ($excel) use ($data) {
-    //     $excel->sheet('Turnos', function ($sheet) use ($data) {
-    //         $sheet->fromArray($data);
-    //     });
-    // }, 'turnos.xlsx');
-    // }
     public function exportTurnos()
 {
     return Excel::download(new TurnosExport, 'turnos.xlsx');
