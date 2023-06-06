@@ -125,7 +125,7 @@ export class GaleriaAdminModalComponent implements OnInit {
   addEditar(item: any): void {
     this.galeria.actualizarFoto(item.id,this.form.value).subscribe(
       (data) => {
-        this.snack.open('Turno modificado !!', 'Aceptar', {
+        this.snack.open('Imagen modificado !!', 'Aceptar', {
           duration: 2000,
           verticalPosition: 'top',
           horizontalPosition: 'center',

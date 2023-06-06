@@ -49,10 +49,10 @@
             </div>-->
         </div>
         <div class="col-9 mb-9">
-            <label class="form-label">Imagen menú </label>
+            <label class="form-label">Imagen</label>
             <input type="file" class="form-control" (change)="onFileSelected($event)" >
             <div *ngIf="submitted && f.controls['imagen_url'].invalid" class="invalid-feedback">
-                <div>Imagen menú requerida</div>
+                <div>Imagen requerida</div>
             </div>
         </div>
         <div class="row">
@@ -61,7 +61,7 @@
                 <textarea formControlName="observaciones" class="form-control" cols="30" rows="5"></textarea>
             </div>
             <div class="col-6 mb-6">
-                <img  src="{{f.value.imagen_url}}" width="200" height="200" alt="Imagen del menu no encontrada">
+                <img  src="{{f.value.imagen_url}}" width="200" height="200" alt="Imagen no encontrada">
             </div>
         </div>
     </div>
