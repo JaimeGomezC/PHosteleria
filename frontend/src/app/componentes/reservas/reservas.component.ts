@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, forwardRef } from '@angular/core';
+import { Component, OnInit, ViewChild, Renderer2,forwardRef } from '@angular/core';
 import { FormControl,FormGroup,Validators,FormControlName} from '@angular/forms';
 import { Router } from '@angular/router';
 import { CalendarOptions,Calendar, EventClickArg, DateSelectArg,EventApi } from '@fullcalendar/core'; // useful for typechecking
@@ -22,7 +22,8 @@ export class ReservasComponent implements OnInit {
     password:new FormControl('',Validators.required)
   })
   datosTurnos?:TurnosService;
-  constructor(private turno:TurnosService, private router:Router, private traductorService: TraductorService,private snack: MatSnackBar) {   }
+  constructor(private turno:TurnosService, private router:Router, private traductorService: TraductorService,private snack: MatSnackBar,
+    private renderer: Renderer2) {   }
   public tr=this.traductorService;
   calendarOptions?: CalendarOptions;
   eventsModel: any;
@@ -38,6 +39,30 @@ export class ReservasComponent implements OnInit {
     this.cargarDatos();
     
   }
+  toggleRenunciaSection() {
+    const renunciaSection = document.getElementById('renuncia-section');
+    if (renunciaSection) {
+      const displayStyle = renunciaSection.style.display;
+      if (displayStyle === 'none') {
+        this.renderer.setStyle(renunciaSection, 'display', 'block');
+      } else {
+        this.renderer.setStyle(renunciaSection, 'display', 'none');
+      }
+    }
+  }
+
+  toggleRecordarSection() {
+    const recordarSection = document.getElementById('recordar-section');
+    if (recordarSection) {
+      const displayStyle = recordarSection.style.display;
+      if (displayStyle === 'none') {
+        this.renderer.setStyle(recordarSection, 'display', 'block');
+      } else {
+        this.renderer.setStyle(recordarSection, 'display', 'none');
+      }
+    }
+  }
+
   cargarDatos(){
     this.turno.getTurnosPublicados().subscribe(data =>{
           console.log('data.result')

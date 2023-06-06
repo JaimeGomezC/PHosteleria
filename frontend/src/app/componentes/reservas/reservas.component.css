@@ -68,3 +68,26 @@ p{
 .calendario_fechaSeleccionable{
   cursor: pointer;
 }
+
+#renuncia-link,
+#recordar-link {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+#renuncia-section {
+  margin-top: 10px;
+  display: none;
+}
+
+.anular {
+  margin-top: 20px;
+}
+
+.anular p {
+  margin-bottom: 5px;
+}
+.anular p:first-child {
+  font-weight: bold;
+}

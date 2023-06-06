@@ -25,6 +25,27 @@
           <a href="https://fpvesta.com/">https://fpvesta.com/</a><br>
           <a href="https://escueladehosteleriaitm.com/">https://escueladehosteleriaitm.com/</a><br>
         </div>
+        <div class="anular">
+          <p>Anular reserva:</p>
+          <p>Si desea anular la reserva, pulse <span id="renuncia-link" (click)="toggleRenunciaSection()">aquí</span></p>
+          <div id="renuncia-section" style="display: none;">
+            <div class="input-group">
+              <input type="text" placeholder="Código de reserva" class="form-control form-control-sm">
+              <div class="input-group-append">
+                <button class="btn btn-primary btn-sm">Anular Reserva</button>
+              </div>
+            </div>
+          </div>
+          <p>Si no recuerda el número de reserva, pulse <span id="recordar-link" (click)="toggleRecordarSection()">aquí</span> introduzca su correo y recibirá un nuevo correo</p>
+          <div id="recordar-section" style="display: none;">
+            <div class="input-group">
+              <input type="text" placeholder="Correo electrónico" class="form-control form-control-sm">
+              <div class="input-group-append">
+                <button class="btn btn-primary btn-sm">Recordar</button>
+              </div>
+            </div>
+          </div>
+        </div>
         
       </div>
       <div class="col-md-6 calendario">
