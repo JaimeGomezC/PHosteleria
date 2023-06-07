@@ -16,5 +16,15 @@
     "menu":"Las reservas podrán efectuarse en mesas de máximo 8 comensales.\nLos menús se publican en esta página con aproximadamente una semana de antelación y podrán sufrir ligeros cambios por ajustes de última hora.",
     "inicio_titulo":"Escuela de Hostelería y Turismo de Murcia 'La Flota'",
     "inicio_saludo":"La misión de la escuela es la de garantizar a nuestro alumnado una formación excelente teórica y práctica en el sector de la hostelería y alimentación, tanto en los aspectos de gestión como de elaboración de productos y todo ello enfocado a conseguir la inserción laboral de nuestros alumnos.",
-    "inicio_reserva":"RESERVA"
-  }
+    "inicio_reserva":"RESERVA",
+    "anular_reserva":"Anular reserva:",
+    "anular_reserva1":"Si desea anular la reserva, pulse ",
+    "anular_reserva2":"aquí",
+    "anular_reserva_input":"Código de reserva",
+    "anular_reserva_boton":"Anular Reserva",
+    "recordar_reserva":"Si no recuerda el número de reserva, pulse ",
+    "recordar_reserva2":"aquí",
+    "recordar_reserva3":" introduzca su correo y recibirá un nuevo correo",
+    "recordar_reserva_input":"Correo electrónico",
+    "recordar_reserva_boton":"Recordar"
+}

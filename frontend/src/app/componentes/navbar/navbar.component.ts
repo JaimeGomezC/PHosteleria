@@ -53,6 +53,8 @@ export class NavbarComponent implements OnInit {
       this.rutaImagen = '../assets/imagenes/fr-flag.png';
     } else if (this.idiomaSeleccionado === 'pt') {
       this.rutaImagen = '../assets/imagenes/pt-flag.png';
+    } else if (this.idiomaSeleccionado === 'it') {
+      this.rutaImagen = '../assets/imagenes/it-flag.png';
     }
   }
   

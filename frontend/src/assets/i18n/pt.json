@@ -5,22 +5,29 @@
   "contacto": "Contato",
   "bienvenido": "Bem-vindo!",
   "conctato": "Contato",
-  "direccion": "Endereço",
-  "llamanos": "Ligue para nós",
-  "calendario": "Calendário de Reservas",
-  "reservaCompleta": "Reserva Completa",
+  "direccion": "ENDEREÇO",
+  "llamanos": "LIGUE PARA NÓS",
+  "calendario": "CALENDÁRIO DE RESERVAS",
+  "reservaCompleta": "Reserva completa",
   "disponible": "Disponível",
-  "importante": "IMPORTANTE: Se algum dos comensais tiver alguma intolerância ou alergia alimentar, por favor, indique isso ao selecionar a data, na seção Observações. Caso não seja indicado com antecedência e se trate de um menu fixo, não podemos garantir a possibilidade de adaptação.",
-  "siguenos": "Siga-nos",
-  "horario": "Horário de serviço do restaurante: das 14h às 17h*\n* Por se tratar de um espaço de formação e devido ao horário dos alunos, a entrada de comensais no restaurante de práticas será no máximo às 15h e o fechamento será às 17h.\n\nAlguns dias de serviço podem variar de acordo com o calendário formativo dos alunos.",
-  "menu": "As reservas podem ser feitas em mesas com no máximo 8 comensais.\nOs menus são publicados nesta página aproximadamente uma semana antes e podem sofrer pequenas alterações devido a ajustes de última hora.",
-  "inicio_titulo": "Escola de Hotelaria e Turismo de Múrcia 'La Flota'",
-  "inicio_saludo": "A missão da escola é garantir aos nossos alunos uma formação teórica e prática excelente no setor de hotelaria e alimentação, tanto nos aspectos de gestão quanto na elaboração de produtos, tudo voltado para a inserção profissional de nossos alunos.",
-  "inicio_reserva": "RESERVAR"
-}
-
-
-
+  "importante": "IMPORTANTE: Caso algum dos comensais tenha alguma intolerância ou alergia alimentar, por favor, informe ao selecionar a data, na seção Observações. Se não for informado com antecedência e for um menu fixo, não garantimos a possibilidade de adaptação.",
+  "siguenos": "SIGA-NOS",
+  "horario": "Horário de funcionamento da sala de jantar: das 14h às 17h*\n* Por se tratar de um espaço de formação e devido ao horário dos alunos, a entrada de comensais na sala de práticas será até às 15h e o encerramento será às 17h.\n\nAlguns dias de serviço podem variar de acordo com o calendário de formação dos alunos.",
+  "menu": "As reservas podem ser feitas em mesas com no máximo 8 comensais.\nOs menus são publicados nesta página aproximadamente uma semana antes e podem sofrer pequenas alterações de última hora.",
+  "inicio_titulo": "Escola de Hotelaria e Turismo de Murcia 'La Flota'",
+  "inicio_saludo": "A missão da escola é garantir aos nossos alunos uma formação teórica e prática excelente no setor de hotelaria e alimentação, tanto em aspectos de gestão quanto de elaboração de produtos, tudo voltado para a inserção profissional de nossos alunos.",
+  "inicio_reserva": "RESERVA",
+  "anular_reserva": "Cancelar reserva:",
+  "anular_reserva1": "Se você deseja cancelar a reserva, clique ",
+  "anular_reserva2": "aqui",
+  "anular_reserva_input": "Código da reserva",
+  "anular_reserva_boton": "Cancelar Reserva",
+  "recordar_reserva": "Se você não se lembra do número da reserva, clique ",
+  "recordar_reserva2": "aqui",
+  "recordar_reserva3": " insira seu e-mail e receberá um novo e-mail",
+  "recordar_reserva_input": "E-mail",
+  "recordar_reserva_boton": "Lembrar"
+  }
 
 
 

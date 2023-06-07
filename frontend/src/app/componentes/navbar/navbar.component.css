@@ -31,7 +31,7 @@
 
 .language ul {
   position: absolute;
-  width: 140px;
+  width: 180px;
   background-color: #fff;
   border: 1px solid #f8f8f8;
   padding-top: 10px;
@@ -41,6 +41,7 @@
 
 .language ul li {
   list-style: none;
+  cursor: pointer;
 }
 
 .language ul li span {
@@ -78,6 +79,10 @@ span.fr::before {
 
 span.pt::before {
   background-image: url(../../../assets/imagenes/pt-flag.png);
+}
+
+span.it::before {
+  background-image: url(../../../assets/imagenes/it-flag.png);
 }
 
 .language:hover ul {

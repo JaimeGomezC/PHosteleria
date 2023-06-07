@@ -16,11 +16,19 @@ class TurnosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    /*Funcion simple para obtener todos los resultados
     public function index()
     {
         $turno = Turnos::all();
         return response()->json($turno);
+    }*/
+    //Funcion para obtener todos los resultados ordenados por fecha descendente
+    public function index()
+    {
+        $turno = Turnos::orderBy('fecha', 'desc')->get();
+        return response()->json($turno);
     }
+    
     public function turnosPublicados()
     {
     $turnos = Turnos::where('visible', 1)->get();
