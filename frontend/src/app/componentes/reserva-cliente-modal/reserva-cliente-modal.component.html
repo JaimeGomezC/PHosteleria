@@ -34,19 +34,21 @@
             </div>
             <div class="col-2 mb-2">
               <label class="form-label">Teléfono</label>
-              <input formControlName="telefono" class="form-control" min="0"
-                [ngClass]="{ 'is-invalid': submitted && f.value.telefono==''}" />
-              <div *ngIf="submitted" class="invalid-feedback">
-                <div>Teléfono requerido</div>
+              <input type="tel" formControlName="telefono" class="form-control" min="0"
+                [ngClass]="{ 'is-invalid': submitted && f.controls['telefono'].invalid}" />
+              <div class="invalid-feedback" *ngIf="submitted && f.controls['telefono'].errors?.['required']">
+                El número de teléfono es requerido.
+              </div>
+              <div class="invalid-feedback" *ngIf="submitted && f.controls['telefono'].errors?.['invalidTelefono']">
+                Por favor, ingresa un número de teléfono válido (9 dígitos).
               </div>
             </div>
             <div class="col-4 mb-4">
-              <label class="form-label">Correo</label>
-              <input formControlName="email" class="form-control" min="0"
-                [ngClass]="{ 'is-invalid': submitted && f.value.email==''}" />
-              <div *ngIf="submitted" class="invalid-feedback">
-                <div>Correo requerido</div>
-              </div>
+              <label class="form-label">Correo electrónico</label>
+              <input type="email" formControlName="email" class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.controls['email'].invalid}">  
+                <div class="invalid-feedback" *ngIf="f.controls['email'].errors?.['required']">El correo electrónico es requerido.</div>
+                <div class="invalid-feedback" *ngIf="f.controls['email'].errors?.['email']">El correo electrónico no es válido.</div>
             </div>
             <div class="row">
               <div class="col-12 mb-12">
