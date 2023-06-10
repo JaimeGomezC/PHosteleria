@@ -1,0 +1,10 @@
+Video explicativo sobre como usar Stripe con ANgular y Express
+https://youtu.be/qT-VTo001OU
+
+En stripe una vez dado de alta una cuenta, nos deja usar el modo desarrollador para hacer pruebas.
+
+Pagina donde encontrar las api
+https://dashboard.stripe.com/test/apikeys
+
+Pagina para ver los pagos
+https://dashboard.stripe.com/test/payments
