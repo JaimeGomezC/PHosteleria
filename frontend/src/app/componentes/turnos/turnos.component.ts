@@ -15,11 +15,12 @@ import { MatSort } from '@angular/material/sort';
   templateUrl: './turnos.component.html',
   styleUrls: ['./turnos.component.css']
 })
-export class TurnosComponent implements OnInit,AfterViewInit {
+export class TurnosComponent implements OnInit {
  
-  loading = true;
+  loading: boolean = false;
   dataSource:MatTableDataSource<TurnosResponse>;
   displayedColumns: string[] = [ 'fecha','turno','visible','n_plazas', 'observaciones','acciones'];
+  
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   arrayMenus?:any;
@@ -34,10 +35,10 @@ export class TurnosComponent implements OnInit,AfterViewInit {
      this.cargarMenus();
   }
 
-   ngAfterViewInit() {
+  ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.paginator._intl.itemsPerPageLabel = 'Turnos por página';
-    this.dataSource.sort = this.sort;
+    this.dataSource.sort = this.sort; // Vincular el MatSort al MatTableDataSource
   }
 
   applyFilter(event: Event) {
@@ -48,6 +49,9 @@ export class TurnosComponent implements OnInit,AfterViewInit {
   cargarDatos(){
     this.turno.getTurnos().subscribe(data =>{
           this.dataSource.data=data;
+          // this.dataSource.sort = this.sort; // Agregar esta línea para vincular el MatSort
+          // this.dataSource.sortData(this.dataSource.data, this.sort); // Ordenar los datos
+
           this.loading = false;
     },
     (error) => {

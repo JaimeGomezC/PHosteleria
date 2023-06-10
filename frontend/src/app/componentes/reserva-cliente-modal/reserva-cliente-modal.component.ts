@@ -1,6 +1,6 @@
 import {Component,Inject,OnInit,} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import {FormBuilder,FormGroup,FormControl,Validators,} from '@angular/forms';
+import {FormBuilder,FormGroup,FormControl,Validators,AbstractControl, ValidatorFn} from '@angular/forms';
 import { ClienteService } from 'src/app/servicios/cliente.service';
 import {MAT_DIALOG_DATA,MatDialog, MatDialogRef,} from '@angular/material/dialog';
 import Swal from 'sweetalert2';
@@ -58,10 +58,10 @@ export class ReservaClienteModalComponent implements OnInit {
         this.data ? this.data[1].cliente.apellido2 : '',
         Validators.required,
       ],
-      email: [this.data ? this.data[1].cliente.email : '', Validators.required],
+      email: [this.data ? this.data[1].cliente.email : '', [Validators.required, Validators.email]],
       telefono: [
         this.data ? this.data[1].cliente.telefono : '',
-        Validators.required,
+        [Validators.required, this.validateTelefono()]
       ],
       observaciones_cliente: [
         this.data ? this.data[1].cliente.observaciones_cliente : '',
@@ -103,6 +103,8 @@ export class ReservaClienteModalComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
+    console.log("enviar")
+    console.dir(this.f.controls['telefono'])
     if (this.form.invalid) {
       return;
     }
@@ -195,4 +197,17 @@ export class ReservaClienteModalComponent implements OnInit {
       }
     );
   }
+  
+validateTelefono(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const telefonoPattern = /^\d{9}$/; // Assuming the phone number should be a 9-digit numeric value
+  
+      if (control.value && !telefonoPattern.test(control.value)) {
+        return { invalidTelefono: true };
+      }
+  
+      return null;
+    };
+  }
+  
 }
