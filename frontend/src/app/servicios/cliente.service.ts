@@ -24,9 +24,8 @@ export class ClienteService {
 
   // Método para agregar un nuevo cliente
   agregarCliente(jsonParams: any): Observable<any> {
-    const requestOptions = { headers: this.getAutorizacion()};
     const body =  jsonParams ;
-    return this.http.post<ClienteResponse>('http://localhost:8000/api/pl/insertClienteReserva' , body,requestOptions);
+    return this.http.post<ClienteResponse>('http://localhost:8000/api/pl/insertClienteReserva' , body);
   }
 
    // Método para agregar un nuevo cliente

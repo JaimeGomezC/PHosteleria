@@ -16,11 +16,12 @@ import { ClienteService } from 'src/app/servicios/cliente.service';
   styleUrls: ['./reserva-cliente.component.css']
 })
 export class ReservaClienteComponent implements OnInit {
-  loading = true;
+  showSpinner: boolean = false;
   dataSource:MatTableDataSource<ReservaResponse>;
   displayedColumns: string[] = [ 'fecha','num_comensales','estado','forma_pago','codigo_verificacion','observaciones_reserva','acciones'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  paramUrl:any;
 
 
   constructor(private reserva:ReservaService,
@@ -33,27 +34,12 @@ export class ReservaClienteComponent implements OnInit {
 
   ngOnInit(): void {
     this.routerUrl.params.subscribe(params => {
-      console.log('Datos recibidos');
-      console.log(params);
-      const datos = params;
+      this.paramUrl=params
+      this.showSpinner = true;
       if(params["idTurno"]){
-        this.reserva.getReservaTurno(params["idTurno"]).subscribe(data =>{
-          this.dataSource.data=data;
-          this.loading = false;
-          console.log(data)
-    },
-    (error) => {
-      console.log(error)
-    })
+        this.cargarDatorTurno()
       }else{
-        this.reserva.getReservas().subscribe(data =>{
-          this.dataSource.data=data;
-          this.loading = false;
-          console.log(data)
-    },
-    (error) => {
-      console.log(error)
-    })
+        this.cargarDatos();
       }
     });
     
@@ -71,15 +57,27 @@ export class ReservaClienteComponent implements OnInit {
   }
 
   cargarDatos(){
+    this.showSpinner = true;
     this.reserva.getReservas().subscribe(data =>{
           this.dataSource.data=data;
-          this.loading = false;
           console.log(data)
+          this.showSpinner = false;
     },
     (error) => {
       console.log(error)
     })
   }  
+  cargarDatorTurno(){
+    this.showSpinner = true;
+    this.reserva.getReservaTurno(this.paramUrl["idTurno"]).subscribe(data =>{
+      this.dataSource.data=data;
+      this.showSpinner = false;
+  },
+  (error) => {
+  console.log(error)
+  })
+  }
+      
   borrarReserva(id:any):void {
     Swal.fire({
       title: 'Esta seguro que desea eliminar el registro?',
@@ -93,9 +91,12 @@ export class ReservaClienteComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.reserva.eliminar(id).subscribe(data =>{
-          this.cargarDatos();
-          Swal.fire('Registro borrado!','Ha eliminado la reserva.','success')
-          this.cargarDatos();
+          if(this.paramUrl["idTurno"]){
+            this.cargarDatorTurno();
+          }else{
+            this.cargarDatos();
+          }
+          Swal.fire('Registro borrado!','Ha eliminado la reserva.','success');
         },
         (error) => {
           console.log(error)

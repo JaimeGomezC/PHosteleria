@@ -42,6 +42,9 @@ Route::group(['middleware' => 'cors'], function(){
     Route::post('/payment', [PaymentController::class, 'processPayment']);
 
     
+    Route::post('reservas/anular/{codigoVerificacion}', [ReservaController::class, 'anularReserva']);
+    Route::get('menus/{menu}', [MenuController::class, 'show']);
+
 
 });
 
@@ -72,11 +75,10 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::delete('reservas/{reserva}', [ReservaController::class, 'destroy']);
     Route::get('reservas/turno/{reserva}',[ReservaController::class, 'getByTurno']);
     Route::get('reservasExport',[ReservaController::class,'exportReservas']);
-
+    
     // TABLA MENU
     Route::get('menus', [MenuController::class, 'index']);
     Route::post('menus', [MenuController::class, 'store']);
-    Route::get('menus/{menu}', [MenuController::class, 'show']);
     Route::put('menus/{menu}', [MenuController::class, 'update']);
     Route::delete('menus/deleteImage', [MenuController::class, 'deleteImage']);
     Route::delete('menus/{menu}', [MenuController::class, 'destroy']);

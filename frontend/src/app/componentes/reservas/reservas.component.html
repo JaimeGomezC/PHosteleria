@@ -30,9 +30,9 @@
           <p>{{ tr.translate('anular_reserva1', tr.idiomaSeleccionado) }}<span id="renuncia-link" (click)="toggleRenunciaSection()">{{ tr.translate('anular_reserva2', tr.idiomaSeleccionado) }}</span></p>
           <div id="renuncia-section" style="display: none;">
             <div class="input-group">
-              <input type="text" placeholder="{{ tr.translate('anular_reserva_input', tr.idiomaSeleccionado) }}" class="form-control form-control-sm">
+              <input type="text" [(ngModel)]="codigoVerificacion" placeholder="{{ tr.translate('anular_reserva_input', tr.idiomaSeleccionado) }}" class="form-control form-control-sm">
               <div class="input-group-append">
-                <button class="btn btn-primary btn-sm">{{ tr.translate('anular_reserva_boton', tr.idiomaSeleccionado) }}</button>
+                <button class="btn btn-primary btn-sm" (click)="anularReserva(codigoVerificacion)">{{ tr.translate('anular_reserva_boton', tr.idiomaSeleccionado) }}</button>
               </div>
             </div>
           </div>

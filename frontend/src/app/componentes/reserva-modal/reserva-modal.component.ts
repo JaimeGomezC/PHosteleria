@@ -57,7 +57,7 @@ export class ReservaModalComponent implements OnInit {
       telefono: ['', Validators.required],
       num_comensales: ['',[Validators.required,this.nPlazasValidar()]],
       observaciones_cliente: [''],
-      id_turno: [1],
+      id_turno: [this.datosRecibidos ? this.datosRecibidos.idTurno : ''],
       fecha: [this.datosRecibidos ? this.datosRecibidos.fechaReserva : ''],
       forma_pago: [''],
       estado: [''],
@@ -111,6 +111,7 @@ export class ReservaModalComponent implements OnInit {
       return null;
     };
   }
+
   public get f() {
     return this.firstFormGroup;
   }
@@ -127,6 +128,7 @@ export class ReservaModalComponent implements OnInit {
       }
     );
   }
+
   addTurno() {
     Swal.fire({
       title: 'Se dispone a relaizar la reserva',
@@ -139,10 +141,13 @@ export class ReservaModalComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
-        console.dir(this.stepper)
+        const clienteData = {
+        ...this.f.value,
+        ...this.secondFormGroup.value
+      };
         this.stepper.next();
         this.isEditable=false;
-        this.cliente.agregarCliente(this.f.value).subscribe(
+        this.cliente.agregarCliente(clienteData).subscribe(
           (data) => {
             const obj = JSON.parse(data.result);
             this.snack.open('Reserva añadida !!\n'+obj.message, 'Aceptar', {

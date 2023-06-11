@@ -71,4 +71,10 @@ export class ReservaService {
       }
     });
   }
+  anularReserva(codigoVerificacion: string): Observable<any> {
+    const requestOptions = {
+      headers: this.getAutorizacion()
+    };
+    return this.http.post<any>(`${this.apiUrl}/anular/${codigoVerificacion}`, null, requestOptions);
+  }
 }

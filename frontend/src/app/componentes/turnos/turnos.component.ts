@@ -17,7 +17,7 @@ import { MatSort } from '@angular/material/sort';
 })
 export class TurnosComponent implements OnInit {
  
-  loading: boolean = false;
+  showSpinner: boolean = false;
   dataSource:MatTableDataSource<TurnosResponse>;
   displayedColumns: string[] = [ 'fecha','turno','visible','n_plazas', 'observaciones','acciones'];
   
@@ -47,12 +47,11 @@ export class TurnosComponent implements OnInit {
   }
 
   cargarDatos(){
+          this.showSpinner = true;
     this.turno.getTurnos().subscribe(data =>{
-          this.dataSource.data=data;
-          // this.dataSource.sort = this.sort; // Agregar esta línea para vincular el MatSort
-          // this.dataSource.sortData(this.dataSource.data, this.sort); // Ordenar los datos
-
-          this.loading = false;
+          console.log(data)
+          this.dataSource.data=data.data;
+          this.showSpinner = false;
     },
     (error) => {
       console.log(error)

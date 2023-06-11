@@ -177,9 +177,10 @@ export class ReservaClienteModalComponent implements OnInit {
   openModal() {
     this.turno.getTurnos().subscribe(
       (dataresult) => {
+        console.dir(dataresult)
         const dialogRef = this.dialog.open(ModalLupaComponent, {
           data: {
-            datos: dataresult,
+            datos: dataresult.data,
             titulo: 'Lista de Turnos',
             camposArray: ['acciones', 'fecha', 'turno', 'n_plazas'], //,'turno','n_plazas','observaciones'
           },

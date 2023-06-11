@@ -132,19 +132,25 @@ class ReservaController extends Controller
     }
    
     public function anularReserva($codigoVerificacion)
-    {
-        // Buscar la reserva por el código de verificación
-        $reserva = Reserva::where('codigo_verificacion', $codigoVerificacion)->first();
-    
-        // Verificar si se encontró una reserva
-        if ($reserva) {
-            // Actualizar el estado de la reserva a "anulado"
-            $reserva->estado = 'anulado';
-            $reserva->save();
-    
-            return response()->json(['result' => 'ok', 'message' => 'Reserva anulada']);
-        } else {
-            return response()->json(['result' => 'error', 'message' => 'Código de verificación inválido']);
-        }
+{
+    // Buscar la reserva por el código de verificación
+    $reserva = Reserva::where('codigo_verificacion', $codigoVerificacion)->first();
+
+    // Verificar si se encontró una reserva
+    if ($reserva->estado=='Pagado') {
+        // Actualizar el estado de la reserva a "anulado"
+        $reserva->estado = 'Pagada y Anulada';
+        $reserva->save();
+
+        return response()->json(['result' => 'ok', 'message' => 'Reserva anulada']);
+    } 
+    elseif($reserva->estado!='Pagado'){
+        $reserva->estado = 'Anulada';
+        $reserva->save();
+        return response()->json(['result' => 'ok', 'message' => 'Reserva anulada']);
     }
+    else {
+        return response()->json(['result' => 'error', 'message' => 'Código de verificación inválido']);
+    }
+}
 }

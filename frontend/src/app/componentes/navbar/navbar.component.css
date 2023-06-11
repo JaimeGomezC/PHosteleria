@@ -100,3 +100,17 @@ span.it::before {
   height: 40px;
   margin-right: 10px;
 }
+
+@media (max-width: 768px) {
+  .navbar-nav {
+    flex-direction: row; /* Cambia la dirección del flex a horizontal */
+    justify-content: space-around; /* Alinea los elementos horizontalmente */
+  }
+
+  .nav-item {
+    margin: 0 10px; /* Ajusta los márgenes de los elementos del menú */
+  }
+
+ 
+
+}
