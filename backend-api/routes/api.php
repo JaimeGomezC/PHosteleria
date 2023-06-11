@@ -40,6 +40,7 @@ Route::group(['middleware' => 'cors'], function(){
     Route::get('reservas/plazasVacantes/{id_turno}',[ReservaController::class, 'calcularPlazasVacantes']);
     Route::post('pl/insertClienteReserva', [PlController::class, 'insertClienteReserva']);
     Route::post('reservas/anular/{codigoVerificacion}', [ReservaController::class, 'anularReserva']);
+    Route::get('menus/{menu}', [MenuController::class, 'show']);
 
 
 });
@@ -75,7 +76,6 @@ Route::middleware(['auth:sanctum'])->group(function(){
     // TABLA MENU
     Route::get('menus', [MenuController::class, 'index']);
     Route::post('menus', [MenuController::class, 'store']);
-    Route::get('menus/{menu}', [MenuController::class, 'show']);
     Route::put('menus/{menu}', [MenuController::class, 'update']);
     Route::delete('menus/deleteImage', [MenuController::class, 'deleteImage']);
     Route::delete('menus/{menu}', [MenuController::class, 'destroy']);
