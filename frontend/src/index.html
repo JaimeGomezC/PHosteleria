@@ -9,6 +9,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+  <script src="https://js.stripe.com/v3/"></script>
+  <script>
+    const stripe = Stripe('pk_test_51NH8DvDMjRSafDzTrbTIW7kx1q5fOvkdwdLCHbUc7e8sLwVbLkjTqZ11t5IJMLeITx0qWjTwDowhnSpz6pjMmTnY00zrPAKPcH');//Clave publica stripe apikey
+    const elements = stripe.elements();
+  </script>
+
 </head>
 <body class="mat-typography">
   <app-root></app-root>

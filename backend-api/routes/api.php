@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\GaleriaController;
-
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +39,8 @@ Route::group(['middleware' => 'cors'], function(){
     Route::get('turnos/publicados',[TurnosController::class,'turnosPublicados']);
     Route::get('reservas/plazasVacantes/{id_turno}',[ReservaController::class, 'calcularPlazasVacantes']);
     Route::post('pl/insertClienteReserva', [PlController::class, 'insertClienteReserva']);
+    Route::post('/payment', [PaymentController::class, 'processPayment']);
+
     
 
 });
@@ -95,6 +97,7 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::delete('galeria/deleteImage',[GaleriaController::class,'deleteImage']);
     Route::delete('galeria/{imagen}',[GaleriaController::class,'destroy']);
     Route::post('galeria/upload-foto', [GaleriaController::class, 'uploadImage']);
+
     
 
 

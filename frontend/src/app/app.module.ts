@@ -24,6 +24,7 @@ import { Carousel2Component } from './componentes/carousel2/carousel2.component'
 import { Carousel3Component } from './componentes/carousel3/carousel3.component';
 import { Carousel4Component } from './componentes/carousel4/carousel4.component';
 import { Carousel5Component } from './componentes/carousel5/carousel5.component';
+import { PaymentFormComponent } from './componentes/payment-form-component/payment-form-component.component';
 
 
 
@@ -45,6 +46,7 @@ import { Carousel5Component } from './componentes/carousel5/carousel5.component'
     Carousel3Component,
     Carousel4Component,
     Carousel5Component,
+    PaymentFormComponent,
     
   ],
   imports: [
