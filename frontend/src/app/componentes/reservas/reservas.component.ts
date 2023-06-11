@@ -8,6 +8,8 @@ import { FullCalendarComponent } from '@fullcalendar/angular';
 import { TurnosService } from 'src/app/servicios/turnos.service';
 import { TraductorService } from 'src/app/servicios/traductor.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ReservaService } from 'src/app/servicios/reserva.service';
+import Swal from 'sweetalert2';
 
 
 
@@ -22,13 +24,15 @@ export class ReservasComponent implements OnInit {
     password:new FormControl('',Validators.required)
   })
   datosTurnos?:TurnosService;
+
   constructor(private turno:TurnosService, private router:Router, private traductorService: TraductorService,private snack: MatSnackBar,
-    private renderer: Renderer2) {   }
+    private renderer: Renderer2,private reservaService: ReservaService) {   }
   public tr=this.traductorService;
   calendarOptions?: CalendarOptions;
   eventsModel: any;
   @ViewChild('fullcalendar') fullcalendar?: FullCalendarComponent;
   legendItems: any[]=[];
+  codigoVerificacion: string = '';
 
   ngOnInit() {
     // need for load calendar bundle first
@@ -37,8 +41,8 @@ export class ReservasComponent implements OnInit {
       { color: 'green', text: 'Disponible' }
     ];
     this.cargarDatos();
-    
   }
+
   toggleRenunciaSection() {
     const renunciaSection = document.getElementById('renuncia-section');
     if (renunciaSection) {
@@ -171,4 +175,32 @@ export class ReservasComponent implements OnInit {
   // toggleWeekends() {
   //   this.calendarOptions.weekends = !this.calendarOptions.weekends // toggle the boolean!
   // }
+
+  anularReserva(codigoVerificacion: string) {
+    this.reservaService.anularReserva(codigoVerificacion).subscribe(
+      (response) => {
+        console.log('Reserva anulada con éxito:', response);
+        if(response.result=='ok'){
+          Swal.fire({
+            icon: 'success',
+            title: response.message,
+            showConfirmButton: false,
+            timer: 2000
+          })
+        }else{
+          Swal.fire({
+            icon: 'error',
+            title: response.message,
+            showConfirmButton: false,
+          showCancelButton: true,
+          cancelButtonColor: '#d33',
+          cancelButtonText: 'Aceptar'          })
+        }
+        
+      },
+      (error) => {
+        console.error('Error al anular la reserva:', error);
+      }
+    );
+  }
 }

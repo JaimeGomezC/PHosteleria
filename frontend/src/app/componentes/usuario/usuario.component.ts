@@ -16,7 +16,7 @@ import { UsuarioModalComponent } from '../usuario-modal/usuario-modal.component'
 })
 export class UsuarioComponent implements OnInit {
 
-  loading = true;
+  showSpinner: boolean = false;
   dataSource:MatTableDataSource<UsuarioResponse>;
   displayedColumns: string[] = [ 'name','email','acciones'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -42,10 +42,11 @@ export class UsuarioComponent implements OnInit {
   }
 
   cargarDatos(){
+    this.showSpinner = true;
     this.user.getRegistros().subscribe(data =>{
           this.dataSource.data=data;
-          this.loading = false;
-    },
+          this.showSpinner = false;
+        },
     (error) => {
       console.log(error)
     })
@@ -85,7 +86,7 @@ export class UsuarioComponent implements OnInit {
     });
   };
   
-  edit_add_Turno(id:any):void {
+  edit_add_Usuario(id:any):void {
     const dialogRef = this.dialog.open(UsuarioModalComponent,{
       width:'40%'
     });

@@ -23,14 +23,14 @@ export class TurnosService {
     return headers;
   }
 
-  getTurnos():Observable<TurnosResponse[]>{
+  getTurnos():Observable<any>{
     let direccion=this.url+"turnos";
     const requestOptions = { headers: this.getAutorizacion()};
     // //buscando con parametros por get
     //  let params = new HttpParams().set('id', '1');
     //  const httpOptions = {
     //  };
-    return this.http.get<TurnosResponse[]>(direccion,requestOptions)
+    return this.http.get<any>(direccion,requestOptions)
   }
   getTurnosPublicados():Observable<any>{
     let direccion=this.url+"turnos/publicados";

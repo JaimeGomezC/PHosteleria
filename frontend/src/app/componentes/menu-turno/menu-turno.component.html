@@ -1,8 +1,17 @@
-<div class="container">
-    <mat-toolbar color="primary">
-      <span>Menus</span>
-    </mat-toolbar>
-    <mat-card>
+<mat-toolbar color="primary">
+  <span>Menus</span>
+</mat-toolbar>
+
+<div *ngIf="showSpinner" class="spinner-overlay">
+  <div class="spinner">
+    <div class="spinner-border text-primary" role="status"></div>
+    <span>cargando...</span>
+  </div>
+</div>
+
+
+<mat-card [class.hide-content]="showSpinner">
+  <ng-container >    
     <div class="row align-items-center">
       <div class="col-9">
       <mat-form-field class="col-12">
@@ -11,16 +20,10 @@
       </mat-form-field>
       </div>
     <div class="col-3">
-      <button mat-raised-button color="primary" class="col-12" (click)="edit_add_Turno('')">Nuevo Menu</button>
+      <button mat-raised-button color="primary" class="col-12" (click)="edit_add_Turno('')" disabled="{{showSpinner}}">Nuevo Menu</button>
     </div>
   </div>
-      <div *ngIf="loading" class="d-flex justify-content-center">
-        <div class="spinner-border text-primary" role="status">
-          </div>
-      </div>
-      <div *ngIf="loading" class="d-flex justify-content-center">
-        <span>cargando...</span>
-      </div>
+
       <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 demo-table">
         <!-- Position Column -->
         <ng-container matColumnDef="nombre_menu">
@@ -35,7 +38,7 @@
         </ng-container>
         <ng-container matColumnDef="observaciones">
           <th mat-header-cell *matHeaderCellDef> Observaciones </th>
-          <td mat-cell *matCellDef="let element"> {{element.observaciones  | slice:0:20}} </td>
+          <td mat-cell *matCellDef="let element" [ngClass]="{'hide-column': hideObservaciones}"> {{element.observaciones  | slice:0:20}} </td>
         </ng-container>
         <ng-container matColumnDef="acciones">
           <th mat-header-cell *matHeaderCellDef>  </th>
@@ -50,5 +53,5 @@
       </table>
       <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
       </mat-paginator>
+    </ng-container>
     </mat-card>
-  </div>

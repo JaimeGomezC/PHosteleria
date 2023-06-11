@@ -16,7 +16,8 @@ import { MenuTurnoModalComponent } from '../menu-turno-modal/menu-turno-modal.co
 })
 export class MenuTurnoComponent implements OnInit {
 
-  loading = true;
+  showSpinner: boolean = false;
+  hideObservaciones = false;
   dataSource:MatTableDataSource<MenuResponse>;
   displayedColumns: string[] = [ 'nombre_menu','precio_pax', 'observaciones','acciones'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -43,10 +44,11 @@ export class MenuTurnoComponent implements OnInit {
  }
 
  cargarDatos(){
+   this.showSpinner = true;
    this.menu.getMenus().subscribe(data =>{
          this.dataSource.data=data;
-         this.loading = false;
-   },
+         this.showSpinner = false;
+        },
    (error) => {
      console.log(error)
    })
@@ -111,5 +113,6 @@ export class MenuTurnoComponent implements OnInit {
      console.log(error)
    });
  }
+ 
 
 }

@@ -1,13 +1,15 @@
 .content {
-  min-height: 100vh;
+  min-height: calc(100vh - 100px); /* Ajusta el espacio inferior para el footer */
   padding-bottom: 100px; /* Ajusta el espacio inferior para el footer */
+  overflow-x: hidden; /* Evita el desbordamiento horizontal */
+  padding-bottom: 200px;
 }
 
 .container {
   margin-top: 20px; /* Ajusta el margen superior */
   margin-bottom: 20px; /* Ajusta el margen inferior */
+  overflow-x: hidden; /* Evita el desbordamiento horizontal */
 }
-
 .footer {
   position: fixed;
   left: 0;
@@ -16,26 +18,31 @@
   padding: 10px;
   background-color: #f8f9fa;
   text-align: center;
-}
-
-.custom-menu-container {
-  margin-left: 0; /* Elimina el margen izquierdo */
-}
-
-.container {
-  margin-top: 20px; /* Ajusta el margen superior */
-  margin-bottom: 20px; /* Ajusta el margen inferior */
-}
-
-.custom-menu-container {
-  margin-left: 0; /* Elimina el margen izquierdo */
+  z-index: 9999;
 }
 
 .app-menu {
   position: sticky;
   top: 0;
   left: 0;
-  height: 100vh;
+  height: calc(100vh - 100px); /* Ajusta el alto del menú */
   background-color: #f8f9fa;
   padding: 20px;
+  overflow-y: auto; /* Agrega scroll al menú si es necesario */
+
+}
+
+/* Media queries para responsive */
+
+@media (max-width: 768px) {
+  .custom-menu-container {
+    margin-top: 20px; /* Ajusta el margen superior */
+  }
+  
+  .app-menu {
+    height: auto;
+  }
+  .content {
+    padding-bottom: 200px; /* Aumenta el espacio inferior para el footer en pantallas pequeñas */
+  }
 }

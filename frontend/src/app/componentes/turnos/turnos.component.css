@@ -30,6 +30,9 @@
     margin-right: 2%;
   }
   
+  .text-right {
+    text-align: right;
+  }
   .btnEdit,.btnDelete{
     cursor: pointer;
   }
@@ -46,9 +49,25 @@
     margin-right: 5%;
   }
 
-  .spinner-border{
-    width: 6rem;
-    height: 6rem;
+  .spinner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+    font-size: 40px; /* Aumenta el tamaño del texto del spinner */
+    padding: 20px; /* Aumenta el espacio interno del spinner */
   }
 
   .añadir{

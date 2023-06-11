@@ -16,7 +16,7 @@ import { GaleriaAdminModalComponent } from '../galeria-admin-modal/galeria-admin
 })
 export class GaleriaAdminComponent implements OnInit {
 
-  loading = true;
+  showSpinner: boolean = false;
   dataSource:MatTableDataSource<GaleriaResponse>;
   displayedColumns: string[] = [ 'nombre_imagen','tipo','descripcion','observaciones','acciones'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -42,9 +42,10 @@ export class GaleriaAdminComponent implements OnInit {
   }
  
   cargarDatos(){
+    this.showSpinner = true;
     this.galeria.getFotosGaleria().subscribe(data =>{
           this.dataSource.data=data;
-          this.loading = false;
+          this.showSpinner = false;
     },
     (error) => {
       console.log(error)

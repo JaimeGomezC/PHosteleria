@@ -1,32 +1,31 @@
-<div class="container">
-  <mat-toolbar color="primary">
-    <span>Turnos</span>
-  </mat-toolbar>
-  <div *ngIf="loading" class="d-flex justify-content-center">
-    <div class="spinner-border text-primary" role="status">
-      </div>
-  </div>
-  <div *ngIf="loading" class="d-flex justify-content-center">
+<mat-toolbar color="primary">
+  <span>Turnos</span>
+</mat-toolbar>
+
+<div *ngIf="showSpinner" class="spinner-overlay">
+  <div class="spinner">
+    <div class="spinner-border text-primary" role="status"></div>
     <span>cargando...</span>
   </div>
-  
-  <mat-card>
-    <div *ngIf="!loading">
-  <div class="row align-items-center">
-      <div class="col-9">
-      <mat-form-field class="col-12">
-        <mat-label>Filtro</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
-      </mat-form-field>
-      </div>
-    <div class="col-3">
-      <button mat-raised-button color="primary" class="col-12 añadir" (click)="edit_add_Turno('')">Nuevo Turno</button>
-      <button mat-raised-button color="primary" class="col-12 bg-success" (click)="exportarTurnos()">Exportar Turnos</button>
-    </div>
-  </div>
+</div>
 
-    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 demo-table">
-      
+<mat-card>
+  <ng-container [class.hide-content]="showSpinner">
+    <div class="row align-items-center">
+      <div class="col-9">
+        <mat-form-field class="col-12">
+          <mat-label>Filtro</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
+        </mat-form-field>
+      </div>
+      <div class="col-3">
+        <button mat-raised-button color="primary" class="col-12 añadir" (click)="edit_add_Turno('')" disabled="{{showSpinner}}">Nuevo Turno</button>
+        <button mat-raised-button color="primary" class="col-12 bg-success" (click)="exportarTurnos()" disabled="{{showSpinner}}">Exportar Turnos</button>
+      </div>
+    </div>
+
+      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 demo-table">
+         
       <ng-container matColumnDef="fecha">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
         <td mat-cell *matCellDef="let element"> {{element.fecha | date: 'dd/MM/yyyy'}} </td>
@@ -54,17 +53,15 @@
       <ng-container matColumnDef="acciones">
         <th mat-header-cell *matHeaderCellDef>  </th>
         <td mat-cell *matCellDef="let element"> 
-          <mat-icon matTooltip="Ver Reservas" (click)="verReserva(element.id)" class="btnVer">visibility</mat-icon>
+          <mat-icon *ngIf="element.reservas" matTooltip="Ver Reservas" (click)="verReserva(element.id)" class="btnVer">visibility</mat-icon>
           <mat-icon matTooltip="Editar" (click)="openModal(element)" class="btnEdit">edit</mat-icon> 
-          <mat-icon matTooltip="Eliminar" (click)="borrar(element.id)" class="btnDelete">delete</mat-icon></td>
+          <mat-icon *ngIf="!element.reservas" matTooltip="Eliminar" (click)="borrar(element.id)" class="btnDelete">delete</mat-icon></td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    
-    </table>
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
-    </mat-paginator>
-  </div>
+      </table>
+      
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements"></mat-paginator>
+    </ng-container>
   </mat-card>
-</div>

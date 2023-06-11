@@ -11,22 +11,34 @@ use App\Exports\TurnosExport;
 
 class TurnosController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    /*Funcion simple para obtener todos los resultados
-    public function index()
-    {
-        $turno = Turnos::all();
-        return response()->json($turno);
-    }*/
+   
     //Funcion para obtener todos los resultados ordenados por fecha descendente
     public function index()
     {
-        $turno = Turnos::orderBy('fecha', 'desc')->get();
-        return response()->json($turno);
+        $turnos = Turnos::orderBy('fecha', 'desc')->get();
+        $response = [];
+    
+        foreach ($turnos as $turno) {
+            $plazasTotales = $turno->n_plazas;
+            $plazasOcupadas = Reserva::where('id_turno', $turno->id)->where('estado', '<>', 'Anulado')->sum('num_comensales');
+    
+            if ($plazasTotales <= $plazasOcupadas) {
+                $disponibilidad = 'red';
+            } else {
+                $disponibilidad = 'green';
+            }
+    
+            $reservas = Reserva::where('id_turno', $turno->id)->count() > 0;
+    
+            $turno->plazasTotales = $plazasTotales;
+            $turno->plazasOcupadas = $plazasOcupadas;
+            $turno->disponibilidad = $disponibilidad;
+            $turno->reservas = $reservas;
+    
+            $response[] = $turno;
+        }
+    
+        return response()->json(['result' => 'ok', 'data' => $response], 200);
     }
     
     public function turnosPublicados()
