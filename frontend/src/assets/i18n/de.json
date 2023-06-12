@@ -1,0 +1,34 @@
+{
+  "inicio": "Startseite",
+  "reservas": "Reservierungen",
+  "galeria": "Galerie",
+  "contacto": "Kontakt",
+  "bienvenido": "Willkommen!",
+  "conctato": "Kontakt",
+  "direccion": "ADRESSE",
+  "llamanos": "ANRUFEN",
+  "calendario": "RESERVIERUNGSKALENDER",
+  "reservaCompleta": "Reservierung abgeschlossen",
+  "disponible": "Verfügbar",
+  "importante": "WICHTIG: Falls einer der Gäste eine Nahrungsmittelunverträglichkeit oder Allergie hat, geben Sie dies bitte bei der Auswahl des Datums im Abschnitt Bemerkungen an. Wenn dies nicht im Voraus angegeben wird und es sich um ein festes Menü handelt, können wir keine Anpassungsmöglichkeit garantieren.",
+  "siguenos": "FOLGEN SIE UNS",
+  "horario": "Öffnungszeiten des Restaurants: von 14 bis 17 Uhr*\n* Da es sich um einen Schulungsraum handelt und aufgrund des Schultages der Schüler, können Gäste das Übungsspeisesaal spätestens um 15 Uhr betreten und er wird um 17 Uhr geschlossen.\n\nEinige Servicetage können je nach Schulungskalender der Schüler variieren.",
+  "menu": "Reservierungen können für Tische mit maximal 8 Gästen vorgenommen werden.\nDie Menüs werden etwa eine Woche im Voraus auf dieser Seite veröffentlicht und können aufgrund von last-minute Anpassungen geringfügige Änderungen aufweisen.",
+  "inicio_titulo": "Hotelfachschule und Tourismus in Murcia 'La Flota'",
+  "inicio_saludo": "Unsere Mission an der Schule ist es, unseren Schülern eine ausgezeichnete theoretische und praktische Ausbildung im Gastgewerbe und in der Lebensmittelbranche zu garantieren, sowohl in den Bereichen Management als auch bei der Produktentwicklung, und dies alles mit dem Ziel, die berufliche Integration unserer Schüler zu erreichen.",
+  "inicio_reserva": "RESERVIERUNG",
+  "anular_reserva": "Reservierung stornieren:",
+  "anular_reserva1": "Wenn Sie Ihre Reservierung stornieren möchten, klicken Sie ",
+  "anular_reserva2": "hier",
+  "anular_reserva_input": "Reservierungscode",
+  "anular_reserva_boton": "Reservierung stornieren",
+  "recordar_reserva": "Wenn Sie sich nicht an die Reservierungsnummer erinnern können, klicken Sie ",
+  "recordar_reserva2": "hier",
+  "recordar_reserva3": "geben Sie Ihre E-Mail-Adresse ein und Sie erhalten eine neue E-Mail",
+  "recordar_reserva_input": "E-Mail-Adresse",
+  "recordar_reserva_boton": "Erinnern"
+  }
+
+
+
+

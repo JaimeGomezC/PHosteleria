@@ -16,7 +16,7 @@ export class TraductorService {
 
   // Carga los archivos de traducción para todos los idiomas
   loadTranslations(): Promise<any> {
-    const supportedLanguages = ['es', 'en','pt','fr','it']; // Agrega aquí los códigos de los idiomas que admites
+    const supportedLanguages = ['es', 'en','de','fr','it']; // Agrega aquí los códigos de los idiomas que admites
 
     const translationPromises = supportedLanguages.map(lang => {
       const translationFile = `assets/i18n/${lang}.json`;
