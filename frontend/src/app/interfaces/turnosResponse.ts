@@ -7,6 +7,7 @@ export interface TurnosResponse{
     fecha:Date;
     turno:string;
     visible:number;
+    formas_pago:string;
     updated_at?:string;
     created_at?:string;
 }

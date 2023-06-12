@@ -83,6 +83,7 @@ class TurnosController extends Controller
         $turnos->turno = $request->turno;
         $turnos->visible = $request->visible;
         $turnos->fecha = $request->fecha;
+        $turnos->formas_pago = $request->formas_pago;
         $turnos->save();
         $data = [
             'result' => 'ok',
@@ -119,6 +120,7 @@ class TurnosController extends Controller
         $turno->turno = $request->turno;
         $turno->visible = $request->visible;
         $turno->fecha = $request->fecha;
+        $turno->formas_pago = $request->formas_pago;
         $turno->save();
         $data = [
             'message' => 'Turno Actualizado',

@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\GaleriaController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\AlmacenController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -84,13 +86,15 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::delete('menus/{menu}', [MenuController::class, 'destroy']);
     Route::post('menus/upload-image', [MenuController::class, 'uploadImage']);
     Route::get('menus/turno/{id_turno}',[MenuController::class, 'getByTurno']);
-    // LLAMADAS A FUNCIONES PL
-    Route::post('pl/actualizar-cliente-reserva', [PlController::class, 'actualizarClienteReserva']);
-    Route::get('obtenerPlazasLibres', [PlController::class, 'obtenerPlazasLibres']);
-    Route::post('pl/updateClienteReserva', [PlController::class, 'updateClienteReserva']);
-    
-});
-    Route::post('correo', [CorreoController::class, 'enviarCorreo']);
+
+    // TABLA ALMACEN
+    Route::get('almacenes', [AlmacenController::class, 'index']);
+    Route::post('almacenes', [AlmacenController::class, 'store']);
+    Route::get('almacenes/{almacen}', [AlmacenController::class, 'show']);
+    Route::put('almacenes/{almacen}', [AlmacenController::class, 'update']);
+    Route::delete('almacenes/{almacen}', [AlmacenController::class, 'destroy']);
+
+    // TABLA GALERIA
     Route::get('galeria', [GaleriaController::class, 'index']);
     Route::post('galeria',[GaleriaController::class,'store']);
     Route::get('galeria/{imagen}',[GaleriaController::class,'show']);
@@ -99,6 +103,15 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::delete('galeria/deleteImage',[GaleriaController::class,'deleteImage']);
     Route::delete('galeria/{imagen}',[GaleriaController::class,'destroy']);
     Route::post('galeria/upload-foto', [GaleriaController::class, 'uploadImage']);
+
+    // LLAMADAS A FUNCIONES PL
+    Route::post('pl/actualizar-cliente-reserva', [PlController::class, 'actualizarClienteReserva']);
+    Route::get('obtenerPlazasLibres', [PlController::class, 'obtenerPlazasLibres']);
+    Route::post('pl/updateClienteReserva', [PlController::class, 'updateClienteReserva']);
+    
+});
+    Route::post('correo', [CorreoController::class, 'enviarCorreo']);
+
 
     
 

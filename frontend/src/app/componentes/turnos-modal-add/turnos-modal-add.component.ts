@@ -41,6 +41,7 @@ export class TurnosModalAddComponent implements OnInit {
       id_menu: [this.data.id_menu],
       listaMenu: [this.data.listaMenu],
       visible: [this.data.visible, Validators.required],
+      formas_pago: [this.data.formas_pago, Validators.required],
     });
   }
 

@@ -25,6 +25,7 @@ import { Carousel3Component } from './componentes/carousel3/carousel3.component'
 import { Carousel4Component } from './componentes/carousel4/carousel4.component';
 import { Carousel5Component } from './componentes/carousel5/carousel5.component';
 import { PaymentFormComponent } from './componentes/payment-form-component/payment-form-component.component';
+import { AlmacenComponent } from './componentes/almacen/almacen.component';
 
 
 
@@ -47,6 +48,7 @@ import { PaymentFormComponent } from './componentes/payment-form-component/payme
     Carousel4Component,
     Carousel5Component,
     PaymentFormComponent,
+    AlmacenComponent,
     
   ],
   imports: [

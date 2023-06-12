@@ -17,6 +17,7 @@ class Turnos extends Model
         'turno',
         'visible',
         'fecha',
+        'formas_pago'
     ];
 
     protected $hidden = [
