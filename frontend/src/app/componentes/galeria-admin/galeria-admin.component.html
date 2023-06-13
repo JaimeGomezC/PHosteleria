@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-  <span>Turnos</span>
+  <span>Galería</span>
 </mat-toolbar>
 
 <div *ngIf="showSpinner" class="spinner-overlay">
@@ -19,7 +19,7 @@
         </mat-form-field>
       </div>
       <div class="col-3">
-        <button mat-raised-button color="primary" class="col-12 añadir" (click)="edit_add_Foto('')" disabled="{{showSpinner}}">Nuevo Turno</button>
+        <button mat-raised-button color="primary" class="col-12 añadir" (click)="edit_add_Foto('')" disabled="{{showSpinner}}">Nueva Foto</button>
       </div>
     </div>
       <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 demo-table">

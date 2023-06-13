@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild  } from '@angular/core';
+import { Component, Input, OnInit,ViewChild  } from '@angular/core';
 import {AbstractControl, FormBuilder, ValidationErrors, Validators} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ClienteService } from 'src/app/servicios/cliente.service';
@@ -27,20 +27,24 @@ export class ReservaModalComponent implements OnInit {
   urlImagen?:any;
   @ViewChild('stepper') stepper!: MatStepper;
   isEditable = true;
+  importe?:any;
+  dataToChild: any;
 
  
   constructor(private _formBuilder: FormBuilder,private router:ActivatedRoute,private cliente:ClienteService,private menu:MenuService,private snack: MatSnackBar,private reserva:ReservaService,private http: HttpClient ) {
-    this.router.params.subscribe(params => {
-      console.log('Datos recibidos');
-      console.log(params);
-      this.datosRecibidos=params;
-      this.maxPlazas=parseInt(this.datosRecibidos['n_plazas']) ;
+    // this.router.params.subscribe(params => {
+    //   console.log('Datos recibidos');
+    //   console.log(params);
+      this.datosRecibidos=this.reserva.getDatosReserva();
+      console.log('this.datosRecibidos');
+      console.log(this.datosRecibidos);
+      this.maxPlazas=this.datosRecibidos.data['n_plazas'] ;
       console.log(this.maxPlazas);
-      if(params["id_menu"]!="null"){
-        this.getMenuImg(params["id_menu"]);
+      if(this.datosRecibidos.data["id_menu"]!="null"){
+        this.getMenuImg(this.datosRecibidos.data["id_menu"]);
       }
-      
-    });
+
+    // });
   }
   ngOnInit(): void {
     this.cagardatos();
@@ -69,8 +73,9 @@ export class ReservaModalComponent implements OnInit {
     });
    
   }
+
   calcularPlazasVacantes(){
-    this.reserva.calcularPlazasVacantes(this.datosRecibidos.idTurno).subscribe(
+    this.reserva.calcularPlazasVacantes(this.datosRecibidos.data.id).subscribe(
       (data) => {
         console.log("data3333")
         console.log(data)
@@ -81,6 +86,19 @@ export class ReservaModalComponent implements OnInit {
       }
     );
   }
+
+  calcularImporte(){
+    const numComensales = this.f.value.num_comensales;
+    let importe="";
+    if(this.datosRecibidos.precioMenu){
+      importe = (numComensales * this.datosRecibidos.precioMenu).toFixed(2);
+    }else{
+      importe = (numComensales * 19.90).toFixed(2);
+    }
+    this.importe = parseFloat(importe);
+    this.sendDataToChild();
+  }
+
   reservaMax(item:any){
     if (item.value > ((0.1 * this.maxPlazas)+this.plzVacantes)) {
       item.setErrors({ 'exceedsMaxPlazas': true });
@@ -193,5 +211,15 @@ export class ReservaModalComponent implements OnInit {
       console.log('Respuesta de Redsys:', response);
       // Aquí puedes manejar la respuesta de Redsys
     });
+  }
+
+  sendDataToChild() {
+    const data = { importe: this.importe};
+    this.dataToChild = data;
+  }
+
+  handleDataFromChild(data: any) {
+    // Aquí puedes manejar los datos emitidos desde el componente hijo
+    console.log(data);
   }
 }

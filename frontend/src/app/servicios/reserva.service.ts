@@ -9,6 +9,7 @@ import { saveAs } from 'file-saver'
 })
 export class ReservaService {
   private apiUrl = 'http://localhost:8000/api/reservas'; // Reemplazar con la URL de tu API
+  private datosReserva: any;
 
   constructor(private http: HttpClient) { }
 
@@ -76,5 +77,13 @@ export class ReservaService {
       headers: this.getAutorizacion()
     };
     return this.http.post<any>(`${this.apiUrl}/anular/${codigoVerificacion}`, null, requestOptions);
+  }
+
+  setDatosReserva(data: any) {
+    this.datosReserva = data;
+  }
+
+  getDatosReserva() {
+    return this.datosReserva;
   }
 }

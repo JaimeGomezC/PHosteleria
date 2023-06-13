@@ -23,10 +23,10 @@ export class ReservasComponent implements OnInit {
     username:new FormControl('',Validators.required),
     password:new FormControl('',Validators.required)
   })
-  datosTurnos?:TurnosService;
+  datosTurnos?:any;
 
   constructor(private turno:TurnosService, private router:Router, private traductorService: TraductorService,private snack: MatSnackBar,
-    private renderer: Renderer2,private reservaService: ReservaService) {   }
+    private renderer: Renderer2,private reserva:ReservaService,) {   }
   public tr=this.traductorService;
   calendarOptions?: CalendarOptions;
   eventsModel: any;
@@ -69,9 +69,10 @@ export class ReservasComponent implements OnInit {
 
   cargarDatos(){
     this.turno.getTurnosPublicados().subscribe(data =>{
-          console.log('data.result')
+          console.log('data.result');
+          this.datosTurnos=data.data;
           console.log(data.data)
-          console.log(data.data.disponibilidad)
+          console.log(data.data[0].disponibilidad)
           let turno=data.data.map((e: any) => ({ idTurno:e.data.id,title:e.data.turno, start: e.data.fecha, allDay: true, n_plazas:e.data.n_plazas,fechaReserva:e.data.fecha,id_menu:e.data.id_menu,color:e.disponibilidad }));
           console.log(turno)
           forwardRef(() => Calendar);
@@ -110,15 +111,21 @@ export class ReservasComponent implements OnInit {
   handleEventClick(arg: EventClickArg) {
     let data=arg.event.extendedProps;
     console.log("data")
+    console.log(data)
+    const turno = this.datosTurnos.find((item: { data: { id: any; }; }) => item.data.id === data['idTurno']);
+
+    if (turno) {
       if (arg.event.backgroundColor !== 'red') {
-        this.router.navigate(['ReservasModal', data]);
-      }else{
-        this.snack.open('Turno completo !!','', {
+        this.reserva.setDatosReserva(turno);
+        this.router.navigate(['ReservasModal']);
+      } else {
+        this.snack.open('Turno completo !!', '', {
           duration: 2000,
           verticalPosition: 'top',
           horizontalPosition: 'center',
         });
       }
+    }
   }
   // handleDateClick(arg: DateClickArg) {
   //   console.log('estoy aqui');
@@ -177,7 +184,7 @@ export class ReservasComponent implements OnInit {
   // }
 
   anularReserva(codigoVerificacion: string) {
-    this.reservaService.anularReserva(codigoVerificacion).subscribe(
+    this.reserva.anularReserva(codigoVerificacion).subscribe(
       (response) => {
         console.log('Reserva anulada con éxito:', response);
         if(response.result=='ok'){

@@ -44,7 +44,7 @@
               </mat-form-field>
             </div>
             <div>
-              <button type="submit" class="custom-button" mat-button matStepperNext>Siguiente</button>
+              <button type="submit" class="custom-button" (click)="calcularImporte()" mat-button matStepperNext>Siguiente</button>
             </div>
           </div>
           <div class="col-5">
@@ -58,16 +58,16 @@
   </mat-step>
   <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
     <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Formas de pago de la reserva</ng-template>
-      
+      <ng-template matStepLabel>Formas de pago de la reserva  </ng-template>
+      <p>El importe a pagar es {{importe}}</p>
       <div class="radio-group-vertical">
         <mat-radio-group class="payment-options" formControlName="forma_pago">
-          <mat-radio-button value="contado">Al contado</mat-radio-button>
-          <mat-radio-button value="Tarjeta">Tarjeta</mat-radio-button>
+          <mat-radio-button *ngIf="datosRecibidos.data.formas_pago!='tarjeta'" value="contado">Al contado</mat-radio-button>
+          <mat-radio-button *ngIf="datosRecibidos.data.formas_pago!='contado'" value="Tarjeta">Tarjeta</mat-radio-button>
         </mat-radio-group>
         <div *ngIf="secondFormGroup.controls['forma_pago'].value === 'Tarjeta'" class="card-payment">
-          <!-- Mostrar botón para redsys aquí -->
-          <button mat-button color="primary" (click)="redirectToRedsys()">Pagar con Tarjeta</button>
+          <!-- <button mat-button color="primary" (click)="redirectToRedsys()">Pagar con Tarjeta</button> -->
+          <app-payment-form [dataFromParent]="dataToChild" (dataToParent)="handleDataFromChild($event)"></app-payment-form>
         </div>
       </div>
       

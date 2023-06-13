@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Menu;
 use App\Models\Turnos;
 use App\Models\Reserva;
 use Illuminate\Http\Request;
@@ -56,12 +57,20 @@ class TurnosController extends Controller
          else {
             $disponibilidad = 'green';
         }
-
+        // Obtener el precio del menú
+        $menu = Menu::find($turno->id_menu);
+        if ($menu) {
+            $precioMenu = $menu->precio_pax;
+        } else {
+            $precioMenu = 19.90;
+        }
+        
         $response[] = [
             'data' => $turno,
             'plazasTotales' => $plazasTotales,
             'plazasOcupadas' => $plazasOcupadas,
-            'disponibilidad' => $disponibilidad
+            'disponibilidad' => $disponibilidad,
+            'precioMenu' => (float) $precioMenu
         ];
     }
 

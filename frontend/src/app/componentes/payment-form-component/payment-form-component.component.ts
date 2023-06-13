@@ -1,7 +1,8 @@
-import { AfterViewInit, Component, ElementRef, Inject, NgZone, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Inject, Input, NgZone, OnChanges, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { StripeService } from 'src/app/servicios/stripe.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { SimpleChanges } from '@angular/core';
 
 
 @Component({
@@ -20,9 +21,9 @@ export class PaymentFormComponent implements AfterViewInit {
   form!: FormGroup;
   loading = false;
   formData = new FormData();
-  precio!: number;
 
-
+  @Input() dataFromParent: any;
+  @Output() dataToParent = new EventEmitter<any>();
 
 
   constructor(
@@ -36,7 +37,16 @@ export class PaymentFormComponent implements AfterViewInit {
       });
       
   }
-
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(this.dataFromParent)
+    if (changes['dataFromParent'] && changes['dataFromParent'].currentValue) {
+      this.form.value.precio = changes['dataFromParent'].currentValue.importe;
+      this.form.patchValue({
+        precio: changes['dataFromParent'].currentValue.importe
+        
+      });
+    }
+  }
   ngAfterViewInit(){
     this.card = elements.create('card');
     this.card.mount(this.cardInfo.nativeElement);
@@ -69,14 +79,17 @@ export class PaymentFormComponent implements AfterViewInit {
 
     this.loading = true;
 
-    this.precio = this.form.value.precio;
+    // this.precio = this.form.value.precio;
 
 
 
-    this.onCLick(this.precio);
+    // this.onCLick(this.precio);
 
   }
 
-
+  sendDataToParent() {
+    const data = { /* tus datos aquí */ };
+    this.dataToParent.emit(data);
+  }
 
 }

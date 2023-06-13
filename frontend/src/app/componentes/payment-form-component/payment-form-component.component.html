@@ -2,8 +2,8 @@
 
   <div class="credit-card">
     <div class="col-10 mb-10">
-      <label class="form-label">Precio a pagar</label>
-      <input formControlName="precio" class="form-control" />
+      <label class="form-label">Precio a pagar  {{dataFromParent.precio}}</label>
+      <input formControlName="precio" class="form-control" [class.disabled]="true"/>
     </div>
       <div>
         <div #cardInfo></div>
