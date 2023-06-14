@@ -112,6 +112,9 @@ Route::middleware(['auth:sanctum'])->group(function(){
 });
     Route::post('correo', [CorreoController::class, 'enviarCorreo']);
 
+    //MOSTRAR IMAGENES DE INICIO Y GALERIA A CLIENTES NO LOGEADOS
+    Route::get('/galeria/search/{tipo}',[GaleriaController::class,'searchByTipo']);
+
 
     
 

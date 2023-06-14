@@ -19,7 +19,7 @@ export class Carousel5Component implements OnInit {
     }
 
     ngOnInit():void {
-      this.galeria.getFotosGaleria().subscribe(data =>{
+      this.galeria.searchByTipo('galeria').subscribe(data =>{
         console.log(data);
         if(data.length>0){
           this.images = data;
