@@ -79,11 +79,11 @@ export class PaymentFormComponent implements AfterViewInit {
 
     this.loading = true;
 
-    // this.precio = this.form.value.precio;
+    //this.precio = this.form.value.precio;
 
 
 
-    // this.onCLick(this.precio);
+    this.onCLick(this.form.value.precio);
 
   }
 
