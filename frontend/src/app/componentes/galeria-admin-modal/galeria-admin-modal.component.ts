@@ -37,7 +37,7 @@ export class GaleriaAdminModalComponent implements OnInit {
       tipo: [this.data?.tipo,Validators.required],
       id_admin: sessionStorage.getItem('usuario'),
       imagen_url: [this.data?.imagen_url],      
-      descripcion: [this.data?.descripcion, /*Validators.required*/],
+      descripcion: [this.data?.descripcion],
       observaciones: [this.data?.observaciones]
     });
   }

@@ -2,17 +2,17 @@
 <mat-toolbar color="primary">
     <span class="fill-remaining-space">{{titulo}}</span>
 </mat-toolbar>
-<mat-card>
-    <mat-card-content>
+<mat-card class="modal-scrollable">
+    <mat-card-content class="modal-content">
         <form *ngIf="!loading" [formGroup]="form" (ngSubmit)="onSubmit(form)" class="form">
             <mat-dialog-content>
 
                 <div class="row">
-                    <div class="col-4 mb-4">
+                    <div class="col-sm-12 col-md-6 col-lg-4">
                         <label class="form-label">Turno</label>
                         <select formControlName="turno" class="form-control" placeholder="hola"
                             [ngClass]="{ 'is-invalid': submitted && f.controls['turno'].invalid}">
-                            <option value="" hidden selected>Selecciona un turno</option>
+                            <option value="" [hidden]="true" [selected]="!f.controls['turno'].value">Selecciona un turno</option>
                             <option value="Comida">Comida</option>
                             <option value="Cena">Cena</option>
                         </select>
@@ -21,15 +21,15 @@
                         </div>
                     </div>
 
-                    <div class="col-4 mb-4">
+                    <div class="col-sm-12 col-md-6 col-lg-4">
                         <label class="form-label">Plazas</label>
-                        <input type="number" formControlName="n_plazas" class="form-control" min="0"
+                        <input type="number" formControlName="n_plazas" class="form-control" min="0" [placeholder]="'Ingrese las plazas'"
                             [ngClass]="{ 'is-invalid': submitted && f.controls['n_plazas'].invalid}" />
                         <div *ngIf="submitted && f.controls['n_plazas'].invalid" class="invalid-feedback">
                             <div>Plazas requerido</div>
                         </div>
                     </div>
-                    <div class="col-4 mb-4">
+                    <div class="col-sm-12 col-md-6 col-lg-4">
                         <label class="form-label">Fecha</label>
                         <input type="date" formControlName="fecha" class="form-control"
                             [ngClass]="{ 'is-invalid': submitted && f.controls['fecha'].invalid}" />
@@ -38,10 +38,11 @@
                             </div>
                     </div>
 
-                    <div class="col-4 mb-4">
+                    <div class="col-sm-12 col-md-6 col-lg-4">
                         <label class="form-label">Publicar </label>
                         <select formControlName="visible" class="form-control"
                             [ngClass]="{ 'is-invalid': submitted && f.controls['visible'].invalid}">
+                            <option value="" [hidden]="true" [selected]="!f.controls['visible'].value">Publicar</option>
                             <option value="1">SI</option>
                             <option value="0">NO</option>
                         </select>
@@ -49,10 +50,11 @@
                             <div>Elemento requerido</div>
                         </div>
                     </div>
-                    <div class="col-4 mb-4">
+                    <div class="col-sm-12 col-md-6 col-lg-4">
                         <label class="form-label">Pago </label>
                         <select formControlName="formas_pago" class="form-control"
                             [ngClass]="{ 'is-invalid': submitted && f.controls['formas_pago'].invalid}">
+                            <option value="" [hidden]="true" [selected]="!f.controls['formas_pago'].value">Forma de pago</option>
                             <option value="contado">Contado</option>
                             <option value="tarjeta">Tarjeta</option>
                             <option value="tarjeta y contado">Tarjeta y contado</option>
@@ -61,9 +63,10 @@
                             <div>Elemento requerido</div>
                         </div>
                     </div>
-                    <div class="col-4 mb-4">
+                    <div class="col-sm-12 col-md-6 col-lg-4">
                         <label class="form-label">Menu </label>
                         <select formControlName="id_menu" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.controls['id_menu'].invalid}">
+                            <option value="" [hidden]="true" [selected]="!f.controls['id_menu'].value">Menus</option>
                             <option value="{{opt.id}}" *ngFor="let opt of data.listaMenu">{{opt.nombre_menu}}</option>
                         </select>
                         <div *ngIf="submitted && f.controls['id_menu'].invalid" class="invalid-feedback">

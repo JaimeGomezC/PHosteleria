@@ -1,3 +1,7 @@
+.modal-content {
+  max-height: 600px; /* Establece la altura máxima del contenido del modal */
+  padding-bottom: 60px;
+}
 button {
     margin: 2%;
  }
@@ -16,9 +20,7 @@ button {
    margin-top: 2%;
  }
 
- .modal-content {
-   max-height: 600px; /* Establece la altura máxima del contenido del modal */
- }
+ 
  img{
    width: 200px;
    height: 200px;
@@ -29,3 +31,11 @@ button {
    background-color: #D3D3D3;
    opacity: 0.5;
  }
+
+@media (max-width: 768px) {
+  .modal-scrollable {
+      max-height: 400px; /* Ajusta esta altura según tus necesidades */
+      overflow-y: auto;
+  }
+}
+ 

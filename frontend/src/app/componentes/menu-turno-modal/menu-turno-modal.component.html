@@ -1,15 +1,16 @@
     <mat-toolbar color="primary">
         <span class="fill-remaining-space">{{titulo}}</span>
     </mat-toolbar>
-    <mat-card>
-        <mat-card-content>
+    <mat-card class="modal-scrollable">
+        <mat-card-content class="modal-content">
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form" action="/upload-image" enctype="multipart/form-data">
     
         <div class="row">
             <div class="col-md-12 mb-3">
                 <label class="form-label">Nombre del menu</label>
-                <input formControlName="nombre_menu" class="form-control"
-                    [ngClass]="{ 'is-invalid': submitted && f.controls['nombre_menu'].invalid}" />
+                <input formControlName="nombre_menu" class="form-control" 
+                    [ngClass]="{ 'is-invalid': submitted && f.controls['nombre_menu'].invalid}" 
+                    [placeholder]="'Ingrese el nombre del menú'"/>
                 <div *ngIf="submitted && f.controls['nombre_menu'].invalid" class="invalid-feedback">
                     <div>Nombre requerido</div>
                 </div>

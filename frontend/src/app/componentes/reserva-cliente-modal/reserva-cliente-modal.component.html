@@ -103,32 +103,18 @@
             </div>
             <div class="col-2 mb-2">
               <label class="form-label">estado</label>
-              <select formControlName="estado" class="form-select" [ngClass]="{ 'is-invalid': submitted && f.controls['estado'].errors }">
+              <select formControlName="estado" class="form-select" [ngClass]="{ 'is-invalid': submitted && f.controls['estado'].errors }" placehorder="Seleccionar estado">
                 <option value="" disabled selected>Seleccionar forma de pago</option>
                 <option value="Pendiente de pago">Pendiente de pago</option>
-                <option value="Pagado">Pagado</option>
+                <option value="Pendiente confirmar">Pendiente confirmar</option>
+                <option value="Pagada">Pagada</option>
                 <option value="Anulada">Anulada</option>
                 <option value="Finalizada">Finalizada</option>
               </select>
               <div *ngIf="submitted" class="invalid-feedback">
                 <div>precio_total requerido</div>
               </div>
-            <!-- </div>
-             <div class="col-2 mb-2">
-              <label class="form-label">pagado_base</label>
-              <input formControlName="pagado_base" class="form-control" min="0"
-                [ngClass]="{ 'is-invalid': submitted && f.value.pagado_base==''}" />
-              <div *ngIf="submitted" class="invalid-feedback">
-                <div>pagado_base requerido</div>
-              </div>
-            </div>
-            <div class="col-2 mb-2">
-              <label class="form-label">pagado_total</label>
-              <input formControlName="pagado_total" class="form-control" min="0"
-                [ngClass]="{ 'is-invalid': submitted && f.value.pagado_total==''}" />
-              <div *ngIf="submitted" class="invalid-feedback">
-                <div>pagado_total requerido</div>
-              </div> -->
+  
             </div>
             <div class="col-2 mb-2">
               <label class="form-label">codigo_verificacion</label>

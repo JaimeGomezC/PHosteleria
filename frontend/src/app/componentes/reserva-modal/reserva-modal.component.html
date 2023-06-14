@@ -1,7 +1,7 @@
 <div class="container">
 
   <h3 class="centered-heading title">
-    Pasos para hacer tu reserva del {{ datosRecibidos.fechaReserva | date: 'dd/MM/yyyy' }},
+    Pasos para hacer tu reserva del {{ datosRecibidos.data.fecha | date: 'dd/MM/yyyy' }},
     número de plazas totales {{ maxPlazas }}, plazas disponibles {{plzVacantes}}.
   </h3>
 <mat-stepper class="stepper" orientation="vertical" [linear]="isLinear" #stepper>
@@ -10,46 +10,47 @@
       <ng-template matStepLabel>Rellena tus datos</ng-template>
       <mat-card class="form-card" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="15px">
         <div class="row">
-          <div class="col-7">
+          
+          <div class="col-sm-12 col-md-7 col-lg-7">
             <div class="row">
-              <mat-form-field class="col-6">
+              <mat-form-field class="col-sm-12 col-md-6 col-lg-6">
                 <mat-label>Nombre</mat-label>
                 <input matInput placeholder="Tu nombre" formControlName="nombre" required>
               </mat-form-field>
-              <mat-form-field class="col-6">
+              <mat-form-field class="col-sm-12 col-md-6 col-lg-6">
                 <mat-label>1ª apellido</mat-label>
                 <input matInput placeholder="1ª apellido" formControlName="apellido1" required>
               </mat-form-field>
-              <mat-form-field class="col-6">
+              <mat-form-field class="col-sm-12 col-md-6 col-lg-6">
                 <mat-label>2ª apellido</mat-label>
                 <input matInput placeholder="2ª Apellido" formControlName="apellido2" required>
               </mat-form-field>
-              <mat-form-field class="col-6">
+              <mat-form-field class="col-sm-12 col-md-6 col-lg-6">
                 <mat-label>Correo electrónico</mat-label>
                 <input matInput placeholder="pat@example.com" formControlName="email" required>
                 <mat-error *ngIf="f.get('email')">Ingresa un correo electrónico válido.</mat-error>
               </mat-form-field>
-              <mat-form-field class="col-6">
+              <mat-form-field class="col-sm-12 col-md-6 col-lg-6">
                 <mat-label>Teléfono</mat-label>
                 <input matInput placeholder="Teléfono" formControlName="telefono" required>
               </mat-form-field>
-              <mat-form-field class="col-6">
+              <mat-form-field class="col-sm-12 col-md-6 col-lg-6">
                 <mat-label>Número de reservas</mat-label>
                 <input type="number" matInput placeholder="Número de reservas" formControlName="num_comensales" required (change)="reservaMax(f.controls['num_comensales'])">
                 <mat-error *ngIf="f.controls['num_comensales'].invalid">Ingresa un número válido de plazas.</mat-error>
               </mat-form-field>
               <mat-form-field class="col-12">
                 <mat-label>Observaciones</mat-label>
-                <textarea matInput placeholder="IMPORTANTE: En caso de que alguno de los comensales tuviera alguna intolerancia o alergia alimentaria, por favor, indíquelo en el apartado Observaciones. De no indicarlo con antelación y tratarse de un menú fijo no aseguramos la posibilidad de adaptación." formControlName="observaciones_cliente"></textarea>
+                <textarea matInput matTextareaAutosize placeholder="IMPORTANTE: En caso de que alguno de los comensales tuviera alguna intolerancia o alergia alimentaria, por favor, indíquelo en este apartado. De no indicarlo con antelación y tratarse de un menú fijo no aseguramos la posibilidad de adaptación." formControlName="observaciones_cliente"></textarea>
               </mat-form-field>
             </div>
             <div>
               <button type="submit" class="custom-button" (click)="calcularImporte()" mat-button matStepperNext>Siguiente</button>
             </div>
           </div>
-          <div class="col-5">
+          <div class="col-sm-12 col-md-5 col-lg-5">
             <ng-container *ngIf="urlImagen">
-              <img src="{{ urlImagen }}" width="300" height="300" alt="Imagen del menu no encontrada">
+              <img src="{{ urlImagen }}"class="w-100 h-100" alt="Imagen del menu no encontrada">
             </ng-container>
           </div>
         </div>

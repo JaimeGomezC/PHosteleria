@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-10 mb-10">
             <label class="form-label">Nombre de la imagen</label>
-            <input formControlName="nombre_imagen" class="form-control"
+            <input formControlName="nombre_imagen" class="form-control" [placeholder]="'Ingrese el nombre de la imagen'"
                 [ngClass]="{ 'is-invalid': submitted && f.controls['nombre_imagen'].invalid}" />
             <div *ngIf="submitted && f.controls['nombre_imagen'].invalid" class="invalid-feedback">
                 <div>Nombre requerido</div>
@@ -19,7 +19,7 @@
             <label class="form-label">Tipo de imagen</label>
             <select formControlName="tipo" class="form-control"
               [ngClass]="{ 'is-invalid': submitted && f.controls['tipo'].invalid}">
-              <option value="" [attr.disabled]="true" [attr.selected]="true" >Selecciona un tipo</option>
+              <option value="" [selected]="!f.controls['tipo'].value" >Selecciona un tipo</option>
               <option value="inicio">Inicio</option>
               <option value="galeria">Galería</option>
               <option value="zigzag">Zigzag</option>

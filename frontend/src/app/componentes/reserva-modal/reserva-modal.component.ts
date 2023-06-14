@@ -57,12 +57,12 @@ export class ReservaModalComponent implements OnInit {
       nombre: ['', Validators.required],
       apellido1: ['', Validators.required],
       apellido2: ['', Validators.required],
-      email: ['', [Validators.required,Validators.email]],
-      telefono: ['', Validators.required],
+      email: ['', [Validators.required,Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)]],
+      telefono: ['', [Validators.required,Validators.pattern(/^\d{9}$/)]],
       num_comensales: ['',[Validators.required,this.nPlazasValidar()]],
       observaciones_cliente: [''],
-      id_turno: [this.datosRecibidos ? this.datosRecibidos.idTurno : ''],
-      fecha: [this.datosRecibidos ? this.datosRecibidos.fechaReserva : ''],
+      id_turno: [this.datosRecibidos ? this.datosRecibidos.data.id : ''],
+      fecha: [this.datosRecibidos ? this.datosRecibidos.data.fecha : ''],
       forma_pago: [''],
       estado: [''],
       precio_total: [0],
@@ -161,7 +161,8 @@ export class ReservaModalComponent implements OnInit {
       if (result.isConfirmed) {
         const clienteData = {
         ...this.f.value,
-        ...this.secondFormGroup.value
+        ...this.secondFormGroup.value,
+        estado: (this.secondFormGroup.controls['forma_pago'].value === 'contado') ? 'Pendiente de pago' : ''
       };
         this.stepper.next();
         this.isEditable=false;

@@ -65,3 +65,7 @@ Si trabajas con XAMPP C:\xampp\php\php.ini
 composer update
 //viene el composer.json se debe instalar con el update --composer require maatwebsite/excel
 npm install file-saver
+
+14/06/2023
+composer require stripe/stripe-php
+

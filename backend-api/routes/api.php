@@ -35,18 +35,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::group(['middleware' => 'cors'], function(){
+    //SERVICIOS NO LOGEADOS
     Route::post('login',[AuthController::class,'login']);
     Route::post('logout',[AuthController::class,'logout']);
     Route::post('register',[AuthController::class,'register']);
     Route::get('turnos/publicados',[TurnosController::class,'turnosPublicados']);
     Route::get('reservas/plazasVacantes/{id_turno}',[ReservaController::class, 'calcularPlazasVacantes']);
     Route::post('pl/insertClienteReserva', [PlController::class, 'insertClienteReserva']);
-    Route::post('/payment', [PaymentController::class, 'processPayment']);
-
-    
     Route::post('reservas/anular/{codigoVerificacion}', [ReservaController::class, 'anularReserva']);
     Route::get('menus/{menu}', [MenuController::class, 'show']);
-
+    Route::get('/galeria/search/{tipo}',[GaleriaController::class,'searchByTipo']);
+    Route::post('galeria/upload-foto', [GaleriaController::class, 'uploadImage']);
 
 });
 
@@ -99,10 +98,8 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::post('galeria',[GaleriaController::class,'store']);
     Route::get('galeria/{imagen}',[GaleriaController::class,'show']);
     Route::put('galeria/{imagen}',[GaleriaController::class,'update']);
-    Route::get('/galeria/search/{tipo}',[GaleriaController::class,'searchByTipo']);
     Route::delete('galeria/deleteImage',[GaleriaController::class,'deleteImage']);
     Route::delete('galeria/{imagen}',[GaleriaController::class,'destroy']);
-    Route::post('galeria/upload-foto', [GaleriaController::class, 'uploadImage']);
 
     // LLAMADAS A FUNCIONES PL
     Route::post('pl/actualizar-cliente-reserva', [PlController::class, 'actualizarClienteReserva']);
@@ -111,9 +108,9 @@ Route::middleware(['auth:sanctum'])->group(function(){
     
 });
     Route::post('correo', [CorreoController::class, 'enviarCorreo']);
+    Route::post('/payment', [PaymentController::class, 'processPayment']);
 
-    //MOSTRAR IMAGENES DE INICIO Y GALERIA A CLIENTES NO LOGEADOS
-    Route::get('/galeria/search/{tipo}',[GaleriaController::class,'searchByTipo']);
+
 
 
     
