@@ -220,7 +220,18 @@ export class ReservaModalComponent implements OnInit {
   }
 
   handleDataFromChild(data: any) {
-    // Aquí puedes manejar los datos emitidos desde el componente hijo
-    console.log(data);
+    if(data.error){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: data.message,
+      })
+    }else{
+      Swal.fire(
+        'Reserva realizada!',
+        data.message,
+        'success'
+      );
+    }    console.log(data);
   }
 }
