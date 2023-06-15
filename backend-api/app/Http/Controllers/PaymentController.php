@@ -28,11 +28,10 @@ class PaymentController extends Controller
 
         // Procesar la respuesta del pago
         if ($charge->status === 'succeeded') {
-            // Pago exitoso, realizar las acciones necesarias (por ejemplo, guardar en la base de datos)
-            return redirect()->back()->with('success', 'Pago exitoso');
+            return response()->json(['result' => 'ok', 'message' => 'Pago exitoso'], 200);
         } else {
             // El pago falló
-            return redirect()->back()->with('error', 'Error al procesar el pago');
+            return response()->json(['message' => 'Error al procesar el pago'], 404);
         }
     }
 }

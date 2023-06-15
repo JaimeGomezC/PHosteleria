@@ -28,7 +28,7 @@ BEGIN
         RETURN JSON_OBJECT('error', TRUE, 'message', CONCAT('Error: ', @sqlstate, ' - ', @errno, ' - ', @errmsg));
     END;
 
-    SELECT n_plazas INTO plazas_totales FROM turnos WHERE id = JSON_EXTRACT(json_params, '$.id_turno');
+    SELECT n_plazas INTO plazas_totales FROM turnos WHERE id = JSON_UNQUOTE(JSON_EXTRACT(json_params, '$.id_turno'));
 
     IF plazas_totales IS NULL THEN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'No se encontró el turno especificado';

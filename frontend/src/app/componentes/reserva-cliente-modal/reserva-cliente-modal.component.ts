@@ -133,7 +133,7 @@ export class ReservaClienteModalComponent implements OnInit {
             'success'
           );
         }
-        this.cancelar();
+        // this.cancelar();
       },
       (error) => {
         console.dir(error)

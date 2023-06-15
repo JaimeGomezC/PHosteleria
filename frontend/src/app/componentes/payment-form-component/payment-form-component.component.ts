@@ -12,8 +12,7 @@ import { SimpleChanges } from '@angular/core';
 })
 export class PaymentFormComponent implements AfterViewInit {
 
-  @ViewChild('cardInfo')
-  cardInfo!: ElementRef;
+  @ViewChild('cardInfo') cardInfo!: ElementRef;
   cardError: any;
   card: any;
 
@@ -67,28 +66,23 @@ export class PaymentFormComponent implements AfterViewInit {
     const { token, error} = await stripe.createToken(this.card);
     if (token){
       const response = await this.stripeService.charge(precio * 100 , token.id);
-      console.log(response);
+      this.sendDataToParent(response)
     }
     else{
       this.ngZone.run(() => this.cardError = error.message);
+      this.sendDataToParent(error)
     }
   }
 
   onSubmit(): void {
     this.submitted = true;
-
     this.loading = true;
-
     //this.precio = this.form.value.precio;
-
-
-
     this.onCLick(this.form.value.precio);
 
   }
 
-  sendDataToParent() {
-    const data = { /* tus datos aquí */ };
+  sendDataToParent(data:any) {
     this.dataToParent.emit(data);
   }
 

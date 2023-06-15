@@ -12,7 +12,7 @@ class CreateInsertClienteReservaFunction extends Migration
         RETURNS JSON
         BEGIN
             DECLARE id_cliente INT;
-            DECLARE v_codigo VARCHAR(10);
+            DECLARE v_codigo VARCHAR(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
             DECLARE plazas_totales INT;
             DECLARE plazas_ocupadas INT;
             DECLARE plazas_disponibles INT;
