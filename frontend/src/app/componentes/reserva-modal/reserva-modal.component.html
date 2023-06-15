@@ -60,7 +60,7 @@
   <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
     <form [formGroup]="secondFormGroup">
       <ng-template matStepLabel>Formas de pago de la reserva  </ng-template>
-      <p>El importe a pagar es {{importe}}</p>
+      <p>El importe a pagar es {{importe}} €</p>
       <div class="radio-group-vertical">
         <mat-radio-group class="payment-options" formControlName="forma_pago">
           <mat-radio-button *ngIf="datosRecibidos.data.formas_pago!='tarjeta'" value="contado">Al contado</mat-radio-button>

@@ -149,7 +149,7 @@ export class ReservaModalComponent implements OnInit {
 
   addTurno() {
     Swal.fire({
-      title: 'Se dispone a relaizar la reserva',
+      title: 'Se dispone a realizar la reserva',
       text: "Revise los datos, ya no podrá modificarlos!",
       icon: 'warning',
       showCancelButton: true,
