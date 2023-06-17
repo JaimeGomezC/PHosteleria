@@ -12,6 +12,7 @@
         "laravel/sanctum": "^2.15",
         "laravel/tinker": "^2.5",
         "maatwebsite/excel": "^3.1",
+        "phpmailer/phpmailer": "^6.8",
         "phpoffice/phpspreadsheet": "^1.17",
         "sendgrid/sendgrid": "^8.0",
         "spatie/laravel-permission": "^5.10",

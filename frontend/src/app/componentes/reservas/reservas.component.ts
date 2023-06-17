@@ -9,6 +9,7 @@ import { TurnosService } from 'src/app/servicios/turnos.service';
 import { TraductorService } from 'src/app/servicios/traductor.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ReservaService } from 'src/app/servicios/reserva.service';
+import { CorreoService } from 'src/app/servicios/correo.service';
 import Swal from 'sweetalert2';
 
 
@@ -25,7 +26,9 @@ export class ReservasComponent implements OnInit {
   })
   datosTurnos?:any;
 
-  constructor(private turno:TurnosService, private router:Router, private traductorService: TraductorService,private snack: MatSnackBar,
+  constructor(private turno:TurnosService, 
+    private router:Router, private traductorService: TraductorService,
+    private snack: MatSnackBar,private correo: CorreoService,
     private renderer: Renderer2,private reserva:ReservaService,) {   }
   public tr=this.traductorService;
   calendarOptions?: CalendarOptions;
@@ -33,6 +36,7 @@ export class ReservasComponent implements OnInit {
   @ViewChild('fullcalendar') fullcalendar?: FullCalendarComponent;
   legendItems: any[]=[];
   codigoVerificacion: string = '';
+  email: string = '';
 
   ngOnInit() {
     // need for load calendar bundle first
@@ -210,4 +214,36 @@ export class ReservasComponent implements OnInit {
       }
     );
   }
+
+  recordarCorreo(email: string) {
+    this.correo.enviarCorreo(email).subscribe(
+      (response) => {
+        if(response.result=='ok'){
+          Swal.fire({
+            icon: 'success',
+            title: response.message,
+            showConfirmButton: false,
+            timer: 2000
+          })
+        }else{
+          Swal.fire({
+            icon: 'error',
+            title: 'error al llamar al servicio',
+            showConfirmButton: false,
+          showCancelButton: true,
+          cancelButtonText: 'Aceptar'          })
+        }
+        
+      },
+      (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: error.error.error,
+          showConfirmButton: false,
+        showCancelButton: true,
+        cancelButtonText: 'Aceptar'  
+      });
+    });
+  }
+
 }

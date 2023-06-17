@@ -5,7 +5,7 @@
       <label class="form-label">Precio a pagar  {{dataFromParent.precio}}</label>
       <input formControlName="precio" class="form-control" [class.disabled]="true"/>
     </div>
-      <div>
+      <div><br>
         <div #cardInfo></div>
         <div class="error" *ngIf="cardError">
           {{ cardError }}

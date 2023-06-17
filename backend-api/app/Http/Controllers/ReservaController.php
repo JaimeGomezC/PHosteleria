@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Reserva;
 use App\Models\Turnos;
+use App\Models\Cliente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -152,5 +153,33 @@ class ReservaController extends Controller
     else {
         return response()->json(['result' => 'error', 'message' => 'Código de verificación inválido']);
     }
+}
+
+public function getReservasByClienteCorreo($correo)
+{
+    // Buscar los clientes por correo
+    $clientes = Cliente::where('email', $correo)->get();
+
+    // Verificar si se encontraron clientes
+    if ($clientes->isEmpty()) {
+        return response()->json(['error' => 'Cliente no encontrado'], 404);
+    }
+
+    $reservas = [];
+
+    // Obtener las reservas de cada cliente con estado distinto de "anulado" y "finalizado"
+    foreach ($clientes as $cliente) {
+        $clienteReservas = Reserva::where('id_cliente', $cliente->id)
+            ->whereNotIn('estado', ['Anulado', 'Finalizado'])
+            ->get();
+
+        $reservas = array_merge($reservas, $clienteReservas->toArray());
+    }
+
+    if (empty($reservas)) {
+        return response()->json(['message' => 'El cliente no tiene reservas'], 200);
+    }
+
+    return response()->json($reservas, 200);
 }
 }
