@@ -205,12 +205,20 @@ export class ReservasComponent implements OnInit {
             showConfirmButton: false,
           showCancelButton: true,
           cancelButtonColor: '#d33',
-          cancelButtonText: 'Aceptar'          })
+          cancelButtonText: 'Aceptar'
+          })
         }
         
       },
       (error) => {
-        console.error('Error al anular la reserva:', error);
+        Swal.fire({
+          icon: 'error',
+          title: error.error.message,
+          text: 'Conctate con el centro',
+          showConfirmButton: false,
+        showCancelButton: true,
+        cancelButtonText: 'Aceptar'
+        })
       }
     );
   }

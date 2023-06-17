@@ -138,21 +138,36 @@ class ReservaController extends Controller
     $reserva = Reserva::where('codigo_verificacion', $codigoVerificacion)->first();
 
     // Verificar si se encontró una reserva
-    if ($reserva->estado=='Pagado') {
-        // Actualizar el estado de la reserva a "anulado"
-        $reserva->estado = 'Pagada y Anulada';
-        $reserva->save();
+    if (!$reserva) {
+        return response()->json(['result' => 'error', 'message' => 'Código de verificación inválido'], 404);
+    }
 
-        return response()->json(['result' => 'ok', 'message' => 'Reserva anulada']);
-    } 
-    elseif($reserva->estado!='Pagado'){
+    // Obtener la fecha del turno
+    $turno = Turnos::find($reserva->id_turno);
+    if (!$turno) {
+        return response()->json(['result' => 'error', 'message' => 'El turno no existe'], 404);
+    }
+    $fechaTurno = $turno->fecha;
+
+    // Calcular la diferencia en días entre la fecha del turno y la fecha actual
+    $fechaActual = date('Y-m-d');
+    $diferenciaDias = strtotime($fechaTurno) - strtotime($fechaActual);
+    $diferenciaDias = floor($diferenciaDias / (60 * 60 * 24));
+
+    // Verificar si faltan menos de 3 días para el servicio del turno
+    if ($diferenciaDias < 3) {
+        return response()->json(['result' => 'error', 'message' => 'No se puede anular la reserva. Faltan menos de 3 días para el servicio del turno.'], 400);
+    }
+
+    // Anular la reserva
+    if ($reserva->estado == 'Pagado') {
+        $reserva->estado = 'Pagada y Anulada';
+    } else {
         $reserva->estado = 'Anulada';
-        $reserva->save();
-        return response()->json(['result' => 'ok', 'message' => 'Reserva anulada']);
     }
-    else {
-        return response()->json(['result' => 'error', 'message' => 'Código de verificación inválido']);
-    }
+    $reserva->save();
+
+    return response()->json(['result' => 'ok', 'message' => 'Reserva anulada'], 200);
 }
 
 public function getReservasByClienteCorreo($correo)
@@ -170,7 +185,7 @@ public function getReservasByClienteCorreo($correo)
     // Obtener las reservas de cada cliente con estado distinto de "anulado" y "finalizado"
     foreach ($clientes as $cliente) {
         $clienteReservas = Reserva::where('id_cliente', $cliente->id)
-            ->whereNotIn('estado', ['Anulado', 'Finalizado'])
+            ->whereNotIn('estado', ['Anulada', 'Finalizado'])
             ->get();
 
         $reservas = array_merge($reservas, $clienteReservas->toArray());
