@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { HttpClient } from '@angular/common/http';
 import { MatStepper } from '@angular/material/stepper';
 import { CorreoService } from 'src/app/servicios/correo.service';
+import { TraductorService } from 'src/app/servicios/traductor.service';
 
 
 @Component({
@@ -28,7 +29,7 @@ export class ReservaModalComponent implements OnInit {
   isEditable = true;
   importe?:any;
   dataToChild: any;
-
+  
  
   constructor(private _formBuilder: FormBuilder,
     private router: Router,
@@ -37,7 +38,8 @@ export class ReservaModalComponent implements OnInit {
     private snack: MatSnackBar,
     private reserva:ReservaService,
     private http: HttpClient,
-    private correo: CorreoService
+    private correo: CorreoService,
+    private traductorService: TraductorService
     ) {
     // this.router.params.subscribe(params => {
     //   console.log('Datos recibidos');
@@ -50,9 +52,10 @@ export class ReservaModalComponent implements OnInit {
       if(this.datosRecibidos.data["id_menu"]!="null"){
         this.getMenuImg(this.datosRecibidos.data["id_menu"]);
       }
-
-    // });
   }
+
+  public tr=this.traductorService;
+  
   ngOnInit(): void {
     this.cagardatos();
     this.calcularPlazasVacantes();
@@ -166,17 +169,17 @@ export class ReservaModalComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
-      this.grabar();
+      this.grabar("Pendiente confirmar");
       }
     })
   }
   
-  grabar() {
+  grabar(item:string) {
         const clienteData = {
         ...this.f.value,
         ...this.secondFormGroup.value,
-        estado: (this.secondFormGroup.controls['forma_pago'].value === 'contado') ? 'Pendiente de pago' : ''
-      };
+        estado: item
+        };
         this.stepper.next();
         this.isEditable=false;
         this.cliente.agregarCliente(clienteData).subscribe(
@@ -221,7 +224,7 @@ export class ReservaModalComponent implements OnInit {
         data.message,
         'success'
       );
-      this.grabar()
+      this.grabar("Pagada")
     };
   }
 

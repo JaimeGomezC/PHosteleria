@@ -1,51 +1,52 @@
 <div class="container">
 
   <h3 class="centered-heading title">
-    Pasos para hacer tu reserva del {{ datosRecibidos.data.fecha | date: 'dd/MM/yyyy' }},
-    número de plazas totales {{ maxPlazas }}, plazas disponibles {{plzVacantes}}.
+    {{ tr.translate('t1reserva', tr.idiomaSeleccionado) }} {{ datosRecibidos.data.fecha | date: 'dd/MM/yyyy' }},
+    {{ tr.translate('t2reserva', tr.idiomaSeleccionado) }} {{ maxPlazas }}, {{ tr.translate('t3reserva', tr.idiomaSeleccionado) }} {{plzVacantes}}.
   </h3>
 <mat-stepper class="stepper" orientation="vertical" [linear]="isLinear" #stepper>
   <mat-step [stepControl]="firstFormGroup" [editable]="isEditable">
     <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Rellena tus datos</ng-template>
+      <ng-template matStepLabel>{{ tr.translate('rRellena tus datos', tr.idiomaSeleccionado) }}</ng-template>
       <mat-card class="form-card" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="15px">
         <div class="row">
           
           <div class="col-sm-12 col-md-7 col-lg-7">
             <div class="row">
               <mat-form-field class="col-sm-12 col-md-6 col-lg-6">
-                <mat-label>Nombre</mat-label>
+                <mat-label>{{ tr.translate('rNombre', tr.idiomaSeleccionado) }}</mat-label>
                 <input matInput placeholder="Tu nombre" formControlName="nombre" required>
               </mat-form-field>
               <mat-form-field class="col-sm-12 col-md-6 col-lg-6">
-                <mat-label>1ª apellido</mat-label>
+                <mat-label>{{ tr.translate('r1ª apellido', tr.idiomaSeleccionado) }} </mat-label>
                 <input matInput placeholder="1ª apellido" formControlName="apellido1" required>
               </mat-form-field>
               <mat-form-field class="col-sm-12 col-md-6 col-lg-6">
-                <mat-label>2ª apellido</mat-label>
+                <mat-label>{{ tr.translate('r2ª apellido', tr.idiomaSeleccionado) }}</mat-label>
                 <input matInput placeholder="2ª Apellido" formControlName="apellido2" required>
               </mat-form-field>
               <mat-form-field class="col-sm-12 col-md-6 col-lg-6">
-                <mat-label>Correo electrónico</mat-label>
+                <mat-label>{{ tr.translate('rCorreo electrónico', tr.idiomaSeleccionado) }}</mat-label>
                 <input matInput placeholder="pat@example.com" formControlName="email" required>
                 <mat-error *ngIf="f.get('email')">Ingresa un correo electrónico válido.</mat-error>
               </mat-form-field>
               <mat-form-field class="col-sm-12 col-md-6 col-lg-6">
-                <mat-label>Teléfono</mat-label>
+                <mat-label>{{ tr.translate('rTeléfono', tr.idiomaSeleccionado) }}</mat-label>
                 <input matInput placeholder="Teléfono" formControlName="telefono" required>
               </mat-form-field>
               <mat-form-field class="col-sm-12 col-md-6 col-lg-6">
-                <mat-label>Número de reservas</mat-label>
+                <mat-label>{{ tr.translate('rNúmero de reservas', tr.idiomaSeleccionado) }}</mat-label>
                 <input type="number" matInput placeholder="Número de reservas" formControlName="num_comensales" required (change)="reservaMax(f.controls['num_comensales'])">
                 <mat-error *ngIf="f.controls['num_comensales'].invalid">Ingresa un número válido de plazas.</mat-error>
               </mat-form-field>
               <mat-form-field class="col-12">
-                <mat-label>Observaciones</mat-label>
+                <mat-label>{{ tr.translate('rObservaciones', tr.idiomaSeleccionado) }}</mat-label>
                 <textarea matInput matTextareaAutosize placeholder="IMPORTANTE: En caso de que alguno de los comensales tuviera alguna intolerancia o alergia alimentaria, por favor, indíquelo en este apartado. De no indicarlo con antelación y tratarse de un menú fijo no aseguramos la posibilidad de adaptación." formControlName="observaciones_cliente"></textarea>
               </mat-form-field>
             </div>
             <div>
-              <button type="submit" class="custom-button" (click)="calcularImporte()" mat-button matStepperNext>Siguiente</button>
+              <button type="submit" class="custom-button" (click)="calcularImporte()" mat-button matStepperNext>
+                {{ tr.translate('rSiguiente', tr.idiomaSeleccionado) }}</button>
             </div>
           </div>
           <div class="col-sm-12 col-md-5 col-lg-5">
@@ -59,12 +60,12 @@
   </mat-step>
   <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
     <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Formas de pago de la reserva  </ng-template>
-      <p>El importe a pagar es {{importe}} €</p>
+      <ng-template matStepLabel>{{ tr.translate('rFormas de pago de la reserva', tr.idiomaSeleccionado) }}</ng-template>
+      <p>{{ tr.translate('rEl importe a pagar es', tr.idiomaSeleccionado) }} {{importe}} €</p>
       <div class="radio-group-vertical">
         <mat-radio-group class="payment-options" formControlName="forma_pago">
-          <mat-radio-button *ngIf="datosRecibidos.data.formas_pago!='tarjeta'" value="contado">Al contado</mat-radio-button>
-          <mat-radio-button *ngIf="datosRecibidos.data.formas_pago!='contado'" value="Tarjeta">Tarjeta</mat-radio-button>
+          <mat-radio-button *ngIf="datosRecibidos.data.formas_pago!='tarjeta'" value="contado">{{ tr.translate('rContado', tr.idiomaSeleccionado) }}</mat-radio-button>
+          <mat-radio-button *ngIf="datosRecibidos.data.formas_pago!='contado'" value="Tarjeta">{{ tr.translate('rTarjeta', tr.idiomaSeleccionado) }}</mat-radio-button>
         </mat-radio-group>
         <div *ngIf="secondFormGroup.controls['forma_pago'].value === 'Tarjeta'" class="card-payment">
           <app-payment-form [dataFromParent]="dataToChild" (dataToParent)="handleDataFromChild($event)"></app-payment-form>
@@ -72,26 +73,27 @@
       </div><br>
       
       <div>
-        <button class="custom-button" mat-button matStepperPrevious>Volver</button>
-        <button class="custom-button" mat-button  (click)="addTurno()">Siguiente</button>
+        <button class="custom-button" mat-button matStepperPrevious>{{ tr.translate('rVolver', tr.idiomaSeleccionado) }}</button>
+        <button class="custom-button" mat-button [disabled]="secondFormGroup.controls['forma_pago'].value === 'Tarjeta'" 
+        (click)="addTurno()" >{{ tr.translate('rObservaciones', tr.idiomaSeleccionado) }}</button>
       </div>
     </form>
   </mat-step>
   <mat-step [stepControl]="lastFormGroup" [editable]="isEditable">
     <form [formGroup]="lastFormGroup">
+      <ng-template matStepLabel>{{ tr.translate('rConfirmar reserva', tr.idiomaSeleccionado) }}</ng-template>
       <div *ngIf="this.secondFormGroup.controls['forma_pago'].value === 'contado'">
-        <p>Introduce el código recibido por correo para confirmar tu reserva.</p>
+        <p>{{ tr.translate('rIntroduce', tr.idiomaSeleccionado) }}</p>
         <mat-form-field class="col-6">
-          <mat-label>Código</mat-label>
+          <mat-label>{{ tr.translate('rCódigo', tr.idiomaSeleccionado) }}</mat-label>
           <input matInput placeholder="codigo" formControlName="codigo" required>
         </mat-form-field>
       </div>
       <div *ngIf="this.secondFormGroup.controls['forma_pago'].value != 'contado'">
-        <p>Reserva confirmada. Ha recibido por email su código de reserva.</p>
+        <p>{{ tr.translate('rReserva', tr.idiomaSeleccionado) }}</p>
       </div>
     <div> 
-      <!-- <button class="custom-button" mat-button matStepperPrevious>Volver</button> -->
-      <button class="custom-button" mat-button matStepperNext (click)="finalizar(lastFormGroup.controls['codigo'].value)">Finalizar</button>
+      <button class="custom-button" mat-button matStepperNext (click)="finalizar(lastFormGroup.controls['codigo'].value)">{{ tr.translate('rFinalizar', tr.idiomaSeleccionado) }}</button>
     </div>
     </form>
   </mat-step>
