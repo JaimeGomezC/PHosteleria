@@ -2,6 +2,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	margin-top: 60px;
   }
   h1{text-align: center;}
   .carousel {
@@ -18,7 +19,7 @@
 	  background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
 	  position: absolute;
 	  width: 200px;
-	  height: 100px;
+	  height: 400px;
 	  z-index: 2;
 	}
   
@@ -35,7 +36,7 @@
   
 	.slide-track {
 	  display: flex;
-	  animation: scroll 10s linear infinite;
+	  animation: scroll 38s linear infinite;
 	  width: 4000px;
 	}
   
@@ -54,5 +55,5 @@
   
   @keyframes scroll {
 	0% { transform: translateX(0); }
-	100% { transform: translateX(calc(-800px * 2 + 800px)); }
+	100% { transform: translateX(calc(-800px * 6 + 800px)); }
   }
