@@ -14,6 +14,10 @@
   padding: 10px; /* Espaciado interno del caption */
 }
 
+.carousel-caption h5{
+  font-size: 18px;
+}
+
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
   background-color: #000; /* Color de fondo para los iconos de navegación */
