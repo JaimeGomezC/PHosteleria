@@ -53,6 +53,7 @@ Route::group(['middleware' => 'cors'], function(){
 });
 
 Route::middleware(['auth:sanctum'])->group(function(){
+    //SERVICIOS LOGEADOS
     Route::get('index', [AuthController::class, 'index']);
     Route::delete('destroy/{user}', [AuthController::class, 'destroy']);
     // Route::post('register',[AuthController::class,'register']);
