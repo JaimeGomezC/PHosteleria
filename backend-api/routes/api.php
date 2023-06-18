@@ -47,7 +47,9 @@ Route::group(['middleware' => 'cors'], function(){
     Route::get('/galeria/search/{tipo}',[GaleriaController::class,'searchByTipo']);
     Route::post('galeria/upload-foto', [GaleriaController::class, 'uploadImage']);
     Route::post('correo', [CorreoController::class, 'enviarCorreo']);
-
+    Route::post('comunicar/correo', [CorreoController::class, 'correo']);
+    Route::post('/payment', [PaymentController::class, 'processPayment']);
+    Route::post('reservas/confirmar/{codigoVerificacion}', [ReservaController::class, 'confirmarReserva']);
     
 
 });
@@ -111,7 +113,6 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::post('pl/updateClienteReserva', [PlController::class, 'updateClienteReserva']);
     
 });
-    Route::post('/payment', [PaymentController::class, 'processPayment']);
 
 
 

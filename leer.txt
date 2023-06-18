@@ -68,4 +68,5 @@ npm install file-saver
 
 14/06/2023
 composer require stripe/stripe-php
-
+16/06/2023
+composer require phpmailer/phpmailer

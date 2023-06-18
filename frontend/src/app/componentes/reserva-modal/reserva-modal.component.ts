@@ -1,6 +1,6 @@
 import { Component, Input, OnInit,ViewChild  } from '@angular/core';
 import {AbstractControl, FormBuilder, ValidationErrors, Validators} from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 import { ClienteService } from 'src/app/servicios/cliente.service';
 import { ReservaService } from 'src/app/servicios/reserva.service';
 import { MenuService } from 'src/app/servicios/menu.service';
@@ -8,8 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import Swal from 'sweetalert2';
 import { HttpClient } from '@angular/common/http';
 import { MatStepper } from '@angular/material/stepper';
-
-
+import { CorreoService } from 'src/app/servicios/correo.service';
 
 
 @Component({
@@ -31,7 +30,15 @@ export class ReservaModalComponent implements OnInit {
   dataToChild: any;
 
  
-  constructor(private _formBuilder: FormBuilder,private router:ActivatedRoute,private cliente:ClienteService,private menu:MenuService,private snack: MatSnackBar,private reserva:ReservaService,private http: HttpClient ) {
+  constructor(private _formBuilder: FormBuilder,
+    private router: Router,
+    private cliente:ClienteService,
+    private menu:MenuService,
+    private snack: MatSnackBar,
+    private reserva:ReservaService,
+    private http: HttpClient,
+    private correo: CorreoService
+    ) {
     // this.router.params.subscribe(params => {
     //   console.log('Datos recibidos');
     //   console.log(params);
@@ -147,7 +154,7 @@ export class ReservaModalComponent implements OnInit {
     );
   }
 
-  addTurno() {
+  addTurno(){
     Swal.fire({
       title: 'Se dispone a realizar la reserva',
       text: "Revise los datos, ya no podrá modificarlos!",
@@ -159,6 +166,12 @@ export class ReservaModalComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
+      this.grabar();
+      }
+    })
+  }
+  
+  grabar() {
         const clienteData = {
         ...this.f.value,
         ...this.secondFormGroup.value,
@@ -169,11 +182,16 @@ export class ReservaModalComponent implements OnInit {
         this.cliente.agregarCliente(clienteData).subscribe(
           (data) => {
             const obj = JSON.parse(data.result);
-            this.snack.open('Reserva añadida !!\n'+obj.message, 'Aceptar', {
-              duration: 2000,
-              verticalPosition: 'top',
-              horizontalPosition: 'center',
-            });
+            this.correo.enviarCorreo(this.f.value.email).subscribe(
+              (data) => {
+                if(data.result=='ok'){
+                  this.snack.open('Reserva realizada !!\n'+obj.message, 'Aceptar', {
+                    duration: 2000,
+                    verticalPosition: 'top',
+                    horizontalPosition: 'center',
+                  });
+                }
+              });
           },
           (error) => {
             this.snack.open(error.message, 'Aceptar', {
@@ -182,36 +200,6 @@ export class ReservaModalComponent implements OnInit {
             });
           }
         );
-      }
-    })
-    
-  }
-  redirectToRedsys(): void {
-    // Aquí puedes agregar la lógica para redirigir al usuario a Redsys
-    // por ejemplo, utilizando el servicio Router de Angular
-    // this.router.navigate(['/redsys']);
-  }
-  enviarPago() {
-    const url = 'https://sis-t.redsys.es:25443/sis/rest/trataPeticionREST';
-    
-    const data = {
-      Ds_Merchant_MerchantCode: '999008881',
-      Ds_Merchant_Terminal: '001',
-      Ds_Merchant_Order: '111',
-      Ds_Merchant_Amount: '1000', // Importe en céntimos
-      Ds_Merchant_Currency: '978', // Código de moneda (ejemplo: euros)
-      Ds_Merchant_ProductDescription: 'Descripción del producto',
-      Ds_Merchant_Titular: 'Sebastián',
-      Ds_Merchant_MerchantURL: 'https://tu_url_de_retorno.com',
-      Ds_Merchant_UrlOK: 'https://tu_url_de_confirmacion.com',
-      Ds_Merchant_UrlKO: 'https://tu_url_de_cancelacion.com',
-      // Agrega otros campos necesarios según tus requerimientos
-    };
-  
-    this.http.post(url, data).subscribe((response) => {
-      console.log('Respuesta de Redsys:', response);
-      // Aquí puedes manejar la respuesta de Redsys
-    });
   }
 
   sendDataToChild() {
@@ -220,7 +208,8 @@ export class ReservaModalComponent implements OnInit {
   }
 
   handleDataFromChild(data: any) {
-    if(data.error){
+    if(data.type=='validation_error'){
+      console.dir(data)
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
@@ -232,6 +221,39 @@ export class ReservaModalComponent implements OnInit {
         data.message,
         'success'
       );
-    }    console.log(data);
+      this.grabar()
+    };
+  }
+
+  finalizar(codigo:any){
+    if(this.secondFormGroup.value.forma_pago=='Tarjeta'){
+      this.router.navigate(['/inicio']);
+    }else{
+      this.reserva.confirmarReserva(codigo).subscribe(
+        (data) => {
+          if(data.error){
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: data.message,
+            })
+          }else{
+            Swal.fire(
+              'Reserva confirmada!',
+              data.message,
+              'success'
+              );
+              this.router.navigate(['/inicio']);
+          }
+        },
+        (error) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: error.error.message,
+          })
+        });
+    }
+    
   }
 }
