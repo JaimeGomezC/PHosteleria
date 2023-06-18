@@ -1,18 +1,21 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()" class="form"  enctype="multipart/form-data">
-
-  <div class="credit-card">
-    <div class="col-10 mb-10">
-      <label class="form-label">Precio a pagar  {{dataFromParent.precio}}</label>
-      <input formControlName="precio" class="form-control" [class.disabled]="true"/>
-    </div>
-      <div><br>
-        <div #cardInfo></div>
-        <div class="error" *ngIf="cardError">
-          {{ cardError }}
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8 col-sm-12">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form" enctype="multipart/form-data">
+        <div class="credit-card">
+          <div class="form-group">
+            <label class="form-label">Importe a pagar {{dataFromParent.precio}}</label>
+            <input formControlName="precio" class="form-control" [class.disabled]="true" />
+          </div>
+          <div class="col-12">
+            <div class="datostarjeta" #cardInfo></div>
+            <div class="error" *ngIf="cardError">
+              {{ cardError }}
+            </div>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary">Pagar!</button>
+          </div>
         </div>
-      </div><br>
-      <!--<button (click)="onCLick()">Pagar</button>-->
-      <button type="submit" class="btn btn-primary me-2">Pagar!</button>
+      </form>
     </div>
-
-</form>
+  </div>
