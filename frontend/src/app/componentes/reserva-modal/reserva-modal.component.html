@@ -67,10 +67,9 @@
           <mat-radio-button *ngIf="datosRecibidos.data.formas_pago!='contado'" value="Tarjeta">Tarjeta</mat-radio-button>
         </mat-radio-group>
         <div *ngIf="secondFormGroup.controls['forma_pago'].value === 'Tarjeta'" class="card-payment">
-          <!-- <button mat-button color="primary" (click)="redirectToRedsys()">Pagar con Tarjeta</button> -->
           <app-payment-form [dataFromParent]="dataToChild" (dataToParent)="handleDataFromChild($event)"></app-payment-form>
         </div>
-      </div>
+      </div><br>
       
       <div>
         <button class="custom-button" mat-button matStepperPrevious>Volver</button>
@@ -80,19 +79,19 @@
   </mat-step>
   <mat-step [stepControl]="lastFormGroup" [editable]="isEditable">
     <form [formGroup]="lastFormGroup">
-      <div *ngIf="secondFormGroup.controls['forma_pago'].value === 'Tarjeta'" class="card-payment">
-        <!-- Mostrar botón para redsys aquí -->
-        <button mat-button color="primary" (click)="redirectToRedsys()">Pagar con Tarjeta</button>
+      <div *ngIf="this.secondFormGroup.controls['forma_pago'].value === 'contado'">
+        <p>Introduce el código recibido por correo para confirmar tu reserva.</p>
+        <mat-form-field class="col-6">
+          <mat-label>Código</mat-label>
+          <input matInput placeholder="codigo" formControlName="codigo" required>
+        </mat-form-field>
       </div>
-    <ng-template matStepLabel>Confirma tu código de reserva</ng-template>
-    <p>Introduce el código recibido por correo para confirmar tu reserva.</p>
-    <mat-form-field class="col-6">
-      <mat-label>Código</mat-label>
-      <input matInput placeholder="codigo" formControlName="codigo" required>
-    </mat-form-field>
+      <div *ngIf="this.secondFormGroup.controls['forma_pago'].value != 'contado'">
+        <p>Reserva confirmada. Ha recibido por email su código de reserva.</p>
+      </div>
     <div> 
       <!-- <button class="custom-button" mat-button matStepperPrevious>Volver</button> -->
-      <button class="custom-button" mat-button matStepperNext><a>Finalizar</a></button>
+      <button class="custom-button" mat-button matStepperNext (click)="finalizar(lastFormGroup.controls['codigo'].value)">Finalizar</button>
     </div>
     </form>
   </mat-step>

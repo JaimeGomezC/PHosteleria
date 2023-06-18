@@ -197,4 +197,21 @@ public function getReservasByClienteCorreo($correo)
 
     return response()->json($reservas, 200);
 }
+
+public function confirmarReserva($codigoVerificacion)
+{
+    // Buscar la reserva por el código de verificación
+    $reserva = Reserva::where('codigo_verificacion', $codigoVerificacion)->first();
+
+    // Verificar si se encontró una reserva
+    if (!$reserva) {
+        return response()->json(['result' => 'error', 'message' => 'Código de verificación inválido, revise su correo.'], 404);
+    }
+
+    // Cambiar el estado de la reserva a "Pendiente de pago"
+    $reserva->estado = 'Pendiente de pago';
+    $reserva->save();
+
+    return response()->json(['result' => 'ok', 'message' => 'Reserva confirmada'], 200);
+}
 }

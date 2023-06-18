@@ -29,7 +29,7 @@ class CorreoController extends Controller
             // Verificar si el cliente tiene reservas
             if (count($reservas) > 0) {
                 // Construir el mensaje del correo
-                $mensaje = "Le recordamos que tiene las siguientes reservas en la escuela de hostelería del instituto de La Flota:<br><br>";
+                $mensaje = "Le comunicamos que dispone de las siguientes reservas en la escuela de hostelería del instituto de La Flota:<br><br>";
 
                 foreach ($reservas as $reserva) {
                     $mensaje .= "Fecha: ".$reserva->fecha." y número de reserva: " . $reserva->codigo_verificacion . "<br>";
@@ -54,9 +54,10 @@ class CorreoController extends Controller
         }
     }
 
-        public function comunicarReserva(Request $request)
+        public function correo(Request $request)
     {
         $to = $request->input('to');
+        $mensaje = $request->input('mensaje');
 
         $demo = new \stdClass();
         $demo->receiver = $to;

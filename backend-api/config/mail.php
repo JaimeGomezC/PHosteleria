@@ -7,11 +7,11 @@ return [
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-            'host' => env('MAIL_HOST', 'smtp.gmail.com'),
-            'port' => env('MAIL_PORT', 587),
-            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-            'username' => env('MAIL_USERNAME', 'hostelerialaflota21@gmail.com'),
-            'password' => env('MAIL_PASSWORD', 'rytgxcjbneddqijd'),
+            'host' => env('MAIL_HOST', 'smtp.zoho.eu'),
+            'port' => env('MAIL_PORT', 465),
+            'encryption' => env('MAIL_ENCRYPTION', 'SSL'),
+            'username' => env('MAIL_USERNAME', 'hostelerialaflota@zohomail.eu'),
+            'password' => env('MAIL_PASSWORD', 'Proyectohosteleria21'),
             'timeout' => null,
             'auth_mode' => null,
         ],

@@ -53,10 +53,10 @@ export class ReservaService {
     return this.http.delete<ReservaResponse>(`${this.apiUrl}/${id}`,requestOptions);
   }
 
-  // Eliminar una reserva por su ID
   calcularPlazasVacantes(idTurno: number): Observable<any> {
     return this.http.get<ReservaResponse>(`${this.apiUrl}/plazasVacantes/${idTurno}`);
   }
+
   exportReservas() {
     const requestOptions = {
       headers: this.getAutorizacion(),
@@ -85,5 +85,9 @@ export class ReservaService {
 
   getDatosReserva() {
     return this.datosReserva;
+  }
+
+  confirmarReserva(codigoVerificacion: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/confirmar/${codigoVerificacion}`, null);
   }
 }
