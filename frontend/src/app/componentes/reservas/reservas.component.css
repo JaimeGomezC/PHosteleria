@@ -91,3 +91,7 @@ p{
 .anular p:first-child {
   font-weight: bold;
 }
+
+.input-group input {
+  margin-right: 10px;
+}
