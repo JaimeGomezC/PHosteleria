@@ -15,6 +15,7 @@
         "phpmailer/phpmailer": "^6.8",
         "phpoffice/phpspreadsheet": "^1.17",
         "sendgrid/sendgrid": "^8.0",
+        "simplesoftwareio/simple-qrcode": "^4.2",
         "spatie/laravel-permission": "^5.10",
         "stripe/stripe-php": "^10.15"
     },

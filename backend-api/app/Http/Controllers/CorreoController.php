@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\CorreoPrueba;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+
 
 class CorreoController extends Controller
 {
@@ -34,6 +36,15 @@ class CorreoController extends Controller
                 foreach ($reservas as $reserva) {
                     $mensaje .= "Fecha: ".$reserva->fecha." y número de reserva: " . $reserva->codigo_verificacion . "<br>";
                     // Agregar más detalles de la reserva si es necesario
+
+                    $mensaje .= "<img src=https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaoAzpURdV9VKiO0XaeV4y-fxLp3_bTMZL0McH5554XfuYH1a55hU9nhNexwSbOcC2Cw8&usqp=CAU/>";
+
+                    $mensaje .= "<br>";
+
+                    QrCode::format('png')->generate($reserva->codigo_verificacion, '../public/qrcodes/' . $reserva->codigo_verificacion . '.png');
+
+                    $mensaje .= '<img src=C:/xampp/htdocs/ProyectoHosteleria/backend-api/public/qrcodes/JO4DN318W.png />';
+
                     $mensaje .= "<br>";
                 }
                 $demo = new \stdClass();
