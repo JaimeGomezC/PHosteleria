@@ -43,7 +43,9 @@ class CorreoController extends Controller
 
                     QrCode::format('png')->generate($reserva->codigo_verificacion, '../public/qrcodes/' . $reserva->codigo_verificacion . '.png');
 
-                    $mensaje .= '<img src=C:/xampp/htdocs/ProyectoHosteleria/backend-api/public/qrcodes/JO4DN318W.png />';
+                    //$mensaje .= '<img src=C:/xampp/htdocs/ProyectoHosteleria/backend-api/public/qrcodes/JO4DN318W.png />';
+
+                    $mensaje .= "<img src='" . asset('qrcodes/' . $reserva->codigo_verificacion . '.png') . "' />";
 
                     $mensaje .= "<br>";
                 }
