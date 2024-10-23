@@ -7,7 +7,7 @@ import { MenuResponse } from '../interfaces/menu';
   providedIn: 'root'
 })
 export class MenuService {
-  private apiUrl = 'http://localhost:8000/api/menus'; // Reemplazar URL de la API
+  private apiUrl = 'https://reservasieslaflota.es/api/public/index.php/api/menus'; // Reemplazar URL de la API
 
   constructor(private http: HttpClient) { }
 

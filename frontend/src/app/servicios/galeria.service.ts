@@ -7,7 +7,8 @@ import { GaleriaResponse } from '../interfaces/galeria';
   providedIn: 'root'
 })
 export class GaleriaService {
-  private apiUrl = 'http://localhost:8000/api/galeria'; // Reemplazar URL de la API
+  //private apiUrl = 'http://localhost:8000/api/galeria'; // Reemplazar URL de la API
+  private apiUrl = 'https://reservasieslaflota.es/api/public/index.php/api/galeria'; // Reemplazar URL de la API
 
   constructor(private http: HttpClient) { }
 

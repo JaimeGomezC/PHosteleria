@@ -11,7 +11,7 @@ import { saveAs } from 'file-saver'
 export class TurnosService {
   // private apiURL='http://localhost/proyectohosteleria/backend/turnos.php';
 
-  url:string="http://localhost:8000/api/"
+  url:string="https://reservasieslaflota.es/api/public/index.php/api/"
   constructor(private http: HttpClient) {   }
 
   getAutorizacion(){

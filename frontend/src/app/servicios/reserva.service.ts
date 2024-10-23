@@ -8,7 +8,7 @@ import { saveAs } from 'file-saver'
   providedIn: 'root'
 })
 export class ReservaService {
-  private apiUrl = 'http://localhost:8000/api/reservas'; // Reemplazar con la URL de tu API
+  private apiUrl = 'https://reservasieslaflota.es/api/public/index.php/api/reservas'; // Reemplazar con la URL de tu API
   private datosReserva: any;
 
   constructor(private http: HttpClient) { }

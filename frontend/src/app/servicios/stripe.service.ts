@@ -9,7 +9,7 @@ export class StripeService {
   constructor(private http: HttpClient) { }
 
   charge(cantidad: number, tokenId: any){
-    return this.http.post('http://localhost:8000/api/payment', {
+    return this.http.post('https://reservasieslaflota.es/api/public/index.php/api/payment', {
       stripeToken: tokenId,
       cantidad: cantidad
     }).toPromise();

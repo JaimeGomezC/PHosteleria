@@ -11,7 +11,7 @@ import {HttpParams} from "@angular/common/http";
 })
 export class ApiService{
     // url:string="http://localhost:80/proyectohosteleria/backend/"
-    url:string="http://localhost:8000/api/"
+    url:string="https://reservasieslaflota.es/api/public/index.php/api/"
     public logged: boolean = false;
 
     constructor(private http:HttpClient){

@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class UsuarioService {
 
-  private url:string="http://localhost:8000/api/"
+  private url:string="https://reservasieslaflota.es/api/public/index.php/api/"
   private logged: boolean = false;
 
   constructor(private http: HttpClient) {}

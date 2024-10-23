@@ -7,7 +7,7 @@ import { Almacen } from '../interfaces/almacen';
   providedIn: 'root'
 })
 export class AlmacenService {
-  private apiUrl:string="http://localhost:8000/api/almacenes";
+  private apiUrl:string="https://reservasieslaflota.es/api/public/index.php/api/almacenes";
 
   constructor(private http: HttpClient) { }
 

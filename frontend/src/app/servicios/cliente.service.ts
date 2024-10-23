@@ -8,7 +8,7 @@ import { ReservaResponse } from '../interfaces/reserva';
   providedIn: 'root'
 })
 export class ClienteService {
-  private apiUrl:string="http://localhost:8000/api/clientes"
+  private apiUrl:string="https://reservasieslaflota.es/api/public/index.php/api/clientes"
   private logged: boolean = false;
 
   constructor(private http: HttpClient) { }
@@ -25,14 +25,14 @@ export class ClienteService {
   // Método para agregar un nuevo cliente
   agregarCliente(jsonParams: any): Observable<any> {
     const body =  jsonParams ;
-    return this.http.post<ClienteResponse>('http://localhost:8000/api/pl/insertClienteReserva' , body);
+    return this.http.post<ClienteResponse>('https://reservasieslaflota.es/api/public/index.php/api/pl/insertClienteReserva' , body);
   }
 
    // Método para agregar un nuevo cliente
    updateCliente(jsonParams: any): Observable<any> {
     const requestOptions = { headers: this.getAutorizacion()};
     const body =  jsonParams ;
-    return this.http.post<ClienteResponse>('http://localhost:8000/api/pl/updateClienteReserva' , body,requestOptions);
+    return this.http.post<ClienteResponse>('https://reservasieslaflota.es/api/public/index.php/api/pl/updateClienteReserva' , body,requestOptions);
   }
 
   // // Método para obtener todos los clientes

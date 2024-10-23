@@ -114,8 +114,10 @@ class GaleriaController extends Controller
             $picture = date("His") . "-" . $name_file . "." . $extension;
 
             $file->move(public_path('public/imagenes_menus'), $picture); // Almacena la imagen en una carpeta llamada 'menu_images'
+            //$file->move(public_path('api/public/public/imagenes_menus'), $picture); // Almacena la imagen en una carpeta llamada 'menu_images'
             $baseUrl = config('app.url');
-            $imageUrl = $baseUrl . ':8000/public/imagenes_menus/' . $picture;
+            $imageUrl = $baseUrl . 'public/public/imagenes_menus/' . $picture;
+            //$imageUrl = $baseUrl . ':8000/public/imagenes_menus/' . $picture;
 
             return response()->json(['message' => 'Imagen subida exitosamente', 'url' => $imageUrl]);
         } else {
@@ -126,6 +128,31 @@ class GaleriaController extends Controller
     }
 
     }
+    public function deleteImage(Request $request)
+    {
+        $imageName = $request->input('imagen_url');
+    
+        if (!empty($imageName)) {
+            // Obtener la ruta completa de la imagen
+            $imagePath = $imageName;
+            // $imagePath ='C:\wamp64\www\ProyectoHosteleria\backend-api\public\public\imagenes_menus\073619-linux.jpg';
+    
+            // Verificar si la imagen existe
+            if (file_exists($imagePath)) {
+                // Eliminar la imagen
+                unlink($imagePath);
+    
+                // Aquí puedes realizar cualquier otra acción necesaria, como eliminar el registro de la base de datos, etc.
+    
+                return response()->json(['message' => 'Imagen eliminada correctamente'], 200);
+            } else {
+                return response()->json(['message' => 'La imagen no existe'.$imagePath], 404);
+            }
+        } else {
+            return response()->json(['message' => 'Nombre de imagen no proporcionado' . $imageName], 400);
+        }
+    }
+    /*
     public function deleteImage(Request $request)
     {
         $imageName = $request->input('imagen_url');
@@ -150,6 +177,7 @@ class GaleriaController extends Controller
             return response()->json(['message' => 'Nombre de imagen no proporcionado' . $imageName], 400);
         }
     }
+    */
 
 
 
